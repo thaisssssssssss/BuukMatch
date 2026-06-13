@@ -10,3 +10,35 @@ Sistema de trocas de livros por meio de gostos em comum (match) para a disciplin
 ./mvnw spring-boot:run
 ```
 
+
+-----------------------------
+#### (readme oficial)
+
+# BuukMatch
+
+Este repositório contém o código fonte do BuukMatch!
+
+O `(a?)` BuukMatch é uma plataforma que tem como propósito conectar leitores por meio de um ambiente de resenhas e troca de itens literários. 
+
+O sistema busca unir amantes de livros que  residem próximos uns aos outros, por meio de um ambiente de troca que funciona por meio de publicações dos livros que se deseja desapegar, levando em conta a distância entre os interessados e também os gostos pessoais. 
+
+Diferente de uma simples doação, nosso produto visa o engajamento de ambas as partes, de modo que a troca seja mútua e satisfatória aos dois lados. Além disso, é uma plataforma que permite troca de mensagens, postagem de resenhas e comentários, o que fomenta a parte interativa do sistema.
+
+
+## ⛏️ Ferramentas Escolhidas
+A seguir, estão listadas o conjunto de ferramentas escolhidas para o desenvolvimento do projeto e seus respectivos papéis.
+
+### GitHub e Git
+O controle de versões do projeto é realizado utilizando o `git`. E, como hospedagem para o repositório remoto, foi usado o `github`. A escolha foi devido à fama e confiabilidade oferecida pelas duas ferramentas.
+
+#### Issue Tracking (GitHub)
+O GitHub também será utilizado para fazer o issue tracking do sistema. Isto é devido à interface amigável da plataforma na criação e atualização do estado das issues.  
+
+### Maven
+A ferramenta de build escolhida foi o `Maven`. Esta escolha foi devido à maturidade da ferramenta com a principal linguagem de programação utilizada (Java).
+
+### JUnit
+A ferramenta de testes escolhida foi o `JUnit`. Esta escolha foi (novamente) motivada pela principal linguagem de programação utilizada ser Java. Além do fato de que o `Maven` oferece uma integração fácil com a biblioteca escolhida.
+
+### Issue Tracking
+
