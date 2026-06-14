@@ -36,7 +36,7 @@ A ferramenta utilizada para criar o container do projeto foi o `Docker`. Esta es
 ## 🧱 Frameworks
 A seguir, está listado o conjunto de frameworks que foram reutilizados para facilitar o desenvolvimento do projeto.
 
-## Documentação
+## 📃 Documentação
 A documentação deste projeto é feita por meio de JavaDoc. Para gerar um HTML formatado com toda a documentação rode:
 ```bash
 mvn javadoc:javadoc
@@ -46,7 +46,7 @@ Para acessá-la entre em:
 targe/reports/apidocs/index.html
 ```
 
-### Execução:
+## ▶️ Execução:
 Para executar o sistema entre em:
 ```bash
 trabalho/trabalho
