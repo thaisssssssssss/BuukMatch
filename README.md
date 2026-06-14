@@ -46,6 +46,9 @@ A seguir, está listado o conjunto de frameworks que foram reutilizados para fac
 ### Spring Boot
 O framework de back-end escolhido foi o `Sprint Boot`. Como a linguagem de programação escolhida para programar o back-end do sistema
 
+## 📈 Banco de Dados
+* H2 Database
+  
 ## 📃 Documentação
 A documentação deste projeto é feita por meio de JavaDoc. Para gerar um HTML formatado com toda a documentação rode:
 ```bash
