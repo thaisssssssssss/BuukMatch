@@ -16,16 +16,25 @@ public class ChatController {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    /*
-     * Cria um novo chat para um usuario ja cadastrado
-     * URL no postman: POST http://localhost:8080/chat/exemplo@gmail.com
-     * json:
+    /**
+     * Cria um novo chat para um usuário já cadastrado.
+     *<br><br>
+
+     * URL no Postman: POST http://localhost:8080/chat/exemplo@gmail.com
+     *<br><br>
+
+     * JSON:
      * {
      *   "receptor": "Exemplo"
      * }
-     * */
+     *
+     * @param email e-mail do usuário cadastrado
+     * @param chat dados do chat recebido no corpo da requisição
+     * @return chat criado e salvo no banco de dados, ou null caso o usuário não exista
+     */
     @PostMapping("/chat/{email}")
     public Chat criaChat(@PathVariable String email,
+                         @PathVariable String calcinha,
                          @RequestBody Chat chat) {
 
         //pega o usuario do banco de dados (encontra pelo email)
@@ -37,14 +46,23 @@ public class ChatController {
         return chatRepository.save(chat);
     }
 
-    /*
-     * Adiciona novas mensagens em um chat ja criado de um usuario ja cadastrado
+    /**
+     * Adiciona novas mensagens em um chat já criado de um usuário já cadastrado
+     *<br><br>
+
      * URL no postman: POST http://localhost:8080/chat/ExemploReceptor/exemplo@gmail.com/texto
-     * json:
+     *<br><br>
+     
+     * JSON:
      * {
      *   "conteudo": "ExemploMensagem"
      * }
-     * */
+     *
+     * @param email e-mail do usuário cadastrado
+     * @param receptor nome do receptor da mensagem 
+     * @param mensagem corpo da mensagem via JSON
+     * @return chat atualizado e salvo no banco de dados
+     */
     @PostMapping("/chat/{receptor}/{email}/texto")
     public Chat adicionaMensagemChatUsuario(@PathVariable String receptor,
                                             @PathVariable String email,
@@ -66,10 +84,13 @@ public class ChatController {
         return chatRepository.save(chat);
     }
 
-    /*
-     * Retorna todos os chats abertos de um usuario ja cadastrado
+    /**
      * URL no postman: GET http://localhost:8080/chat/exemplo@gmail.com
-     * */
+     *
+     *
+     * @param email e-mail do usuário cadastrado
+     * @return Retorna todos os chats abertos de um usuário já cadastrado
+     */
     @GetMapping("/chat/{email}")
     public Iterable<Chat> getChats(@PathVariable String email) {
 

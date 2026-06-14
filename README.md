@@ -1,19 +1,6 @@
-# BuukMatch
 Sistema de trocas de livros por meio de gostos em comum (match) para a disciplina de Projeto Integrado I
 
-### Fiz alguns dos laboratórios que o professor passou e criei uma espécie de chat, bem incompleto ainda, mas só pra entender o funcionamento.
-
-### O HTML a IA que fez 
-
-### Pra rodar:
-```bash
-./mvnw spring-boot:run
-```
-
-
 -----------------------------
-#### (readme oficial)
-
 # BuukMatch
 
 Este repositório contém o código fonte do BuukMatch!
@@ -51,3 +38,28 @@ A seguir, está listado o conjunto de frameworks que foram reutilizados para fac
 
 ### Spring Boot
 O framework de back-end escolhido foi o `Sprint Boot`. Como a linguagem de programação escolhida para programar o back-end do sistema
+
+## 📃 Documentação
+A documentação deste projeto é feita por meio de JavaDoc. Para gerar um HTML formatado com toda a documentação rode:
+```bash
+mvn javadoc:javadoc
+```
+Para acessá-la entre em:
+```bash
+targe/reports/apidocs/index.html
+```
+
+## ▶️ Execução
+Para executar o sistema entre em:
+```bash
+trabalho/trabalho
+```
+Em seguida, rode:
+```bash
+./mvnw spring-boot:run
+```
+A visualização da interface interativa é possível em:
+```bash
+src/main/resources/static/index.html
+```
+

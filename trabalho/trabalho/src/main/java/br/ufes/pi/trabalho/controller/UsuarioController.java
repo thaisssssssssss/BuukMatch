@@ -10,26 +10,40 @@ public class UsuarioController{
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    /*
-     * Cadastra um novo Usuario
+    
+    /**
+     * Cadastra um novo usuário
+     *<br><br>
+
      * URL no postman: POST http://localhost:8080/cadastrar
-     * json:
+     *<br><br>
+
+     * JSON:
      * {
-     *  "nome": "ExemploNome",
-     *  "email": "exemplo@gmail.com",
-     *  "senha": "senhaexemplo"
+     *   "nome": "ExemploNome",
+     *   "email": "exemplo@gmail.com",
+     *   "senha": "senhaexemplo"
      * }
-     * */
+     *
+     * @param usuario informações do usuário que se deseja cadastrar
+     * @return usuário cadastrado e salvo no banco de dados
+     */
     @PostMapping("/cadastrar")
     public Usuario cadastrarUsuario(@RequestBody Usuario usuario) {
         //salva um usuario no banco de dados
         return usuarioRepository.save(usuario);
     }
 
-    /*
-     * Possivel "login" de um Usuario
+    /**
+     * Realiza um possivel "login" de um usuário
+     *<br><br>
+     
      * URL no postman: POST http://localhost:8080/login/exemplo@email.com/senhaexemplo
-     * */
+     *
+     * @param email e-mail do usuário a ser cadastrado
+     * @param senha senha do usuário a ser cadastrado
+     * @return usuário cujo login foi realizado
+     */
     @PostMapping("/login/{email}/{senha}")
     public Usuario loginUsuario(@PathVariable String email, @PathVariable String senha){
 
@@ -47,10 +61,11 @@ public class UsuarioController{
         else return null;
     }
 
-    /*
-     * Retorna lista com todos os usuarios
+    /**
      * URL no postman: GET http://localhost:8080/usuarios
-     * */
+     *
+     * @return lista com todos os usuários
+     */
     @GetMapping("/usuarios")
     public Iterable<Usuario> getChats() {
         return usuarioRepository.findAll();
