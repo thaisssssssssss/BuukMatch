@@ -25,7 +25,7 @@ O sistema busca unir amantes de livros que  residem próximos uns aos outros, po
 Diferente de uma simples doação, nosso produto visa o engajamento de ambas as partes, de modo que a troca seja mútua e satisfatória aos dois lados. Além disso, é uma plataforma que permite troca de mensagens, postagem de resenhas e comentários, o que fomenta a parte interativa do sistema.
 
 
-## ⛏️ Ferramentas
+## 🛠️ Ferramentas
 A seguir, estão listadas o conjunto de ferramentas escolhidas para o desenvolvimento do projeto e seus respectivos papéis.
 
 ### GitHub e Git
@@ -45,4 +45,8 @@ A ferramenta de testes escolhida foi o `JUnit`. Esta escolha foi (novamente) mot
 
 ### Docker
 A ferramenta utilizada para criar o container do projeto foi o `Docker`. Esta escolha foi motivada pelo fato da maioria das ferramentas de deploy disponíveis do mercado terem suporte a este tipo de container. Além do fato de ser a ferramenta mais famosa no segmento que atua.
+
+## 🧱 Frameworks
+A seguir, está listado o conjunto de frameworks que foram reutilizados para facilitar o desenvolvimento do projeto.
+
 
