@@ -49,4 +49,5 @@ A ferramenta utilizada para criar o container do projeto foi o `Docker`. Esta es
 ## 🧱 Frameworks
 A seguir, está listado o conjunto de frameworks que foram reutilizados para facilitar o desenvolvimento do projeto.
 
-
+### Spring Boot
+O framework de back-end escolhido foi o `Sprint Boot`. Como a linguagem de programação escolhida para programar o back-end do sistema
