@@ -1,19 +1,6 @@
-# BuukMatch
 Sistema de trocas de livros por meio de gostos em comum (match) para a disciplina de Projeto Integrado I
 
-### Fiz alguns dos laboratórios que o professor passou e criei uma espécie de chat, bem incompleto ainda, mas só pra entender o funcionamento.
-
-### O HTML a IA que fez 
-
-### Pra rodar:
-```bash
-./mvnw spring-boot:run
-```
-
-
 -----------------------------
-#### (readme oficial)
-
 # BuukMatch
 
 Este repositório contém o código fonte do BuukMatch!
@@ -49,4 +36,27 @@ A ferramenta utilizada para criar o container do projeto foi o `Docker`. Esta es
 ## 🧱 Frameworks
 A seguir, está listado o conjunto de frameworks que foram reutilizados para facilitar o desenvolvimento do projeto.
 
+## Documentação
+A documentação deste projeto é feita por meio de JavaDoc. Para gerar um HTML formatado com toda a documentação rode:
+```bash
+mvn javadoc:javadoc
+```
+Para acessá-la entre em:
+```bash
+targe/reports/apidocs/index.html
+```
+
+### Execução:
+Para executar o sistema entre em:
+```bash
+trabalho/trabalho
+```
+Em seguida, rode:
+```bash
+./mvnw spring-boot:run
+```
+A visualização da interface interativa é possível em:
+```bash
+src/main/resources/static/index.html
+```
 
