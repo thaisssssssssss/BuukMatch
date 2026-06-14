@@ -46,7 +46,7 @@ Para acessá-la entre em:
 targe/reports/apidocs/index.html
 ```
 
-## ▶️ Execução:
+## ▶️ Execução
 Para executar o sistema entre em:
 ```bash
 trabalho/trabalho
