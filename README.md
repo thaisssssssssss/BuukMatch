@@ -1,7 +1,7 @@
 Sistema de trocas de livros por meio de gostos em comum (match) para a disciplina de Projeto Integrado I
 
 -----------------------------
-# BuukMatch
+# BuukMatch 🐮
 
 Este repositório contém o código fonte do BuukMatch!
 
@@ -11,6 +11,13 @@ O sistema busca unir amantes de livros que  residem próximos uns aos outros, po
 
 Diferente de uma simples doação, nosso produto visa o engajamento de ambas as partes, de modo que a troca seja mútua e satisfatória aos dois lados. Além disso, é uma plataforma que permite troca de mensagens, postagem de resenhas e comentários, o que fomenta a parte interativa do sistema.
 
+## 📚 Características principais
+* Criação do perfil 
+* Página principal no estilo feed de twitter
+* Botões de “gostei” e “tenho interesse”, no estilo match 
+* Notificação de match 
+* Resenhas curtas de livros, escritas por usuários doadores 
+* Chat entre usuários
 
 ## 🛠️ Ferramentas
 A seguir, estão listadas o conjunto de ferramentas escolhidas para o desenvolvimento do projeto e seus respectivos papéis.
@@ -35,6 +42,9 @@ A ferramenta utilizada para criar o container do projeto foi o `Docker`. Esta es
 
 ## 🧱 Frameworks
 A seguir, está listado o conjunto de frameworks que foram reutilizados para facilitar o desenvolvimento do projeto.
+
+## 📈 Banco de Dados
+* H2 Database
 
 ## 📃 Documentação
 A documentação deste projeto é feita por meio de JavaDoc. Para gerar um HTML formatado com toda a documentação rode:
