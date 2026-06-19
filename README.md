@@ -5,7 +5,7 @@ Sistema de trocas de livros por meio de gostos em comum (match) para a disciplin
 
 Este repositório contém o código fonte do BuukMatch!
 
-O `(a?)` BuukMatch é uma plataforma que tem como propósito conectar leitores por meio de um ambiente de resenhas e troca de itens literários. 
+A BuukMatch é uma plataforma que tem como propósito conectar leitores por meio de um ambiente de resenhas e troca de itens literários. 
 
 O sistema busca unir amantes de livros que  residem próximos uns aos outros, por meio de um ambiente de troca que funciona por meio de publicações dos livros que se deseja desapegar, levando em conta a distância entre os interessados e também os gostos pessoais. 
 
@@ -56,6 +56,11 @@ pela ferramenta, esta foi a principal escolha para desenvolver a interface da ap
 
 ## 📈 Banco de Dados
 * H2 Database
+
+## 📐 Diagrama de Classes
+A imagem a seguir representa o diagrama de classes do projeto.
+
+![Imagem do diagrama de classes do projeto. Feito com a ferramenta Visual Paradigm](assets/diagrama-classe.png)
   
 ## 📃 Documentação
 A documentação deste projeto é feita por meio de JavaDoc. Para gerar um HTML formatado com toda a documentação rode:
