@@ -60,7 +60,7 @@ pela ferramenta, esta foi a principal escolha para desenvolver a interface da ap
 ## 📐 Diagrama de Classes
 A imagem a seguir representa o diagrama de classes do projeto.
 
-![Imagem do diagrama de classes do projeto. Feito com a ferramenta Visual Paradigm](assets/diagrama-classe.png)
+![Imagem do diagrama de classes do projeto. Feito com a ferramenta Visual Paradigm](assets/diagrama-classes.png)
   
 ## 📃 Documentação
 A documentação deste projeto é feita por meio de JavaDoc. Para gerar um HTML formatado com toda a documentação rode:
