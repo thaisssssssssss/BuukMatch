@@ -21,4 +21,12 @@ public class Match{
     public List<Mensagem> getMensagens() {
         return mensagens;
     }
+
+    public Usuario getUsuario1() {
+        return usuario1;
+    }
+    public Usuario getUsuario2() {
+        return usuario2;
+    }
+    
 }

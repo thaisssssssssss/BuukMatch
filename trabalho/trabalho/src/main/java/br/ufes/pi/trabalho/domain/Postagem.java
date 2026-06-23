@@ -1,5 +1,6 @@
-import java.time.LocalDateTime;
+package br.ufes.pi.trabalho.domain;
 
+import java.time.LocalDateTime;
 import jakarta.persistence.*;
 
 @Entity
@@ -11,12 +12,12 @@ public class Postagem{
     private String textoDescritivo;
     private LocalDateTime dataPublicacao ;
     private String foto;
-
+    private Usuario dono;
     private StatusPostagem status;
     
     @Enumerated(EnumType.STRING)
     private StatusPostagem _status; 
-
+    // tem que inicializar o dono
     public Postagem(String texto_descritivo, LocalDateTime data_publicacao, String foto){
         this.textoDescritivo = texto_descritivo;
         this.foto = foto;
@@ -39,5 +40,9 @@ public class Postagem{
     }
     public Long getId() {
         return id;
+    }
+
+    public Usuario getDono() {
+        return dono;
     }
 }

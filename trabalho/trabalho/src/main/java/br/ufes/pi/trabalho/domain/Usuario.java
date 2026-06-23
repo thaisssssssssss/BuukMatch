@@ -1,5 +1,8 @@
 package br.ufes.pi.trabalho.domain;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.ArrayListray;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,13 +17,29 @@ public class Usuario{
     private String nome;
     private String email;
     private String senha;
+    private String foto;
+    private LocalDate dataNascimento;
+    private ArrayList<GeneroLivro> generosFavoritos; 
+    private ArrayList<Postagem> postagems;
+    private Endereco endereco;
+    private ArrayList<Match> matches;  
 
     protected Usuario(){}
 
-    public Usuario(String nome, String email, String senha){
+    public Usuario(String nome, String email, String senha, LocalDate dataNascimento, Endereco endereco){
         setNome(nome);
         setEmail(email);
         setSenha(senha);
+        this.dataNascimento = dataNascimento;
+        this.endereco = endereco;
+        this.matches = new ArrayList<Match>();
+        this.postagems = new ArrayList<Postagem>();
+        this.generosFavoritos = new ArrayList<GeneroLivro>();
+
+    }
+
+    public void adiciona_match(Match match){
+        this.matches.add(match);
     }
 
     public Long getId() {
@@ -59,5 +78,25 @@ public class Usuario{
 //        if(!this.senha.equals(senha)) throw new Exception("Senha incorreta");
         if(!this.senha.equals(senha)) return false;
         else return true;
+    }
+
+    public LocalDate getDataNascimento() {
+        return dataNascimento;
+    }
+    public String getFoto() {
+        return foto;
+    }
+    public Endereco getEndereco() {
+        return endereco;
+    }
+    public ArrayList<Match> getMatches() {
+        return matches;
+    }
+    public ArrayList<Postagem> getPostagems() {
+        return postagems;
+    }
+
+    public ArrayList<GeneroLivro> getGenerosFavoritos() {
+        return generosFavoritos;
     }
 }
