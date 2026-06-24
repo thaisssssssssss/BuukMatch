@@ -1,7 +1,7 @@
 services:
   backend:
     build:
-      context: ./trabalho/trabalho
+      context: ./trabalho
       dockerfile: Dockerfile
     container_name: buukmatch-backend
     ports:

@@ -27,12 +27,12 @@ jobs:
 
       - name: Dar permissao ao Maven Wrapper
         run: chmod +x mvnw
-        working-directory: trabalho/trabalho
+        working-directory: trabalho
 
       - name: Compilar e testar com Maven
         run: ./mvnw -B clean package
-        working-directory: trabalho/trabalho
+        working-directory: trabalho
 
       - name: Gerar imagem Docker do backend
         run: docker build -t buukmatch-backend:latest .
-        working-directory: trabalho/trabalho
+        working-directory: trabalho
