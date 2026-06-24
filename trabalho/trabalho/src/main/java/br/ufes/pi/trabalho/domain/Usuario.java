@@ -2,7 +2,6 @@ package br.ufes.pi.trabalho.domain;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.ArrayListray;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

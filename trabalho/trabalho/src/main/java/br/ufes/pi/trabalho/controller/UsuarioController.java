@@ -6,6 +6,8 @@ import br.ufes.pi.trabalho.domain.Usuario;
 import br.ufes.pi.trabalho.repository.UsuarioRepository;
 import br.ufes.pi.trabalho.service.UsuarioService;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -73,7 +75,7 @@ public class UsuarioController{
     }
 
     @PostMapping("/{id}/mensagens") // como organizar por chat entre dois usuarios especificamente e nao so enviar todas mensagens
-    public List<Mensagem> listarMensagens(@PathVariable Long id){
+    public Iterable<Mensagem> listarMensagens(@PathVariable Long id){
         return usuarioService.listarMensagens(id);
     }
 }

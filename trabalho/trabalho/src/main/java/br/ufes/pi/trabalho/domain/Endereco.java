@@ -1,8 +1,12 @@
 package br.ufes.pi.trabalho.domain;
 
+import jakarta.persistence.Embeddable;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
-@Entity
+@Embeddable
 public class Endereco{
     private String rua;
     private String cidade;

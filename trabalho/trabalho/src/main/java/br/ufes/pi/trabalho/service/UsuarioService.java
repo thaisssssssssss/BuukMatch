@@ -51,6 +51,6 @@ public class UsuarioService {
 
         // precisa retornar da melhor forma, 
         // a lista de chats!!!
-        // return ;
+        return null;
     }
 }

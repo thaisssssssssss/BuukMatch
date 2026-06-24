@@ -12,7 +12,10 @@ public class Postagem{
     private String textoDescritivo;
     private LocalDateTime dataPublicacao ;
     private String foto;
+
+    @ManyToOne
     private Usuario dono;
+    
     private StatusPostagem status;
     
     @Enumerated(EnumType.STRING)

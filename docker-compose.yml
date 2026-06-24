@@ -1,0 +1,16 @@
+services:
+  backend:
+    build:
+      context: ./trabalho/trabalho
+      dockerfile: Dockerfile
+    container_name: buukmatch-backend
+    ports:
+      - "8080:8080"
+    volumes:
+      - buukmatch-h2-data:/app/db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:h2:file:/app/db/trabalhodb
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+
+volumes:
+  buukmatch-h2-data:

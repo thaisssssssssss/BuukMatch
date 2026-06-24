@@ -1,0 +1,38 @@
+name: CI - BuukMatch
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build-backend:
+    name: Build backend Spring Boot
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar codigo
+        uses: actions/checkout@v4
+
+      - name: Configurar JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: Dar permissao ao Maven Wrapper
+        run: chmod +x mvnw
+        working-directory: trabalho/trabalho
+
+      - name: Compilar e testar com Maven
+        run: ./mvnw -B clean package
+        working-directory: trabalho/trabalho
+
+      - name: Gerar imagem Docker do backend
+        run: docker build -t buukmatch-backend:latest .
+        working-directory: trabalho/trabalho
