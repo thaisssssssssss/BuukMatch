@@ -23,4 +23,8 @@
 hs_err_pid*
 replay_pid*
 
-trabalho/trabalho/db/
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
