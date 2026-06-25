@@ -79,10 +79,10 @@ public class UsuarioController{
         return usuarioService.listarMensagens(id);
     }
 
-    @PostMapping("/{id}/post")
-    public Postagem publicarPostagem(){
-        ret
-    }
+    // @PostMapping("/{id}/post")
+    // public Postagem publicarPostagem(){
+    //     ret
+    // }
 
 }
 
