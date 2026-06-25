@@ -1,4 +1,4 @@
-package br.ufes.pi.trabalho.domain;
+package br.ufes.pi.trabalho.dto;
 
 public class LoginData {
 
