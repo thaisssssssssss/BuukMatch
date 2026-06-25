@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import br.ufes.pi.trabalho.domain.Like;
-import br.ufes.pi.trabalho.domain.LikeData;
+import br.ufes.pi.trabalho.dto.LikeData;
 import br.ufes.pi.trabalho.domain.Postagem;
 import br.ufes.pi.trabalho.domain.Usuario;
 import br.ufes.pi.trabalho.repository.LikeRepository;

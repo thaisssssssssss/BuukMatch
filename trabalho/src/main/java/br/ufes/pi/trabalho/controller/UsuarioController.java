@@ -1,6 +1,6 @@
 package br.ufes.pi.trabalho.controller;
 
-import br.ufes.pi.trabalho.domain.LoginData;
+import br.ufes.pi.trabalho.dto.LoginData;
 import br.ufes.pi.trabalho.domain.Mensagem;
 import br.ufes.pi.trabalho.domain.Usuario;
 import br.ufes.pi.trabalho.repository.UsuarioRepository;
@@ -78,5 +78,11 @@ public class UsuarioController{
     public Iterable<Mensagem> listarMensagens(@PathVariable Long id){
         return usuarioService.listarMensagens(id);
     }
+
+    @PostMapping("/{id}/post")
+    public Postagem publicarPostagem(){
+        ret
+    }
+
 }
 

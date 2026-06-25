@@ -1,6 +1,6 @@
 package br.ufes.pi.trabalho.service;
 
-import br.ufes.pi.trabalho.domain.LoginData;
+import br.ufes.pi.trabalho.dto.LoginData;
 import br.ufes.pi.trabalho.domain.Mensagem;
 
 import org.springframework.http.HttpStatus;

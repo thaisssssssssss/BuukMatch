@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.ufes.pi.trabalho.domain.LikeData;
+import br.ufes.pi.trabalho.dto.LikeData;
 import br.ufes.pi.trabalho.domain.Like;
 import br.ufes.pi.trabalho.service.LikeService;
 
