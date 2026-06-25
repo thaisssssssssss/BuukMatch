@@ -1,6 +1,6 @@
 package br.ufes.pi.trabalho.domain;
 
-public enum StatusPostagem {
+public enum StatusPost {
     DISPONIVEL,
     RESERVADO,
     FINALIZADO

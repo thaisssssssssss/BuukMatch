@@ -8,7 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 
 @Entity
-public class Livro{
+public class Book{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -16,17 +16,17 @@ public class Livro{
     private String autor;
     private String capa;
     @Enumerated(EnumType.STRING)
-    private GeneroLivro genero;
+    private BookGenre Genre;
     private Integer anoPublicacao;
     
-    Livro(String titulo, String autor, String capa, GeneroLivro genero, Integer anoPublicacao){
+    Book(String titulo, String autor, String capa, BookGenre Genre, Integer anoPublicacao){
         this.titulo = titulo;
         this.autor = autor;
         this.capa = capa;
-        this.genero = genero;
+        this.Genre = Genre;
         this.anoPublicacao = anoPublicacao;
     }
-    Livro(){}
+    Book(){}
 
     public Integer getAnoPublicacao() {
         return anoPublicacao;
@@ -37,8 +37,8 @@ public class Livro{
     public String getCapa() {
         return capa;
     }
-    public GeneroLivro getGenero() {
-        return genero;
+    public BookGenre getGenre() {
+        return Genre;
     }
     public Long getId() {
         return id;

@@ -84,7 +84,7 @@
             display: none;
         }
 
-        .usuario-logado {
+        .User-logado {
             background: #e6e9ff;
             padding: 12px;
             border-radius: 10px;
@@ -105,7 +105,7 @@
             color: #4b4b8f;
         }
 
-        .mensagem {
+        .Message {
             background: #667eea;
             color: white;
             padding: 10px 14px;
@@ -165,11 +165,11 @@
             <button class="secundario" onclick="cadastrar()">Cadastrar</button>
         </div>
 
-        <div id="areaUsuario" class="hidden">
-            <div class="usuario-logado">
+        <div id="areaUser" class="hidden">
+            <div class="User-logado">
                 <strong>Usuário logado:</strong>
-                <p id="nomeUsuario"></p>
-                <small id="emailUsuario"></small>
+                <p id="nomeUser"></p>
+                <small id="emailUser"></small>
             </div>
 
             <button onclick="carregarChats()">Atualizar chats</button>
@@ -187,11 +187,11 @@
                 <button onclick="criarChat()">Criar</button>
             </div>
 
-            <h3>Enviar mensagem</h3>
+            <h3>Enviar Message</h3>
             <div class="linha">
-                <input id="receptorMensagem" placeholder="Contato">
-                <input id="conteudoMensagem" placeholder="Mensagem">
-                <button onclick="enviarMensagem()">Enviar</button>
+                <input id="receptorMessage" placeholder="Contato">
+                <input id="conteudoMessage" placeholder="Message">
+                <button onclick="enviarMessage()">Enviar</button>
             </div>
 
             <div id="listaChats"></div>
@@ -205,27 +205,27 @@
 </div>
 
 <script>
-    let usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
+    let UserLogado = JSON.parse(localStorage.getItem("UserLogado"));
 
     function atualizarTela() {
         const areaLogin = document.getElementById("areaLogin");
-        const areaUsuario = document.getElementById("areaUsuario");
+        const areaUser = document.getElementById("areaUser");
         const conteudoLogado = document.getElementById("conteudoLogado");
         const conteudoDeslogado = document.getElementById("conteudoDeslogado");
 
-        if (usuarioLogado) {
+        if (UserLogado) {
             areaLogin.classList.add("hidden");
-            areaUsuario.classList.remove("hidden");
+            areaUser.classList.remove("hidden");
             conteudoLogado.classList.remove("hidden");
             conteudoDeslogado.classList.add("hidden");
 
-            document.getElementById("nomeUsuario").innerText = usuarioLogado.nome;
-            document.getElementById("emailUsuario").innerText = usuarioLogado.email;
+            document.getElementById("nomeUser").innerText = UserLogado.nome;
+            document.getElementById("emailUser").innerText = UserLogado.email;
 
             carregarChats();
         } else {
             areaLogin.classList.remove("hidden");
-            areaUsuario.classList.add("hidden");
+            areaUser.classList.add("hidden");
             conteudoLogado.classList.add("hidden");
             conteudoDeslogado.classList.remove("hidden");
         }
@@ -273,22 +273,22 @@
             return;
         }
 
-        const usuario = await resposta.json();
+        const User = await resposta.json();
 
-        if (!usuario) {
+        if (!User) {
             alert("E-mail ou senha incorretos.");
             return;
         }
 
-        usuarioLogado = usuario;
-        localStorage.setItem("usuarioLogado", JSON.stringify(usuarioLogado));
+        UserLogado = User;
+        localStorage.setItem("UserLogado", JSON.stringify(UserLogado));
 
         atualizarTela();
     }
 
     function sair() {
-        usuarioLogado = null;
-        localStorage.removeItem("usuarioLogado");
+        UserLogado = null;
+        localStorage.removeItem("UserLogado");
         atualizarTela();
     }
 
@@ -300,7 +300,7 @@
             return;
         }
 
-        const email = usuarioLogado.email;
+        const email = UserLogado.email;
 
         const resposta = await fetch(`/chat/${encodeURIComponent(email)}`, {
             method: "POST",
@@ -317,16 +317,16 @@
         carregarChats();
     }
 
-    async function enviarMensagem() {
-        const receptor = document.getElementById("receptorMensagem").value.trim();
-        const conteudo = document.getElementById("conteudoMensagem").value.trim();
+    async function enviarMessage() {
+        const receptor = document.getElementById("receptorMessage").value.trim();
+        const conteudo = document.getElementById("conteudoMessage").value.trim();
 
         if (!receptor || !conteudo) {
-            alert("Digite o contato e a mensagem.");
+            alert("Digite o contato e a Message.");
             return;
         }
 
-        const email = usuarioLogado.email;
+        const email = UserLogado.email;
 
         const resposta = await fetch(`/chat/${encodeURIComponent(receptor)}/${encodeURIComponent(email)}/texto`, {
             method: "POST",
@@ -335,18 +335,18 @@
         });
 
         if (!resposta.ok) {
-            alert("Erro ao enviar mensagem. Verifique se o chat existe.");
+            alert("Erro ao enviar Message. Verifique se o chat existe.");
             return;
         }
 
-        document.getElementById("conteudoMensagem").value = "";
+        document.getElementById("conteudoMessage").value = "";
         carregarChats();
     }
 
     async function carregarChats() {
-        if (!usuarioLogado) return;
+        if (!UserLogado) return;
 
-        const email = usuarioLogado.email;
+        const email = UserLogado.email;
 
         const resposta = await fetch(`/chat/${encodeURIComponent(email)}`);
 
@@ -369,10 +369,10 @@
             let mensagensHtml = "";
 
             if (!chat.mensagens || chat.mensagens.length === 0) {
-                mensagensHtml = "<p class='vazio'>Nenhuma mensagem enviada.</p>";
+                mensagensHtml = "<p class='vazio'>Nenhuma Message enviada.</p>";
             } else {
                 chat.mensagens.forEach(msg => {
-                    mensagensHtml += `<div class="mensagem">${msg.conteudo}</div>`;
+                    mensagensHtml += `<div class="Message">${msg.conteudo}</div>`;
                 });
             }
 

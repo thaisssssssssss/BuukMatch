@@ -3,9 +3,9 @@ package br.ufes.pi.trabalho.service;
 import org.springframework.stereotype.Service;
 
 import br.ufes.pi.trabalho.domain.Match;
-import br.ufes.pi.trabalho.domain.Usuario;
+import br.ufes.pi.trabalho.domain.User;
 import br.ufes.pi.trabalho.repository.MatchRepository;
-import br.ufes.pi.trabalho.repository.UsuarioRepository;
+import br.ufes.pi.trabalho.repository.UserRepository;
 
 @Service
 public class MatchService {
@@ -14,10 +14,10 @@ public class MatchService {
     public MatchService(MatchRepository matchRepository){
         this.matchRepository = matchRepository;
     }
-    public void registrar(Usuario usuario1 , Usuario usuario2){
-        Match match = new Match(usuario1, usuario2); 
-        usuario1.adiciona_match(match);
-        usuario2.adiciona_match(match);
+    public void registrar(User user1 , User user2){
+        Match match = new Match(user1, user2); 
+        user1.addMatch(match);
+        user2.addMatch(match);
 
         this.matchRepository.save(match);
     }
