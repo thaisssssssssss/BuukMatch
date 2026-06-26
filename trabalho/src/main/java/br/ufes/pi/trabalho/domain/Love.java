@@ -7,25 +7,25 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
 @Entity
-public class Like{
+public class Love{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     @ManyToOne
-    Usuario usuario;
+    User User;
 
     @ManyToOne
-    Postagem  postagem;
+    Post  Post;
     
-    public Like(Usuario usuario, Postagem postagem){
-        this.usuario =  usuario;
-        this.postagem = postagem;
+    public Love(User User, Post Post){
+        this.User =  User;
+        this.Post = Post;
     }
-    public Postagem getPostagem() {
-        return postagem;
+    public Post getPost() {
+        return Post;
     }
-    public Usuario getUsuario() {
-        return usuario;
+    public User getUser() {
+        return User;
     }
 }

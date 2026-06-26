@@ -8,7 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Mensagem {
+public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,10 +23,10 @@ public class Mensagem {
         this.conteudo = conteudo;
     }
 
-    public Mensagem(String conteudo, LocalDateTime dataRecebimento){
+    public Message(String conteudo, LocalDateTime dataRecebimento){
         setConteudo(conteudo);
         this.dataRecebimento = dataRecebimento;
     }
 
-    protected Mensagem(){}
+    protected Message(){}
 }

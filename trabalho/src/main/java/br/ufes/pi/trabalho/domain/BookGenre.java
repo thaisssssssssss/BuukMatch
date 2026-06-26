@@ -1,7 +1,7 @@
 package br.ufes.pi.trabalho.domain;
 
 
-public enum GeneroLivro{
+public enum BookGenre{
     ROMANCE,
     FANTASIA,
     TERROR,

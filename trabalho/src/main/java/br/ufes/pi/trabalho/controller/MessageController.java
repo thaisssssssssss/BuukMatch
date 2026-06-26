@@ -1,5 +1,5 @@
 package br.ufes.pi.trabalho.controller;
 
-public class PostagemController {
+public class MessageController {
     
 }
