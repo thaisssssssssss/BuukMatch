@@ -1,11 +1,11 @@
 // package br.ufes.pi.trabalho.repository;
 
 // import br.ufes.pi.trabalho.domain.Chat;
-// import br.ufes.pi.trabalho.domain.Usuario;
+// import br.ufes.pi.trabalho.domain.User;
 // import org.springframework.data.repository.CrudRepository;
 
 // public interface ChatRepository extends CrudRepository<Chat, Long> {
-//     Chat findChatByReceptorAndUsuario(String receptor, Usuario usuario);
+//     Chat findChatByReceptorAndUser(String receptor, User User);
 
-//     Iterable<Chat> findChatByUsuario(Usuario usuario);
+//     Iterable<Chat> findChatByUser(User User);
 // }

@@ -18,34 +18,34 @@ public class Match{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private ArrayList<Mensagem> mensagens;
+    private ArrayList<Message> mensagens;
     
     @ManyToOne
-    private Usuario usuario1;
+    private User User1;
     
     @ManyToOne
-    private Usuario usuario2;
+    private User User2;
 
-    public Match (Usuario usuario1, Usuario usuario2){
-        this.usuario1 = usuario1;
-        this.usuario2 = usuario2;
+    public Match (User User1, User User2){
+        this.User1 = User1;
+        this.User2 = User2;
         this.mensagens = new ArrayList<>();
 
     }
 
-    public void adicionarMensagem(Mensagem mensagem) {
-        mensagens.add(mensagem);
+    public void adicionarMessage(Message Message) {
+        mensagens.add(Message);
     }
 
-    public List<Mensagem> getMensagens() {
+    public List<Message> getMensagens() {
         return mensagens;
     }
 
-    public Usuario getUsuario1() {
-        return usuario1;
+    public User getUser1() {
+        return User1;
     }
-    public Usuario getUsuario2() {
-        return usuario2;
+    public User getUser2() {
+        return User2;
     }
     
 }
