@@ -13,23 +13,23 @@ public class Love{
     private Long id;
     
     @ManyToOne
-    User User;
+    User user;
 
     @ManyToOne
-    Post  Post;
+    Post  post;
     
     public Love(User User, Post Post){
-        this.User =  User;
-        this.Post = Post;
+        this.user =  User;
+        this.post = Post;
     }
 
     protected Love(){}
 
     public Post getPost() {
-        return Post;
+        return post;
     }
     
     public User getUser() {
-        return User;
+        return user;
     }
 }

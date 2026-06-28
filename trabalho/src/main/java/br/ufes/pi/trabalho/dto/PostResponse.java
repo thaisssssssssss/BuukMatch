@@ -12,6 +12,9 @@ public class PostResponse {
         this.publicationDate = publicationDate;
         this.photo = photo;
     }
+
+    protected PostResponse(){}
+    
     public String getDescription() {
         return description;
     }

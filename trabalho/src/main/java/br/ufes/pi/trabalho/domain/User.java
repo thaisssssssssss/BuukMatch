@@ -2,11 +2,15 @@ package br.ufes.pi.trabalho.domain;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 
 
@@ -25,7 +29,10 @@ public class User{
     private String photo;
     private LocalDate birthdate;
     private ArrayList<BookGenre> GenresFavoritos; 
-    private ArrayList<Post> posts;
+
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    private List<Post> posts = new ArrayList<>();
+
     private Address Address;
     private ArrayList<Match> matches;  
 
@@ -40,7 +47,6 @@ public class User{
         this.matches = new ArrayList<Match>();
         this.posts = new ArrayList<Post>();
         this.GenresFavoritos = new ArrayList<BookGenre>();
-
     }
 
     public void addMatch(Match match){
@@ -92,16 +98,20 @@ public class User{
     public LocalDate getBirthdate() {
         return birthdate;
     }
+
     public String getPhoto() {
         return photo;
     }
+
     public Address getAddress() {
         return Address;
     }
+
     public ArrayList<Match> getMatches() {
         return matches;
     }
-    public ArrayList<Post> getPosts() {
+
+    public List<Post> getPosts() {
         return posts;
     }
 
