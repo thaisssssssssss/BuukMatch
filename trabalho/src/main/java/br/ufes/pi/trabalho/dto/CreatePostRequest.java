@@ -15,9 +15,11 @@ public class CreatePostRequest{
     public String getDescription() {
         return description;
     }
+
     public Long getIdUser() {
         return idUser;
     }
+    
     public String getPhoto() {
         return photo;
     }

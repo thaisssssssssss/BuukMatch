@@ -1,8 +1,4 @@
 package br.ufes.pi.trabalho.domain;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.hibernate.annotations.ManyToAny;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -10,42 +6,58 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Match{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private ArrayList<Message> mensagens;
+    @ManyToOne
+    private User user1;
     
     @ManyToOne
-    private User User1;
-    
-    @ManyToOne
-    private User User2;
+    private User user2;
+
+    @OneToOne(mappedBy = "match", cascade = CascadeType.ALL)
+    private Chat chat;
 
     public Match (User User1, User User2){
-        this.User1 = User1;
-        this.User2 = User2;
-        this.mensagens = new ArrayList<>();
-
+        setUser1(User1);
+        setUser2(User2);
+    }
+       
+    protected Match(){}
+    
+    public Long getId() {
+        return id;
     }
 
-    public void adicionarMessage(Message Message) {
-        mensagens.add(Message);
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public List<Message> getMensagens() {
-        return mensagens;
-    }
-
-    public User getUser1() {
-        return User1;
-    }
-    public User getUser2() {
-        return User2;
+    public void setUser1(User user1) {
+        this.user1 = user1;
     }
     
+    public User getUser1() {
+        return user1;
+    }
+    
+    public void setUser2(User user2) {
+        this.user2 = user2;
+    }
+    
+    public User getUser2() {
+        return user2;
+    }
+       
+    public Chat getChat() {
+        return chat;
+    }
+
+    public void setChat(Chat chat) {
+        this.chat = chat;
+    }
 }

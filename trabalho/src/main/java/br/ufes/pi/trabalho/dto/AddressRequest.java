@@ -13,15 +13,21 @@ public class AddressRequest {
         this.city = city;
         this.number =  number;
     }
+
+    public AddressRequest(){}
+
     public String getCity() {
         return city;
     }
+
     public String getDistrict() {
         return district;
     }
+
     public String getStreet() {
         return street;
     }
+
     public Long getNumber() {
         return number;
     }

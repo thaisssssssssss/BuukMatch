@@ -4,15 +4,12 @@ import br.ufes.pi.trabalho.dto.LoginRequest;
 import br.ufes.pi.trabalho.dto.CreateUserRequest;
 import br.ufes.pi.trabalho.dto.UserResponse;
 import br.ufes.pi.trabalho.domain.Message;
-import br.ufes.pi.trabalho.domain.User;
-import br.ufes.pi.trabalho.repository.UserRepository;
 import br.ufes.pi.trabalho.service.UserService;
 
 import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @RestController 
 @RequestMapping("/users")
@@ -27,21 +24,22 @@ public class UserController{
      * Cadastra um novo usuário
      *<br><br>
 
-     * URL no postman: POST http://localhost:8080/user
+     * URL no postman: POST http://localhost:8080/users
      *<br><br>
 
      * JSON:
-     * {{
-     *  "nome": "Marina",
-     *  "email": "marina@gmail.com",
-     *  "senha": "123456",
-     *  "dataNascimento": "2004-05-20",
-     *  "Address": {
-     *    "rua": "Rua A",
-     *    "cidade": "Vitória",
-     *    "bairro": "Centro",
-     *    "numero": 10
-     *  }}
+     * {
+     *      "name": "Maria",
+     *      "email": "maria@gmail.com",
+     *      "password": "123456",
+     *      "birthdate": "2004-05-20",
+     *      "address": {
+     *          "street": "Rua A",
+     *          "city": "Vitória",
+     *          "district": "Centro",
+     *          "number": 10
+     *      }
+     *  }
      *   
      * @param CreateUserRequest informações do usuário que se deseja cadastrar
      * @return usuário cadastrado e salvo no banco de dados
@@ -78,7 +76,7 @@ public class UserController{
      *
      * @return lista com todos os usuários
      */
-    @GetMapping
+    @GetMapping("/listar")
     public ResponseEntity<List<UserResponse>> listUsers() {
         return ResponseEntity.ok(userService.listUsers());
     }

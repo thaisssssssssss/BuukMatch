@@ -22,9 +22,13 @@ public class Love{
         this.User =  User;
         this.Post = Post;
     }
+
+    protected Love(){}
+
     public Post getPost() {
         return Post;
     }
+    
     public User getUser() {
         return User;
     }

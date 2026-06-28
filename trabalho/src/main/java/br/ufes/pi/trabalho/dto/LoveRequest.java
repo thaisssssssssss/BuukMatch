@@ -12,6 +12,7 @@ public class LoveRequest {
     public Long getIdPost() {
         return idPost;
     }
+    
     public Long getIdUser() {
         return idUser;
     }
