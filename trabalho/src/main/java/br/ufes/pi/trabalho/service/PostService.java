@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -28,12 +27,14 @@ public class PostService {
     }
 
     public void registerPostById(CreatePostRequest request){
-        User u = userRepository.findById(request.getIdUser()).orElseThrow(
-            () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User do not exist")
-        ); // usuario precisa existir
+        User owner = userRepository
+                     .findById(request.getIdUser())
+                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User do not exist")); 
+                     // usuario precisa existir
 
-        Post p_new = new Post(request.getDescription(), request.getPhoto());
-        u.addPost(p_new);
+        Post p_new = new Post(request.getDescription(), request.getPhoto(), owner);
+        
+        owner.addPost(p_new);
 
         postRepository.save(p_new);
     }
@@ -42,7 +43,7 @@ public class PostService {
         User u = userRepository.findById(id).orElseThrow(
             () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User do not exist")
         ); // usuario precisa existir
-        ArrayList<Post> posts = u.getPosts();
+        List<Post> posts = u.getPosts();
         List<PostResponse> responses = new ArrayList<PostResponse>();
 
         for(Post p : posts){

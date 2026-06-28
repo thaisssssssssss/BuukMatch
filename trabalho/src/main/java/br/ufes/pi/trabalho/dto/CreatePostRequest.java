@@ -12,6 +12,8 @@ public class CreatePostRequest{
         this.idUser = idUser;
     }
 
+    protected CreatePostRequest(){}
+    
     public String getDescription() {
         return description;
     }

@@ -19,9 +19,8 @@ public class LoveController {
     }
 
     @PostMapping //um User realizar um Love em uma Post
-    public ResponseEntity<Void> registerLoveOnPost(@RequestBody LoveRequest LoveRequest){
-
-        loveService.registerLoveOnPost(LoveRequest);
+    public ResponseEntity<Void> registerLoveOnPost(@RequestBody LoveRequest loveRequest){
+        loveService.registerLoveOnPost(loveRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }

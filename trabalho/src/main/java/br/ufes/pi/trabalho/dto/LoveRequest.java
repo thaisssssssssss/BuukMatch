@@ -9,6 +9,8 @@ public class LoveRequest {
         this.idUser = idUser;
     }
 
+    protected LoveRequest(){}
+    
     public Long getIdPost() {
         return idPost;
     }
