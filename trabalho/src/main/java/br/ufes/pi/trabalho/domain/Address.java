@@ -20,6 +20,8 @@ public class Address{
         this.number = number;
     }
 
+    protected Address(){}
+
     public String getDistrict() {
         return district;
     }

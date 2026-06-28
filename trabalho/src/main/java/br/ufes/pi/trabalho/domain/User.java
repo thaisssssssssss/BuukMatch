@@ -11,11 +11,10 @@ import jakarta.persistence.Column;
 
 
 
-@Table(name = "User")
+@Table(name = "tb_user")
 @Entity
 public class User{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     @Column(name = "name", unique=true)

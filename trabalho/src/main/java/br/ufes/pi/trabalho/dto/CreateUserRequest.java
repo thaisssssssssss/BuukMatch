@@ -1,9 +1,6 @@
 package br.ufes.pi.trabalho.dto;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-
-import br.ufes.pi.trabalho.dto.AddressRequest;
 
 public class CreateUserRequest {
     private String name;
@@ -19,6 +16,8 @@ public class CreateUserRequest {
         this.birthdate = birthdate;
         this.address = address;
     }
+
+    public CreateUserRequest(){}
 
     public AddressRequest getAddress() {
         return address;

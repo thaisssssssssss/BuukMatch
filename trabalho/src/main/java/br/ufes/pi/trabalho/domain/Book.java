@@ -26,23 +26,29 @@ public class Book{
         this.Genre = Genre;
         this.anoPublicacao = anoPublicacao;
     }
-    Book(){}
+    
+    protected Book(){}
 
     public Integer getAnoPublicacao() {
         return anoPublicacao;
     }
+
     public String getAutor() {
         return autor;
     }
+
     public String getCapa() {
         return capa;
     }
+
     public BookGenre getGenre() {
         return Genre;
     }
+
     public Long getId() {
         return id;
     }
+    
     public String getTitulo() {
         return titulo;
     }

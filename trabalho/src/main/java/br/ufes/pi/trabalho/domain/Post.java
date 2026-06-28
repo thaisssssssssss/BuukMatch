@@ -27,20 +27,25 @@ public class Post{
         this.publicationDate = LocalDateTime.now();
         this.status = StatusPost.RESERVADO;
     }
-    public Post() {}
+
+    protected Post() {}
 
     public String getDescription() {
         return description;
     }
+
     public String getPhoto() {
         return photo;
     }
+
     public StatusPost getStatus() {
         return status;
     }
+
     public LocalDateTime getPublicationDate() {
         return publicationDate;
     }
+    
     public Long getId() {
         return id;
     }

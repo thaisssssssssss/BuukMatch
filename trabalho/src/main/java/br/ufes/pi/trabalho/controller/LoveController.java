@@ -1,11 +1,8 @@
 package br.ufes.pi.trabalho.controller;
 
-import java.util.Optional;
-
 import org.springframework.web.bind.annotation.*;
 
 import br.ufes.pi.trabalho.dto.LoveRequest;
-import br.ufes.pi.trabalho.domain.Love;
 import br.ufes.pi.trabalho.service.LoveService;
 
 import org.springframework.http.ResponseEntity;

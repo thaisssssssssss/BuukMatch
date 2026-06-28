@@ -15,9 +15,11 @@ public class PostResponse {
     public String getDescription() {
         return description;
     }
+
     public String getPhoto() {
         return photo;
     }
+    
     public LocalDateTime getPublicationDate() {
         return publicationDate;
     }
