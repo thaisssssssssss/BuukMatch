@@ -20,12 +20,14 @@ public class ChatService {
     private final MatchRepository matchRepository;
     private final MessageRepository messageRepository;
     private final UserRepository userRepository;
+    private final UserService userService;
 
-    public ChatService(ChatRepository chatRepository, MatchRepository matchRepository, MessageRepository messageRepository, UserRepository userRepository){
+    public ChatService(ChatRepository chatRepository, MatchRepository matchRepository, MessageRepository messageRepository, UserRepository userRepository, UserService userService){
         this.chatRepository = chatRepository;
         this.matchRepository = matchRepository;
         this.messageRepository = messageRepository;
         this.userRepository = userRepository;
+        this.userService = userService;
     }
 
     public Chat creatMatchChat(Long matchId){
@@ -56,14 +58,12 @@ public class ChatService {
                .findByChatOrderByDataRecebimentoAsc(chat);
     }
 
-    public Message sendMessage(Long chatId, Long remetenteId, String conteudo){
+    public Message sendMessage(Long chatId, String token, String conteudo){
         Chat chat = chatRepository
                     .findById(chatId)
                     .orElseThrow(() -> new RuntimeException("Chat nao encontrado"));
 
-        User remetente = userRepository
-                         .findById(remetenteId)
-                         .orElseThrow(() -> new RuntimeException("Usuario nao encontrado"));
+        User remetente = userService.returnUserByToken(token);
 
         if(!chat.getUser1().equals(remetente) && !chat.getUser2().equals(remetente)){
             throw new RuntimeException("Usuario nao esta nesse chat");

@@ -31,15 +31,30 @@ public class LoveService {
     }
     
 
-    // registra um novo Love no banco de dados
-    public void registerLoveOnPost(LoveRequest LoveRequest) {
+    /**
+     * Regras de negócio para registrar um novo Love (curtida de match) no banco de dados.
+     *<br><br>
+     *
+     * Confere se o usuário que curtiu o post existe no banco de dados.
+     * Confere se o post curtido existe no banco de dados.
+     * Confere se o usuário que curtiu o post não é o mesmo que publicou o post.
+     * Cria um novo Love e salva no banco de dados.
+     * De todos os posts do usuário que curtiu o post atual, confere se algum foi 
+     * curtido pelo usuário que publicou o post atual. Em caso afirmativo, cria-se um Match.
+     * 
+     * 
+     * Depois, cria um usuário e salva-o no banco de dados.
+     *
+     * @param request um LoveRequest com id do usuário que curtiu o post e id do post.
+     */
+    public void registerLoveOnPost(LoveRequest request) {
         //quem curtiu
         User user = userRepository
-                 .findById(LoveRequest.getIdUser())
+                 .findById(request.getIdUser())
                  .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Usuario nao encontrado"));
         
         Post post = postRepository
-                 .findById(LoveRequest.getIdPost())
+                 .findById(request.getIdPost())
                  .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Post nao encontrado"));
         
         //quem fez o post
@@ -53,6 +68,7 @@ public class LoveService {
         loveRepository.save(newLove);
 
 
+        // como nao usa a lista de posts do proprio usuario, talvez pode retirar
         List<Post> userPosts = postRepository.findByOwner(user);
         
         for(Post uP : userPosts){
