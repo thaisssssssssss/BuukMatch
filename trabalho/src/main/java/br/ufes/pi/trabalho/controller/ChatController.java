@@ -34,7 +34,7 @@ public class ChatController {
         return chatService.listUserChats(userId);
     }
 
-    @GetMapping("/{chatId}/mensagens/listar")
+    @GetMapping("/{chatId}/1/mensagens/listar")
     public List<Message> listMessage(@PathVariable Long chatId, @RequestBody SendMessageRequest request){
         return chatService.listMessage(chatId);
     }
@@ -51,8 +51,8 @@ public class ChatController {
      *      "conteudo": "oi"
      *  }
      */
-    @GetMapping("/{chatId}/mensagens/enviar")
-    public Message sendMessage(@PathVariable Long chatId, @RequestBody SendMessageRequest request, @RequestHeader("Authorization") String token){
-        return chatService.sendMessage(chatId, token, request.getConteudo());
+    @PostMapping("/{chatId}/mensagens/enviar")
+    public void sendMessage(@PathVariable Long chatId, @RequestBody SendMessageRequest request, @RequestHeader("Authorization") String token){
+        chatService.sendMessage(chatId, token, request.getConteudo());
     }
 }
