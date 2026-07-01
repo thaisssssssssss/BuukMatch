@@ -18,9 +18,23 @@ public class LoveController {
         this.loveService = loveService;
     }
 
+    /**
+     * Registra um Love (curtida de match)
+     *<br><br>
+     
+     * URL no postman: POST http://localhost:8080/loves
+     *
+     * No comapo headers coloca Authorization e o token recebido.
+     * JSON:
+     * {
+     *      "idPost": 2,
+     *      "idUser": 1
+     * }
+     * @param request LoveRequest contendo id do post e do usuário que o curtiu
+     */
     @PostMapping //um User realizar um Love em uma Post
-    public ResponseEntity<Void> registerLoveOnPost(@RequestBody LoveRequest loveRequest){
-        loveService.registerLoveOnPost(loveRequest);
+    public ResponseEntity<Void> registerLoveOnPost(@RequestBody LoveRequest request){
+        loveService.registerLoveOnPost(request);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }

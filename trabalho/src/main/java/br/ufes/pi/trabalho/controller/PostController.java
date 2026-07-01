@@ -1,6 +1,4 @@
 package br.ufes.pi.trabalho.controller;
-import br.ufes.pi.trabalho.domain.Post;
-import br.ufes.pi.trabalho.domain.User;
 import br.ufes.pi.trabalho.service.PostService;
 import br.ufes.pi.trabalho.dto.CreatePostRequest;
 import br.ufes.pi.trabalho.dto.PostResponse;

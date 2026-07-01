@@ -1,6 +1,7 @@
 package br.ufes.pi.trabalho.controller;
 
 import br.ufes.pi.trabalho.dto.LoginRequest;
+import br.ufes.pi.trabalho.dto.LoginResponse;
 import br.ufes.pi.trabalho.dto.CreateUserRequest;
 import br.ufes.pi.trabalho.dto.UserResponse;
 import br.ufes.pi.trabalho.domain.Message;
@@ -57,17 +58,22 @@ public class UserController{
     }
 
     /**
-     * Realiza um possivel "login" de um usuário
+     * Realiza o login de um usuário
      *<br><br>
      
-     * URL no postman: POST http://localhost:8080/login/exemplo@email.com/senhaexemplo
+     * URL no postman: POST http://localhost:8080/users/login
      *
+     * JSON:
+     * {
+     *      "email": "luisa@gmail.com",
+     *      "password": "123123"
+     *  }
      * @param email e-mail do usuário a ser cadastrado
      * @param senha senha do usuário a ser cadastrado
-     * @return usuário cujo login foi realizado
+     * @return token de cadastro
      */
     @PostMapping("/login")  
-    public ResponseEntity<UserResponse> loginUser(@RequestBody LoginRequest login){
+    public ResponseEntity<LoginResponse> loginUser(@RequestBody LoginRequest login){
         return ResponseEntity.ok(userService.login(login));
     }
 
