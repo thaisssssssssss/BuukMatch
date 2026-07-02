@@ -118,6 +118,14 @@ public class UserService {
         return new UserResponse(u.getName(), u.getEmail(), u.getPhoto());
     }
 
+    /**
+     * Regras de negócio para retornar a lista de usuários cadastrados
+     *<br><br>
+     *
+     * Pega todos os usuários presentes no banco de dados, e os devolve como userResponse.
+     *
+     * @return uma lista de UserResponse contendo os usuários cadastrados
+     */
     public List<UserResponse>  listUsers(){
         Iterable<User> users = userRepository.findAll();
 
@@ -134,6 +142,7 @@ public class UserService {
         return responses;
     }
 
+    //apagar isso provavelmente
     public List<Message> listMessages(Long id){
         User u = userRepository
         .findById(id)

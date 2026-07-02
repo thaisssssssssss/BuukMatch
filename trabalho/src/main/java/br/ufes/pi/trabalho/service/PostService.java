@@ -20,22 +20,20 @@ import org.springframework.web.server.ResponseStatusException;
 public class PostService {
     private final PostRepository postRepository;
     private final UserRepository userRepository;
+    private final UserService userService;
 
-    public PostService(PostRepository postRepository, UserRepository userRepository){
+    public PostService(PostRepository postRepository, UserRepository userRepository, UserService userService){
         this.postRepository = postRepository;
         this.userRepository = userRepository;
+        this.userService = userService;
     }
 
-    public void registerPostById(CreatePostRequest request){
-        User owner = userRepository
-                     .findById(request.getIdUser())
-                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User do not exist")); 
-                     // usuario precisa existir
+    public void registerPostById(CreatePostRequest request, String token){
+        User owner = userService.returnUserByToken(token);
 
         Post p_new = new Post(request.getDescription(), request.getPhoto(), owner);
         
         owner.addPost(p_new);
-
         postRepository.save(p_new);
     }
 

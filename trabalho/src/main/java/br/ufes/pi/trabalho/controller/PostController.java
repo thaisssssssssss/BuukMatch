@@ -21,8 +21,8 @@ public class PostController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> publishPost(@RequestBody CreatePostRequest request){
-        postService.registerPostById(request);
+    public ResponseEntity<Void> publishPost(@RequestBody CreatePostRequest request, @RequestHeader("Authorization") String token){
+        postService.registerPostById(request, token);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
