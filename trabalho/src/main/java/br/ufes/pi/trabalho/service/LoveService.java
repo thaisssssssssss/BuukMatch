@@ -11,23 +11,22 @@ import br.ufes.pi.trabalho.dto.LoveRequest;
 import br.ufes.pi.trabalho.domain.Post;
 import br.ufes.pi.trabalho.domain.User;
 import br.ufes.pi.trabalho.repository.LoveRepository;
-import br.ufes.pi.trabalho.repository.UserRepository;
 import br.ufes.pi.trabalho.repository.PostRepository;
 
 
 @Service
 public class LoveService {
     private final LoveRepository loveRepository;
-    private final UserRepository userRepository;
     private final PostRepository postRepository;
 
     private final MatchService matchService;
+    private final UserService userService;
 
-    public LoveService(LoveRepository loveRepository, UserRepository userRepository, PostRepository postRepository, MatchService matchService){
+    public LoveService(LoveRepository loveRepository, PostRepository postRepository, MatchService matchService, UserService userService){
         this.loveRepository = loveRepository;
-        this.userRepository = userRepository;
         this.postRepository = postRepository;
         this.matchService = matchService;
+        this.userService = userService;
     }
     
 
@@ -47,11 +46,9 @@ public class LoveService {
      *
      * @param request um LoveRequest com id do usuário que curtiu o post e id do post.
      */
-    public void registerLoveOnPost(LoveRequest request) {
+    public void registerLoveOnPost(LoveRequest request, String token) {
         //quem curtiu
-        User user = userRepository
-                 .findById(request.getIdUser())
-                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Usuario nao encontrado"));
+        User user = userService.returnUserByToken(token);
         
         Post post = postRepository
                  .findById(request.getIdPost())

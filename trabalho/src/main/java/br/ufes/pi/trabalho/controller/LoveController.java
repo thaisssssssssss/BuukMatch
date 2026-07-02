@@ -24,17 +24,16 @@ public class LoveController {
      
      * URL no postman: POST http://localhost:8080/loves
      *
-     * No comapo headers coloca Authorization e o token recebido.
+     * No campo headers coloca Authorization e o token recebido.
      * JSON:
      * {
-     *      "idPost": 2,
-     *      "idUser": 1
+     *      "idPost": 2
      * }
      * @param request LoveRequest contendo id do post e do usuário que o curtiu
      */
     @PostMapping //um User realizar um Love em uma Post
-    public ResponseEntity<Void> registerLoveOnPost(@RequestBody LoveRequest request){
-        loveService.registerLoveOnPost(request);
+    public ResponseEntity<Void> registerLoveOnPost(@RequestBody LoveRequest request, @RequestHeader("Authorization") String token){
+        loveService.registerLoveOnPost(request, token);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }
