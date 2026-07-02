@@ -44,7 +44,7 @@ public class ChatService {
         List<ChatResponse> response = new ArrayList<>();
 
         for(Chat c : chats){
-            ChatResponse cs = new ChatResponse();
+            ChatResponse cs = new ChatResponse(c.getId());
 
             if(!c.getUser1().getId().equals(user.getId())){
                 cs.setName(c.getUser1().getName());
@@ -53,13 +53,16 @@ public class ChatService {
                 cs.setName(c.getUser2().getName());
             }
 
-            Message lastMsg = messageRepository
-                            .findFirstByChatOrderByIdDesc(c)
-                            .orElseThrow(() -> new RuntimeException("Chat sem mensagens"));
+            // Message lastMsg = messageRepository
+            //                 .findFirstByChatOrderByIdDesc(c)
+            //                 .orElseThrow(() -> new RuntimeException("Chat sem mensagens"));
             
-            if(lastMsg != null){
-                cs.setLastMessage(lastMsg.getConteudo());
-            }
+            String lastMessage = messageRepository
+                                 .findFirstByChatOrderByIdDesc(c)
+                                 .map(Message::getConteudo)
+                                 .orElse("");
+
+            cs.setLastMessage(lastMessage);
 
             response.add(cs);
         }
@@ -83,7 +86,9 @@ public class ChatService {
         List<MessageResponse> response = new ArrayList<>();
 
         for(Message m : msgs){
-            response.add(new MessageResponse(m.getDataRecebimento(), m.getConteudo()));
+            boolean sentByMe = m.getRemetente().getId().equals(user.getId());
+
+            response.add(new MessageResponse(m.getDataRecebimento(), m.getConteudo(), m.getRemetente().getName(), sentByMe));
         }
 
         return response;

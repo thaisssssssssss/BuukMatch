@@ -29,7 +29,7 @@ public class ChatController {
         return chatService.listUserChats(token);
     }
 
-    @GetMapping("/{chatId}/1/mensagens/listar")
+    @GetMapping("/{chatId}/mensagens/listar")
     public List<MessageResponse> listMessage(@PathVariable Long chatId, @RequestHeader("Authorization") String token){
         return chatService.listMessage(chatId, token);
     }
