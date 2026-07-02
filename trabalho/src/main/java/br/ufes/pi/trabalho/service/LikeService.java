@@ -39,12 +39,12 @@ public class LikeService {
         
         //quem fez o post
         User owner = post.getOwner();
-
         if(owner.equals(user)){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Nao eh possivel curtir o proprio post");
         }
 
         Like newLike = new Like(user, post);
+        post.addLike(newLike);
         likeRepository.save(newLike);
 
 

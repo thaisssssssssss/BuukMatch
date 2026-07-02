@@ -14,13 +14,14 @@ import br.ufes.pi.trabalho.dto.LikeRequest;
 @RequestMapping("/likes")
 public class LikeController {
     private final LikeService likeService;
-    
+    // tem que criar no post controller algo que retorne o numero de likes de um post
+    // tem que impedir que se alguem ja deu like, de novo
     public LikeController(LikeService likeService){
         this.likeService = likeService;
     }
 
     @PostMapping //um User realizar um Love em uma Post
-    public ResponseEntity<Void> registerLoveOnPost(@RequestBody LikeRequest request){
+    public ResponseEntity<Void> registerLikeOnPost(@RequestBody LikeRequest request){
         likeService.registerLikeOnPost(request);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
