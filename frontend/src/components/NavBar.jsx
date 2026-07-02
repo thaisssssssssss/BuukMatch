@@ -15,7 +15,7 @@ function NavBar(){
                 <h1 className="logo-name">BuukMatch</h1>
                 <ul>
                     <li><Link className="sobre-nos" to = "/">SobreNos</Link></li>
-                    <li><Link className="entrar" to = "/">Entrar</Link></li>
+                    <li><Link className="entrar" to = "/login">Entrar</Link></li>
                     <li><Link className="cadastrar" to = "/">Cadastro</Link></li>
                 </ul>
             </div>
