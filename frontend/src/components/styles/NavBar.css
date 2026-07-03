@@ -19,9 +19,10 @@
 }
 
 .logo-name{
-    color: crimson;
+    color: #E54F81;
     margin-left: 10px;
 }
+
 .logo{
     width: 50px;
     cursor: pointer;
@@ -33,7 +34,6 @@ ul{
     list-style: none;
     text-align:right;
     /* font: optional; */
-    color: crimson;
     /* text-decoration: none; */
 }
 
@@ -49,31 +49,50 @@ ul li a{
     color: crimson;
 }
 
-.sobre-nos{
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    color: crimson;
+.option-navbar{
+    color: black;
+}
 
+.option-navbar:hover {
+    color: #70062D;
+}
+
+.option-navbar.active {
+    color: #E54F81;
+    font-weight: bold;
 }
 
 .cadastrar{
-    background-color: crimson;
+    background-color: #E6517B;
+    border: 1px solid #E6517B;
     /* padding: 15px 30px; */
     color: white;
     padding: 10px;
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     border-radius: 8px;
+    transition: .2s;
+}
+
+.cadastrar:hover {
+    transition: .2s;
+    background-color: white;
+    color: #E6517B;
 }
 
 
-.entrar{
+.login{
     border: solid;
-    border-color: crimson;
+    border-color: #E6517B;
     border-width: 1px;
     background-color: white;
     /* padding: 15px 30px; */
-    color: crimson;
+    color: #E6517B;
     padding: 10px;
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     border-radius: 8px;
+    transition: .2s;
+}
 
+.login:hover {
+    background-color: #E6517B;
+    color: white;
+    transition: .2s;
 }

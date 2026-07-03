@@ -1,4 +1,4 @@
-import "./Login.css"
+import "./styles/Login.css"
 import Input from "../components/Input"
 import logoImg from "../assets/logo.png"
 import { Link } from "react-router-dom"
