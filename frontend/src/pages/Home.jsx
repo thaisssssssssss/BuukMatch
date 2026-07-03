@@ -1,5 +1,5 @@
 import NavBar from "../components/NavBar"
-import "./Home.css"
+import "./styles/Home.css"
 import {Link} from "react-router-dom"
 import home_img from "../assets/home.png"
 
