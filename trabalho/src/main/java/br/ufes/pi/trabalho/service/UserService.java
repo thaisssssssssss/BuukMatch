@@ -3,7 +3,6 @@ package br.ufes.pi.trabalho.service;
 import br.ufes.pi.trabalho.dto.LoginRequest;
 import br.ufes.pi.trabalho.dto.LoginResponse;
 import br.ufes.pi.trabalho.dto.UserResponse;
-import br.ufes.pi.trabalho.domain.Message;
 import br.ufes.pi.trabalho.domain.Token;
 import br.ufes.pi.trabalho.domain.Address;
 
@@ -142,17 +141,4 @@ public class UserService {
         return responses;
     }
 
-    //apagar isso provavelmente
-    public List<Message> listMessages(Long id){
-        User u = userRepository
-        .findById(id)
-        .orElseThrow(() -> new ResponseStatusException(
-        HttpStatus.NOT_FOUND, "User não existe"));
-        
-
-        // precisa retornar da melhor forma, 
-        // precisa retornar as messagens, nao sei se por meio de um  DTO, se tiver algo sensivel la
-        // a lista de chats!!!
-        return null;
-    }
 }

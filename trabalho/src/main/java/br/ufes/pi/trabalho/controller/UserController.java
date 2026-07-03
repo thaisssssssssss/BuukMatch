@@ -4,7 +4,6 @@ import br.ufes.pi.trabalho.dto.LoginRequest;
 import br.ufes.pi.trabalho.dto.LoginResponse;
 import br.ufes.pi.trabalho.dto.CreateUserRequest;
 import br.ufes.pi.trabalho.dto.UserResponse;
-import br.ufes.pi.trabalho.domain.Message;
 import br.ufes.pi.trabalho.service.UserService;
 
 import java.util.List;
@@ -87,9 +86,5 @@ public class UserController{
         return ResponseEntity.ok(userService.listUsers());
     }
 
-    @PostMapping("/{id}/messages") // como organizar por chat entre dois Users especificamente e nao so enviar todas mensagens
-    public ResponseEntity<List<Message>> listMessages(@PathVariable Long id){
-        return ResponseEntity.ok(userService.listMessages(id));
-    }
 }
 

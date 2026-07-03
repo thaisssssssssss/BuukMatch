@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.ufes.pi.trabalho.domain.Chat;
-import br.ufes.pi.trabalho.domain.Message;
+import br.ufes.pi.trabalho.dto.ChatResponse;
+import br.ufes.pi.trabalho.dto.MessageResponse;
 import br.ufes.pi.trabalho.dto.SendMessageRequest;
 import br.ufes.pi.trabalho.service.ChatService;
 
@@ -24,19 +24,14 @@ public class ChatController {
         this.chatService = chatService;
     }
 
-    @PostMapping("/match/{matchId}")
-    public Chat creatMatchChat(@PathVariable Long matchId){
-        return chatService.creatMatchChat(matchId);
+    @GetMapping("/listar")
+    public List<ChatResponse> listUserChats(@RequestHeader("Authorization") String token){
+        return chatService.listUserChats(token);
     }
 
-    @GetMapping("/usuario/{userId}")
-    public List<Chat> listUserChats(@PathVariable Long userId){
-        return chatService.listUserChats(userId);
-    }
-
-    @GetMapping("/{chatId}/1/mensagens/listar")
-    public List<Message> listMessage(@PathVariable Long chatId, @RequestBody SendMessageRequest request){
-        return chatService.listMessage(chatId);
+    @GetMapping("/{chatId}/mensagens/listar")
+    public List<MessageResponse> listMessage(@PathVariable Long chatId, @RequestHeader("Authorization") String token){
+        return chatService.listMessage(chatId, token);
     }
 
     /**
