@@ -6,7 +6,7 @@ public class ChatResponse {
     private Long chatId;
     
     public ChatResponse(Long chatId){
-        setChatId(getChatId());
+        setChatId(chatId);
     }
     
     public String getLastMessage() {

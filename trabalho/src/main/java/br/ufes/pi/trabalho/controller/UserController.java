@@ -41,7 +41,7 @@ public class UserController{
      *      }
      *  }
      *   
-     * @param CreateUserRequest informações do usuário que se deseja cadastrar
+     * @param request informações do usuário que se deseja cadastrar
      * @return usuário cadastrado e salvo no banco de dados
      */
     @PostMapping
@@ -67,8 +67,7 @@ public class UserController{
      *      "email": "luisa@gmail.com",
      *      "password": "123123"
      *  }
-     * @param email e-mail do usuário a ser cadastrado
-     * @param senha senha do usuário a ser cadastrado
+     * @param login email e senha de um usuario
      * @return token de cadastro
      */
     @PostMapping("/login")  

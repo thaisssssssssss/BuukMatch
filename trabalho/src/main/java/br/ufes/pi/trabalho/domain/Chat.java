@@ -29,7 +29,7 @@ public class Chat {
     @OneToMany(mappedBy = "chat", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Message> msgs = new ArrayList<>();
     
-    protected Chat() { }
+    public Chat() { }
     
     public Chat(Match match){
         setMatch(match);
