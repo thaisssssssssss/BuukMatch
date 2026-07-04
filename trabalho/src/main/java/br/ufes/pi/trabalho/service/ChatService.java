@@ -52,10 +52,6 @@ public class ChatService {
             else{
                 cs.setName(c.getUser2().getName());
             }
-
-            // Message lastMsg = messageRepository
-            //                 .findFirstByChatOrderByIdDesc(c)
-            //                 .orElseThrow(() -> new RuntimeException("Chat sem mensagens"));
             
             String lastMessage = messageRepository
                                  .findFirstByChatOrderByIdDesc(c)

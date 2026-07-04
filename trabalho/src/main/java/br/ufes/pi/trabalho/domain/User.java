@@ -78,6 +78,14 @@ public class User{
     }
 
     public void setEmail(String email) {
+        if (email == null || email.isBlank()) {
+            throw new IllegalArgumentException("Email nao pode ser vazio");
+        }
+
+        if (!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
+            throw new IllegalArgumentException("Email invalido");
+        }        
+        
         this.email = email;
     }
 
@@ -86,11 +94,15 @@ public class User{
     }
 
     public void setPassword(String password) {
+        if (email == null || email.isBlank()) {
+            throw new IllegalArgumentException("Senha nao pode ser vazia");
+        }
+
         this.password = password;
     }
 
     public boolean comparePassword(String password){
-//        if(!this.password.equals(password)) throw new Exception("password incorreta");
+        //if(!this.password.equals(password)) throw new Exception("password incorreta");
         if(!this.password.equals(password)) return false;
         else return true;
     }
