@@ -7,11 +7,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import br.ufes.pi.trabalho.domain.Love;
-import br.ufes.pi.trabalho.dto.LoveRequest;
 import br.ufes.pi.trabalho.dto.NotificationResponse;
 import br.ufes.pi.trabalho.domain.Post;
 import br.ufes.pi.trabalho.domain.User;
+import br.ufes.pi.trabalho.dto.LoveRequest;
 import br.ufes.pi.trabalho.repository.LoveRepository;
+import br.ufes.pi.trabalho.repository.UserRepository;
 import br.ufes.pi.trabalho.repository.PostRepository;
 
 
@@ -61,7 +62,7 @@ public class LoveService {
         User owner = post.getOwner();
 
         if(owner.equals(user)){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Nao eh possivel curtir o proprio post");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Nao eh possivel amar  o proprio post");
         }
 
         Love newLove = new Love(user, post);
