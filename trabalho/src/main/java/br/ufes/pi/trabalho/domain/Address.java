@@ -1,10 +1,6 @@
 package br.ufes.pi.trabalho.domain;
 
 import jakarta.persistence.Embeddable;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 
 @Embeddable
 public class Address{
@@ -19,6 +15,8 @@ public class Address{
         this.district = district;
         this.number = number;
     }
+
+    protected Address(){}
 
     public String getDistrict() {
         return district;

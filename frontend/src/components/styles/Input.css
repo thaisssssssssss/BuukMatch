@@ -1,0 +1,20 @@
+.input-box {
+    border-radius: 8px;
+    width: 100%;
+}
+
+.input-name {
+    font-size: 1rem;
+    color: rgb(196, 196, 196);
+}
+
+.input-insert {
+    border: none;
+    background-color: #FFF2FA;
+    padding: 1rem;
+    border-radius: 5px;
+}
+
+.input-insert::placeholder {
+    font-weight: normal;
+}

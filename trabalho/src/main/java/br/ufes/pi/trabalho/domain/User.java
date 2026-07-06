@@ -2,20 +2,23 @@ package br.ufes.pi.trabalho.domain;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 
 
 
-@Table(name = "User")
+@Table(name = "tb_user")
 @Entity
 public class User{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     @Column(name = "name", unique=true)
@@ -26,7 +29,10 @@ public class User{
     private String photo;
     private LocalDate birthdate;
     private ArrayList<BookGenre> GenresFavoritos; 
-    private ArrayList<Post> posts;
+
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    private List<Post> posts = new ArrayList<>();
+
     private Address Address;
     private ArrayList<Match> matches;  
 
@@ -41,7 +47,6 @@ public class User{
         this.matches = new ArrayList<Match>();
         this.posts = new ArrayList<Post>();
         this.GenresFavoritos = new ArrayList<BookGenre>();
-
     }
 
     public void addMatch(Match match){
@@ -73,6 +78,14 @@ public class User{
     }
 
     public void setEmail(String email) {
+        if (email == null || email.isBlank()) {
+            throw new IllegalArgumentException("Email nao pode ser vazio");
+        }
+
+        if (!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
+            throw new IllegalArgumentException("Email invalido");
+        }        
+        
         this.email = email;
     }
 
@@ -81,11 +94,15 @@ public class User{
     }
 
     public void setPassword(String password) {
+        if (email == null || email.isBlank()) {
+            throw new IllegalArgumentException("Senha nao pode ser vazia");
+        }
+
         this.password = password;
     }
 
     public boolean comparePassword(String password){
-//        if(!this.password.equals(password)) throw new Exception("password incorreta");
+        //if(!this.password.equals(password)) throw new Exception("password incorreta");
         if(!this.password.equals(password)) return false;
         else return true;
     }
@@ -93,16 +110,20 @@ public class User{
     public LocalDate getBirthdate() {
         return birthdate;
     }
+
     public String getPhoto() {
         return photo;
     }
+
     public Address getAddress() {
         return Address;
     }
+
     public ArrayList<Match> getMatches() {
         return matches;
     }
-    public ArrayList<Post> getPosts() {
+
+    public List<Post> getPosts() {
         return posts;
     }
 

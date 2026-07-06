@@ -12,5 +12,17 @@ services:
       SPRING_DATASOURCE_URL: jdbc:h2:file:/app/db/trabalhodb
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
 
+  frontend:
+      build:
+        context: ./frontend
+        dockerfile: Dockerfile
+      container_name: buukmatch-frontend
+      ports:
+        - "5173:5173"
+      volumes:
+        - ./frontend:/app
+        - /app/node_modules
+      depends_on:
+        - backend
 volumes:
   buukmatch-h2-data:
