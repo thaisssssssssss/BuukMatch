@@ -8,6 +8,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import br.ufes.pi.trabalho.domain.Love;
 import br.ufes.pi.trabalho.dto.LoveRequest;
+import br.ufes.pi.trabalho.dto.NotificationResponse;
 import br.ufes.pi.trabalho.domain.Post;
 import br.ufes.pi.trabalho.domain.User;
 import br.ufes.pi.trabalho.repository.LoveRepository;
@@ -21,12 +22,14 @@ public class LoveService {
 
     private final MatchService matchService;
     private final UserService userService;
+    private final NotificationService notificationService;
 
-    public LoveService(LoveRepository loveRepository, PostRepository postRepository, MatchService matchService, UserService userService){
+    public LoveService(LoveRepository loveRepository, PostRepository postRepository, MatchService matchService, UserService userService, NotificationService notificationService){
         this.loveRepository = loveRepository;
         this.postRepository = postRepository;
         this.matchService = matchService;
         this.userService = userService;
+        this.notificationService = notificationService;
     }
     
 
@@ -46,7 +49,7 @@ public class LoveService {
      *
      * @param request um LoveRequest com id do usuário que curtiu o post e id do post.
      */
-    public void registerLoveOnPost(LoveRequest request, String token) {
+    public NotificationResponse registerLoveOnPost(LoveRequest request, String token) {
         //quem curtiu
         User user = userService.returnUserByToken(token);
         
@@ -76,13 +79,13 @@ public class LoveService {
 
             if(likedByOwner){
                 matchService.registrar(user, owner);
-                break;
+                return notificationService.creatMatch1Notification(user, owner);
             }
         }
 
 
 
-
+        return notificationService.creatWaitingMatchNotification();
         // !!!!!! tem que buscar se existe o Love inverso
         // se existe cria um match também e coloca no banco de dados
         // >>>> matchService.registrar(UserAtual, donoDoPost); <<<<<

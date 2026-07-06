@@ -29,12 +29,17 @@ public class Chat {
     @OneToMany(mappedBy = "chat", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Message> msgs = new ArrayList<>();
     
+    private String user1Name;
+    private String user2Name;
+
     public Chat() { }
     
     public Chat(Match match){
         setMatch(match);
         setUser1(match.getUser1());
         setUser2(match.getUser2());
+        setUser1Name(match.getUser1().getName());
+        setUser2Name(match.getUser2().getName());
     }
     
     public Long getId() {
@@ -75,5 +80,21 @@ public class Chat {
 
     public List<Message> getMessages(){
         return msgs;
+    }
+
+    public String getUser2Name() {
+        return user2Name;
+    }
+
+    public void setUser2Name(String user2Name) {
+        this.user2Name = user2Name;
+    }
+
+    public String getUser1Name() {
+        return user1Name;
+    }
+
+    public void setUser1Name(String user1Name) {
+        this.user1Name = user1Name;
     }
 }

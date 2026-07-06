@@ -2,6 +2,8 @@ package br.ufes.pi.trabalho.controller;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,13 +27,13 @@ public class ChatController {
     }
 
     @GetMapping("/listar")
-    public List<ChatResponse> listUserChats(@RequestHeader("Authorization") String token){
-        return chatService.listUserChats(token);
+    public ResponseEntity<List<ChatResponse>> listUserChats(@RequestHeader("Authorization") String token){
+        return ResponseEntity.ok(chatService.listUserChats(token));
     }
 
     @GetMapping("/{chatId}/mensagens/listar")
-    public List<MessageResponse> listMessage(@PathVariable Long chatId, @RequestHeader("Authorization") String token){
-        return chatService.listMessage(chatId, token);
+    public ResponseEntity<List<MessageResponse>> listMessage(@PathVariable Long chatId, @RequestHeader("Authorization") String token){
+        return ResponseEntity.ok(chatService.listMessage(chatId, token));
     }
 
     /**
@@ -47,7 +49,8 @@ public class ChatController {
      *  }
      */
     @PostMapping("/{chatId}/mensagens/enviar")
-    public void sendMessage(@PathVariable Long chatId, @RequestBody SendMessageRequest request, @RequestHeader("Authorization") String token){
+    public ResponseEntity<Void> sendMessage(@PathVariable Long chatId, @RequestBody SendMessageRequest request, @RequestHeader("Authorization") String token){
         chatService.sendMessage(chatId, token, request.getConteudo());
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 }
