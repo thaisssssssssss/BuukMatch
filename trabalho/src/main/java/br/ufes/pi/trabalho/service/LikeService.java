@@ -10,28 +10,25 @@ import br.ufes.pi.trabalho.domain.User;
 import br.ufes.pi.trabalho.dto.LikeRequest;
 import br.ufes.pi.trabalho.repository.LikeRepository;
 import br.ufes.pi.trabalho.repository.PostRepository;
-import br.ufes.pi.trabalho.repository.UserRepository;
 
 
 
 @Service
 public class LikeService {
     private final LikeRepository likeRepository;
-    private final UserRepository userRepository;
     private final PostRepository postRepository;
 
+    private final UserService userService;
     
-    public LikeService(LikeRepository likeRepository, UserRepository userRepository, PostRepository postRepository){
+    public LikeService(LikeRepository likeRepository, PostRepository postRepository, UserService userService){
         this.likeRepository = likeRepository;
         this.postRepository = postRepository;
-        this.userRepository = userRepository;
+        this.userService = userService;
     }
 
-    public void registerLikeOnPost(LikeRequest request) {
+    public void registerLikeOnPost(LikeRequest request, String token) {
         //quem curtiu
-        User user = userRepository
-                 .findById(request.getIdUser())
-                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Usuario nao encontrado"));
+        User user = userService.returnUserByToken(token);
         
         Post post = postRepository
                  .findById(request.getIdPost())

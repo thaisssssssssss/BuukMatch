@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,9 +21,9 @@ public class LikeController {
         this.likeService = likeService;
     }
 
-    @PostMapping //um User realizar um Love em uma Post
-    public ResponseEntity<Void> registerLikeOnPost(@RequestBody LikeRequest request){
-        likeService.registerLikeOnPost(request);
+    @PostMapping 
+    public ResponseEntity<Void> registerLikeOnPost(@RequestBody LikeRequest request, @RequestHeader("Authorization") String token){
+        likeService.registerLikeOnPost(request, token);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 

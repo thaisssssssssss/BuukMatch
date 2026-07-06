@@ -12,7 +12,6 @@ import br.ufes.pi.trabalho.domain.Post;
 import br.ufes.pi.trabalho.domain.User;
 import br.ufes.pi.trabalho.dto.LoveRequest;
 import br.ufes.pi.trabalho.repository.LoveRepository;
-import br.ufes.pi.trabalho.repository.UserRepository;
 import br.ufes.pi.trabalho.repository.PostRepository;
 
 

@@ -1,8 +1,6 @@
 package br.ufes.pi.trabalho.domain;
 
-import br.ufes.pi.trabalho.domain.Like;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.*;
@@ -16,6 +14,7 @@ public class Post{
     private String description;
     private LocalDateTime publicationDate;
     private String photo;
+
     @OneToMany(mappedBy = "post")
     private List<Like> likes;
     // private int nLikes;
@@ -27,7 +26,7 @@ public class Post{
     private StatusPost status; 
     
     private String ownerName;
-    
+
     // tem que inicializar o dono
     public Post(String description, String photo, User owner){
         setDescription(description);
@@ -35,6 +34,7 @@ public class Post{
         setOwner(owner);
         setPublicationDate(LocalDateTime.now());
         setStatus(StatusPost.DISPONIVEL);
+        setOwnerName(owner.getName());
     }
 
     protected Post() {}
@@ -85,5 +85,17 @@ public class Post{
 
     public void setStatus(StatusPost status) {
         this.status = status;
+    }
+
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
+    }
+
+    public void addLike(Like like){
+        this.likes.add(like);
     }
 }
