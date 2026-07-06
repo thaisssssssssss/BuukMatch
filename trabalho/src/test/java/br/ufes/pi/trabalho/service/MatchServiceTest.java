@@ -26,6 +26,8 @@ class MatchServiceTest {
     @Mock
     private ChatRepository chatRepository;
 
+    @Mock NotificationService notificationService;
+
     @InjectMocks
     private MatchService matchService;
 

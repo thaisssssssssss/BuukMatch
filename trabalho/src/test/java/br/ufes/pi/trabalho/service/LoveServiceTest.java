@@ -37,6 +37,8 @@ class LoveServiceTest {
     @Mock
     private UserService userService;
 
+    @Mock NotificationService notificationService;
+
     @InjectMocks
     private LoveService loveService;
 

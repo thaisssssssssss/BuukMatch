@@ -8,9 +8,11 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import br.ufes.pi.trabalho.domain.Match;
 import br.ufes.pi.trabalho.domain.Notification;
@@ -18,6 +20,7 @@ import br.ufes.pi.trabalho.domain.User;
 import br.ufes.pi.trabalho.dto.NotificationResponse;
 import br.ufes.pi.trabalho.repository.NotificationRepository;
 
+@ExtendWith(MockitoExtension.class)
 class NotificationServiceTest {
     @Mock
     private NotificationRepository notificationRepository;
