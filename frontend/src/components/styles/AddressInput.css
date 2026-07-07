@@ -1,0 +1,37 @@
+/* .wrapper{
+
+} */
+.adress-input-box {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+}
+.adress-input-box > * {
+    width: 100%;
+}
+.finalizar-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    /* margin: 10px auto;  */
+    height: 2rem;
+    border: none;
+    border-radius: 5px;
+    padding: 1.5rem;
+    background-color: #E54F81;
+    font-weight: bold;
+    color: white;
+}
+
+.tittle-1{
+    color: #E34C75;
+    font-size: 1rem;
+}
+
+.tittle-2{
+    /* color: #c20b3c; */
+    color: #70062D;
+    font-size: 2rem;
+}
