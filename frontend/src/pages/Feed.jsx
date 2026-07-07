@@ -10,7 +10,7 @@ import './styles/Feed.css'
 
 // import required modules
 import { EffectCards } from 'swiper/modules';
-import NavBar from '../components/NavBar'
+import NavBarApp from '../components/NavBarApp'
 import Logo from '../assets/logo.png'
 
 import Card from '../components/Card'
@@ -57,12 +57,24 @@ function Feed() {
             }
         ]
     
-        console.log(posts)
+    const [swiperInstance, setSwiperInstance] = useState(null);
+    
+    // Desfazer
+    const handleUndo = () => {
+        if (swiperInstance) {
+            swiperInstance.allowSlidePrev = true;
+            swiperInstance.slidePrev();           
+            swiperInstance.allowSlidePrev = false; 
+        }
+    }
 
     return (
         <div className='container'>
-            <NavBar />
-            <section className='feed-swiper-container'>
+            <NavBarApp />
+            <section 
+                className='feed-swiper-container'
+                
+                >
                 <div className='title-box'>
                     <div className='title'>
                         <p>Buuusque seu próximo livro</p>
@@ -74,7 +86,8 @@ function Feed() {
                 effect={'cards'}
                 grabCursor={true}
                 modules={[EffectCards]}
-                allowSlidePrev={false}
+                // allowSlidePrev={false}
+                onSwiper={setSwiperInstance}
                 >
                     {
                         posts.map((post) => (
@@ -85,6 +98,10 @@ function Feed() {
                     }
                 </Swiper>
             </section>
+
+            <div className='return'>
+                <p>Pulou? <span onClick={handleUndo}>Desfazer</span></p>
+            </div>
 
         </div>
     )

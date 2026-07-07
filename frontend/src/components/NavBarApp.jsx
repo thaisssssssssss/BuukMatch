@@ -1,10 +1,9 @@
 import logo from "../assets/logo.png"
 import { NavLink, Link } from "react-router-dom"
-import './styles/NavBar.css'
-import Cadastro from "../pages/Cadastro";
-import Entrar from "../pages/Entrar";
-import SobreNos from "../pages/SobreNos";
+import './styles/NavBarApp.css'
 import { useLocation } from "react-router-dom";
+
+import { UserRound } from "lucide-react";
 
 function NavBarApp(){
     const path = useLocation()
@@ -12,20 +11,25 @@ function NavBarApp(){
     return (
         <nav className="navBar">
             <div className="navBar-container">
-                <Link to = "/" className="links">
-                    <img className="logo" src = {logo}  alt = "Logo"/>
-                </Link>
-                <h1 className="logo-name">BuukMatch</h1>
-                <ul>
-                    <li><NavLink className="option-navbar" to = "/" end>Início</NavLink></li>
-                    <li><NavLink className="option-navbar" to = "/sobre">Sobre Nós</NavLink></li>
-                    <li><NavLink className="cadastrar" to = "/">Cadastrar</NavLink></li>
-                    <li><NavLink className="login" to = "/login">Login</NavLink></li>
+                <div className="left-section">
+                    <Link to = "/" className="links">
+                        <img className="logo" src = {logo}  alt = "Logo"/>
+                    </Link>
+                </div>
+                <ul className="links-list">
+                    <li><NavLink className="option-navbar" to = "/feed" end>Feed</NavLink></li>
+                    <li><NavLink className="option-navbar" to = "/matches">Matches</NavLink></li>
+                    <li><NavLink className="option-navbar" to = "/chat">Chat</NavLink></li>
+                    <li><NavLink className="option-navbar" to = "/me">Meu perfil</NavLink></li>
                 </ul>
+                <div className="profile">
+                    <UserRound />
+                    <p>Olá, <span>Ronald</span>!</p>
+                </div>
             </div>
         </nav>
     );
 
 }
 
-export default NavBar
+export default NavBarApp
