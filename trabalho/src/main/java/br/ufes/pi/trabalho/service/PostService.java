@@ -1,5 +1,6 @@
 package br.ufes.pi.trabalho.service;
 
+import br.ufes.pi.trabalho.domain.Book;
 import br.ufes.pi.trabalho.domain.Post;
 import br.ufes.pi.trabalho.domain.User;
 import br.ufes.pi.trabalho.repository.PostRepository;
@@ -26,7 +27,8 @@ public class PostService {
     public void registerPostById(CreatePostRequest request, String token){
         User owner = userService.returnUserByToken(token);
 
-        Post p_new = new Post(request.getDescription(), request.getPhoto(), owner);
+        Book b_new = new Book(request.getBook().getTitle(), request.getBook().getAutor(), request.getBook().getCover(), request.getBook().getDescription(), request.getBook().getNumberOfPages(), request.getBook().getPublicationYear(), request.getBook().getGenre());
+        Post p_new = new Post(request.getLegend(), request.getPhoto(), owner, b_new);
         
         owner.addPost(p_new);
         postRepository.save(p_new);
@@ -41,7 +43,7 @@ public class PostService {
         for(Post p : posts){
             responses.add(
                 new PostResponse(
-                    p.getDescription(),
+                    p.getLegend(),
                     p.getPublicationDate(),
                     p.getPhoto()
                 )

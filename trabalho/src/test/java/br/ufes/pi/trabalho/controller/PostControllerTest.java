@@ -13,6 +13,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.ResponseEntity;
 
+import br.ufes.pi.trabalho.domain.BookGenre;
+import br.ufes.pi.trabalho.dto.BookRequest;
 import br.ufes.pi.trabalho.dto.CreatePostRequest;
 import br.ufes.pi.trabalho.dto.PostResponse;
 import br.ufes.pi.trabalho.service.PostService;
@@ -28,9 +30,11 @@ class PostControllerTest {
 
     @Test
     void publishPostSuccess() {
+        BookRequest b = new BookRequest("Crepusculo", "Thais", "Capa", "Livro de vampiros feiosinhos que brilham.", 300, 2010, BookGenre.ROMANCE);
         CreatePostRequest request = new CreatePostRequest(
                 "Meu post",
-                "foto.png"
+                "foto.png",
+                b
         );
 
         // postService é um mock, logo não é chamado de verdade

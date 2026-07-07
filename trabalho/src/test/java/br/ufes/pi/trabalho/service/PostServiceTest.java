@@ -1,7 +1,10 @@
 package br.ufes.pi.trabalho.service;
 
+import br.ufes.pi.trabalho.domain.Book;
+import br.ufes.pi.trabalho.domain.BookGenre;
 import br.ufes.pi.trabalho.domain.Post;
 import br.ufes.pi.trabalho.domain.User;
+import br.ufes.pi.trabalho.dto.BookRequest;
 import br.ufes.pi.trabalho.dto.CreatePostRequest;
 import br.ufes.pi.trabalho.dto.PostResponse;
 import br.ufes.pi.trabalho.repository.PostRepository;
@@ -47,9 +50,11 @@ class PostServiceTest {
                 null
         );
 
+        BookRequest b = new BookRequest("Crepusculo", "Thais", "Capa", "Livro de vampiros feiosinhos que brilham.", 300, 2010, BookGenre.ROMANCE);
         CreatePostRequest request = new CreatePostRequest(
                 "Livro muito bom!",
-                "foto.png"
+                "foto.png",
+                b
         );
 
         when(userService.returnUserByToken("tokenMaria")).thenReturn(maria);
@@ -62,7 +67,7 @@ class PostServiceTest {
 
         Post savedPost = captor.getValue();
 
-        assertEquals("Livro muito bom!", savedPost.getDescription());
+        assertEquals("Livro muito bom!", savedPost.getLegend());
         assertEquals("foto.png", savedPost.getPhoto());
         assertEquals(maria, savedPost.getOwner());
 
@@ -72,9 +77,11 @@ class PostServiceTest {
     @Test
     void registerPostInvalidToken() {
 
+        BookRequest b = new BookRequest("Crepusculo", "Thais", "Capa", "Livro de vampiros feiosinhos que brilham.", 300, 2010, BookGenre.ROMANCE);
         CreatePostRequest request = new CreatePostRequest(
                 "Livro",
-                "foto.png"
+                "foto.png",
+                b
         );
 
         when(userService.returnUserByToken("tokenInvalido"))
@@ -95,8 +102,9 @@ class PostServiceTest {
                 null
         );
 
-        Post p1 = new Post("Primeiro post", "foto1.png", maria);
-        Post p2 = new Post("Segundo post", "foto2.png", maria);
+        Book b = new Book("Crepusculo", "Thais", "Capa", "Livro de vampiros feiosinhos que brilham.", 300, 2010, BookGenre.ROMANCE);
+        Post p1 = new Post("Primeiro post", "foto1.png", maria, b);
+        Post p2 = new Post("Segundo post", "foto2.png", maria, b);
 
         when(userService.returnUserByToken("tokenMaria")).thenReturn(maria);
 

@@ -23,17 +23,20 @@ public class User{
     
     @Column(name = "name", unique=true)
     private String name;
+
     @Column(name = "email", unique=true)
     private String email;
+
     private String password;
     private String photo;
     private LocalDate birthdate;
-    private ArrayList<BookGenre> GenresFavoritos; 
+    private ArrayList<BookGenre> favoriteGenres; 
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     private List<Post> posts = new ArrayList<>();
 
     private Address Address;
+
     private ArrayList<Match> matches;  
 
     protected User(){}
@@ -46,7 +49,7 @@ public class User{
         this.Address = Address;
         this.matches = new ArrayList<Match>();
         this.posts = new ArrayList<Post>();
-        this.GenresFavoritos = new ArrayList<BookGenre>();
+        this.favoriteGenres = new ArrayList<BookGenre>();
     }
 
     public void addMatch(Match match){
@@ -102,7 +105,6 @@ public class User{
     }
 
     public boolean comparePassword(String password){
-        //if(!this.password.equals(password)) throw new Exception("password incorreta");
         if(!this.password.equals(password)) return false;
         else return true;
     }
@@ -127,7 +129,7 @@ public class User{
         return posts;
     }
 
-    public ArrayList<BookGenre> getGenresFavoritos() {
-        return GenresFavoritos;
+    public ArrayList<BookGenre> getFavoriteGenres() {
+        return favoriteGenres;
     }
 }
