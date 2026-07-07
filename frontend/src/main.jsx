@@ -7,6 +7,7 @@ import Chat from "./pages/Chat.jsx"
 import SignIn from "./pages/SignIn.jsx"
 
 import { BrowserRouter , createBrowserRouter, RouterProvider } from "react-router-dom";
+import Feed from './pages/Feed.jsx'
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
   {
     path: "/chat",
     Component: Chat
+  },
+  {
+    path: "/feed",
+    Component: Feed
   },
   {
     path: "/signin",
