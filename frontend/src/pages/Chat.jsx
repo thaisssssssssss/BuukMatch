@@ -110,7 +110,7 @@ function Chat() {
                 <NavBarApp /> 
                 <div className="chat-main-content">
                     <SideBar chats={chats} onChatClick={setFocusChat}/>
-                    <MainChatRender chat={chats[0]} />
+                    <MainChatRender chat={focusChat} />
                 </div>
             </div>
         </div>

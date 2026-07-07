@@ -1,8 +1,7 @@
 import "./styles/Card.css"
 import { BookOpen, CalendarDays, NotebookText } from "lucide-react"
 
-function Card({ post: {title, author, description, pageCount, publicationYear, publisher} }) {
-        
+function Card({ post: {title, author, description, pageCount, publicationYear, publisher} }) {    
     return (
         <div className="card-container">
             <section className="img-section sections-half"></section>

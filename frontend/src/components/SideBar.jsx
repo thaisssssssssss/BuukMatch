@@ -3,7 +3,7 @@ import './styles/SideBar.css'
 import profile from "../assets/woman.png"
 import ChatSideBar from "./ChatSideBar";
 
-function SideBar({ chats }){
+function SideBar({ chats, onChatClick }){
     return (
         <nav className="sideBar">
             <div className="sideBar-container">
@@ -23,7 +23,7 @@ function SideBar({ chats }){
                 <ul className="sidebar-chats">
                     {
                         chats.map((chat) => (
-                            <li className="sidebar-chat-item">
+                            <li className="sidebar-chat-item" onClick={() => onChatClick(chat)}>
                                 <ChatSideBar key={chat.id} chat={chat} />
                             </li>
                         ))
