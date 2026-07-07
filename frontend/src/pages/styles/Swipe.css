@@ -1,0 +1,25 @@
+.swiper {
+    width: 100%;
+    max-width: 800px; /* Em telas grandes, limita o tamanho total */
+    height: 70%;
+}
+
+.swiper-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+    font-size: 22px;
+    font-weight: bold;
+    color: black;
+    background-color: white;
+    
+    /* ADICIONE ESTA LINHA: Transforma o slide em uma referência de tamanho */
+}
+
+/* Em telas de celular, faça o swiper ocupar quase toda a largura */
+@media (max-width: 768px) {
+    .swiper {
+        max-width: 90%; 
+    }
+}

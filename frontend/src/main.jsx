@@ -4,6 +4,7 @@ import './index.css'
 import App from './App.jsx'
 import Login from "./pages/Login.jsx"
 import { BrowserRouter , createBrowserRouter, RouterProvider } from "react-router-dom";
+import Feed from './pages/Feed.jsx'
 
 const router = createBrowserRouter([
   {
@@ -13,6 +14,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     Component: Login
+  },
+  {
+    path: "/feed",
+    Component: Feed
   }
 ])
 
