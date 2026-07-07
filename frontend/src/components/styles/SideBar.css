@@ -1,28 +1,28 @@
 .sideBar{
-    background-color: #fbc2e6;
+    background-color: #fbc2e64d;
     /* position: absolute; */
     top: 0;
     left: 0;
     padding: 2rem 3rem;
-    width: 35vw;
-    height: 100vh;
-    overflow-y: auto;
+    min-width: 35vw;
+    height: calc(100% - 16px);
     border-radius: 16px;
     /* padding-right: 8px; */
-    margin-top: 8px;
-    margin-left: 8px;
+    margin: 8px 0 8px 8px;
+    /* margin-left: 8px; */
     /* padding-left: 8px; */
 }
 .title-chat-container{
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 100%;
 }
 
 .title-chat{
     font-size: 2rem;
     font-weight: bold;
-    color: crimson;
+    color: #70062D;
 }
 
 .profileContainer{
@@ -54,4 +54,23 @@
     margin: 0;
     font-size: 13.9px;
     text-transform: lowercase;
+}
+
+.sidebar-chats-title {
+    text-align: center;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.sidebar-chats {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    width: 100%;
+    gap: 1rem;
+}
+
+.sidebar-chats li {
+    margin: 0;
+    width: 100%;
 }

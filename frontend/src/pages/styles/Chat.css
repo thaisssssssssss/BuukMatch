@@ -9,11 +9,13 @@
     display: flex; /* sidebar + chat lado a lado */ 
     flex-direction: column;
     /* overflow: hidden; */
-    min-height: 100vh;
-    flex:1;
+    height: 100%;
+    flex: 1;
 }
 
 .chat-main-content{
-    
     display: flex;
+    height: 100%;
+    gap: 0.5rem;
+
 }

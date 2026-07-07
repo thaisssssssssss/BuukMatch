@@ -1,8 +1,9 @@
 import {Link} from "react-router-dom"
 import './styles/SideBar.css'
 import profile from "../assets/woman.png"
+import ChatSideBar from "./ChatSideBar";
 
-function SideBar(){
+function SideBar({ chats }){
     return (
         <nav className="sideBar">
             <div className="sideBar-container">
@@ -18,12 +19,16 @@ function SideBar(){
                         <p className="email">marinasorvete@gmail.com</p>
                     </div>
                 </div>
-
-                <div className="chatsContainer">
-                    <ul>
-                        
-                    </ul>
-                </div>
+                <p className="sidebar-chats-title">Meus chats</p>
+                <ul className="sidebar-chats">
+                    {
+                        chats.map((chat) => (
+                            <li className="sidebar-chat-item">
+                                <ChatSideBar key={chat.id} chat={chat} />
+                            </li>
+                        ))
+                    }
+                </ul>
                
             </div>
         </nav>

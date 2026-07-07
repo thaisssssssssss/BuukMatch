@@ -1,0 +1,30 @@
+.message-container {
+    border-radius: 10px;
+    padding: 1rem;
+    text-align: left;
+    background-color: #70062d37;
+
+}
+
+.message-box {
+    display: flex;
+    gap: 1rem;
+}
+
+.message-content {
+    flex: 1;
+}
+
+.message-hour {
+    font-weight: 300;
+    font-size: 1rem;
+}
+
+.message-container.recebida {
+    background-color: white;
+
+}
+
+.message-user {
+    font-weight: bold;
+}
