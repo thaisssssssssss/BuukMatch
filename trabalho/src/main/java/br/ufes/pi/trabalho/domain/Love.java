@@ -18,9 +18,12 @@ public class Love{
     @ManyToOne
     Post  post;
     
-    public Love(User User, Post Post){
-        this.user =  User;
+    private String userName;
+
+    public Love(User user, Post Post){
+        this.user =  user;
         this.post = Post;
+        setUserName(user.getName());
     }
 
     protected Love(){}
@@ -32,4 +35,13 @@ public class Love{
     public User getUser() {
         return user;
     }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
 }

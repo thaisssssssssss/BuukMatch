@@ -18,7 +18,7 @@
 }
 
 .image-section {
-    background-image: url("../assets/background.jpg");
+    background-image: url("../../assets/background.jpg");
     background-size: cover;
     background-position: center;
 }
@@ -57,6 +57,7 @@
     display: flex;
     align-items: center;
     gap: 1rem;
+    color: #70062D;
 }
 
 .logo-link {
@@ -70,6 +71,7 @@
 
 .title-description {
     font-weight: normal;
+    color: #c27690;
 }
 
 .login-section {
@@ -87,13 +89,14 @@
     border: none;
     border-radius: 5px;
     padding: 1.5rem;
-    background-color: #e98bc5;
+    background-color: #E54F81;
     font-weight: bold;
     color: white;
 }
 
 .login-button:hover {
-    background-color: #c99db8;
+    background-color: #70062D;
+    transition: .2s;
     color: white;
     cursor: pointer;
 }
@@ -112,11 +115,12 @@
 }
 
 .link-criar {
-    color: #e98bc5;
+    color: #70062D;
     font-weight: bold;
 }
 
 .link-criar:hover {
     cursor: pointer;
+    transition: .2s;
     color: #ac4183;
 }

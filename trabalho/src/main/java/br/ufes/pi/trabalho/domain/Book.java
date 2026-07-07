@@ -1,55 +1,88 @@
 package br.ufes.pi.trabalho.domain;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.Embeddable;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 
-@Entity
+
+@Embeddable
 public class Book{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String titulo;
+    private String title;
     private String autor;
-    private String capa;
+    private String cover;
+    private String description;
+    private Integer numberOfPages;
+    private Integer publicationYear;
+
     @Enumerated(EnumType.STRING)
-    private BookGenre Genre;
-    private Integer anoPublicacao;
+    private BookGenre genre;
     
-    Book(String titulo, String autor, String capa, BookGenre Genre, Integer anoPublicacao){
-        this.titulo = titulo;
-        this.autor = autor;
-        this.capa = capa;
-        this.Genre = Genre;
-        this.anoPublicacao = anoPublicacao;
+    public Book(String title, String autor, String cover, String description, Integer numberOfPages, Integer publicationYear, BookGenre genre){
+        setTitle(title);
+        setAutor(autor);
+        setCover(cover);
+        setDescription(description);
+        setNumberOfPages(numberOfPages);
+        setPublicationYear(publicationYear);
+        setGenre(genre);
     }
     
     protected Book(){}
 
-    public Integer getAnoPublicacao() {
-        return anoPublicacao;
+    public Integer getNumberOfPages() {
+        return numberOfPages;
+    }
+
+    public void setNumberOfPages(Integer numberOfPages) {
+        this.numberOfPages = numberOfPages;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getCover() {
+        return cover;
+    }
+
+    public void setCover(String cover) {
+        this.cover = cover;
     }
 
     public String getAutor() {
         return autor;
     }
 
-    public String getCapa() {
-        return capa;
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public BookGenre getGenre() {
-        return Genre;
+        return genre;
     }
 
-    public Long getId() {
-        return id;
+    public void setGenre(BookGenre genre) {
+        this.genre = genre;
     }
+
     
-    public String getTitulo() {
-        return titulo;
+    public Integer getPublicationYear() {
+        return publicationYear;
+    }
+
+    public void setPublicationYear(Integer publicationYear) {
+        this.publicationYear = publicationYear;
     }
 }

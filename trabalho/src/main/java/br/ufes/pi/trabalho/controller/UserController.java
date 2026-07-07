@@ -4,14 +4,15 @@ import br.ufes.pi.trabalho.dto.LoginRequest;
 import br.ufes.pi.trabalho.dto.LoginResponse;
 import br.ufes.pi.trabalho.dto.CreateUserRequest;
 import br.ufes.pi.trabalho.dto.UserResponse;
-import br.ufes.pi.trabalho.domain.Message;
 import br.ufes.pi.trabalho.service.UserService;
 
 import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController 
 @RequestMapping("/users")
 public class UserController{
@@ -42,7 +43,7 @@ public class UserController{
      *      }
      *  }
      *   
-     * @param CreateUserRequest informações do usuário que se deseja cadastrar
+     * @param request informações do usuário que se deseja cadastrar
      * @return usuário cadastrado e salvo no banco de dados
      */
     @PostMapping
@@ -68,8 +69,7 @@ public class UserController{
      *      "email": "luisa@gmail.com",
      *      "password": "123123"
      *  }
-     * @param email e-mail do usuário a ser cadastrado
-     * @param senha senha do usuário a ser cadastrado
+     * @param login email e senha de um usuario
      * @return token de cadastro
      */
     @PostMapping("/login")  
@@ -87,9 +87,5 @@ public class UserController{
         return ResponseEntity.ok(userService.listUsers());
     }
 
-    @PostMapping("/{id}/messages") // como organizar por chat entre dois Users especificamente e nao so enviar todas mensagens
-    public ResponseEntity<List<Message>> listMessages(@PathVariable Long id){
-        return ResponseEntity.ok(userService.listMessages(id));
-    }
 }
 

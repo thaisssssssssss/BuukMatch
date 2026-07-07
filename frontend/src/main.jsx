@@ -4,6 +4,8 @@ import './index.css'
 import App from './App.jsx'
 import Login from "./pages/Login.jsx"
 import Chat from "./pages/Chat.jsx"
+import SignIn from "./pages/SignIn.jsx"
+
 import { BrowserRouter , createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter([
@@ -18,9 +20,12 @@ const router = createBrowserRouter([
   {
     path: "/chat",
     Component: Chat
+  },
+  {
+    path: "/signin",
+    Component: SignIn
   }
 ])
-
 
 createRoot(document.getElementById('root')).render(
   <RouterProvider router={router} />

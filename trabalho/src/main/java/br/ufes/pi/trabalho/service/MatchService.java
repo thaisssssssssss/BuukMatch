@@ -8,14 +8,17 @@ import br.ufes.pi.trabalho.domain.User;
 import br.ufes.pi.trabalho.repository.ChatRepository;
 import br.ufes.pi.trabalho.repository.MatchRepository;
 
+
 @Service
 public class MatchService {
     private final  MatchRepository matchRepository;
     private final ChatRepository chatRepository;
+    private final NotificationService notificationService;
 
-    public MatchService(MatchRepository matchRepository, ChatRepository chatRepository){
+    public MatchService(MatchRepository matchRepository, ChatRepository chatRepository, NotificationService notificationService){
         this.matchRepository = matchRepository;
         this.chatRepository = chatRepository;
+        this.notificationService = notificationService;
     }
 
     public Match registrar(User user1 , User user2){
@@ -27,6 +30,8 @@ public class MatchService {
     
         Chat chat = new Chat(savedMatch);
         chatRepository.save(chat);
+
+        notificationService.creatMatch2Notification(user2, user1, savedMatch);
 
         return savedMatch;
     }

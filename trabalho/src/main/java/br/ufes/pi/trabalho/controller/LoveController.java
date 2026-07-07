@@ -1,13 +1,11 @@
 package br.ufes.pi.trabalho.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import br.ufes.pi.trabalho.dto.LoveRequest;
+import br.ufes.pi.trabalho.dto.NotificationResponse;
 import br.ufes.pi.trabalho.service.LoveService;
-
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.HttpStatus;
-
 
 @RestController
 @RequestMapping("/loves")
@@ -24,17 +22,15 @@ public class LoveController {
      
      * URL no postman: POST http://localhost:8080/loves
      *
-     * No comapo headers coloca Authorization e o token recebido.
+     * No campo headers coloca Authorization e o token recebido.
      * JSON:
      * {
-     *      "idPost": 2,
-     *      "idUser": 1
+     *      "idPost": 2
      * }
      * @param request LoveRequest contendo id do post e do usuário que o curtiu
      */
     @PostMapping //um User realizar um Love em uma Post
-    public ResponseEntity<Void> registerLoveOnPost(@RequestBody LoveRequest request){
-        loveService.registerLoveOnPost(request);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+    public ResponseEntity<NotificationResponse> registerLoveOnPost(@RequestBody LoveRequest request, @RequestHeader("Authorization") String token){
+        return ResponseEntity.ok(loveService.registerLoveOnPost(request, token));
     }
 }

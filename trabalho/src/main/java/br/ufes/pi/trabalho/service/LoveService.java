@@ -7,27 +7,29 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import br.ufes.pi.trabalho.domain.Love;
-import br.ufes.pi.trabalho.dto.LoveRequest;
+import br.ufes.pi.trabalho.dto.NotificationResponse;
 import br.ufes.pi.trabalho.domain.Post;
 import br.ufes.pi.trabalho.domain.User;
+import br.ufes.pi.trabalho.dto.LoveRequest;
 import br.ufes.pi.trabalho.repository.LoveRepository;
-import br.ufes.pi.trabalho.repository.UserRepository;
 import br.ufes.pi.trabalho.repository.PostRepository;
 
 
 @Service
 public class LoveService {
     private final LoveRepository loveRepository;
-    private final UserRepository userRepository;
     private final PostRepository postRepository;
 
     private final MatchService matchService;
+    private final UserService userService;
+    private final NotificationService notificationService;
 
-    public LoveService(LoveRepository loveRepository, UserRepository userRepository, PostRepository postRepository, MatchService matchService){
+    public LoveService(LoveRepository loveRepository, PostRepository postRepository, MatchService matchService, UserService userService, NotificationService notificationService){
         this.loveRepository = loveRepository;
-        this.userRepository = userRepository;
         this.postRepository = postRepository;
         this.matchService = matchService;
+        this.userService = userService;
+        this.notificationService = notificationService;
     }
     
 
@@ -47,11 +49,9 @@ public class LoveService {
      *
      * @param request um LoveRequest com id do usuário que curtiu o post e id do post.
      */
-    public void registerLoveOnPost(LoveRequest request) {
+    public NotificationResponse registerLoveOnPost(LoveRequest request, String token) {
         //quem curtiu
-        User user = userRepository
-                 .findById(request.getIdUser())
-                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Usuario nao encontrado"));
+        User user = userService.returnUserByToken(token);
         
         Post post = postRepository
                  .findById(request.getIdPost())
@@ -61,7 +61,7 @@ public class LoveService {
         User owner = post.getOwner();
 
         if(owner.equals(user)){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Nao eh possivel curtir o proprio post");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Nao eh possivel amar  o proprio post");
         }
 
         Love newLove = new Love(user, post);
@@ -79,13 +79,13 @@ public class LoveService {
 
             if(likedByOwner){
                 matchService.registrar(user, owner);
-                break;
+                return notificationService.creatMatch1Notification(user, owner);
             }
         }
 
 
 
-
+        return notificationService.creatWaitingMatchNotification();
         // !!!!!! tem que buscar se existe o Love inverso
         // se existe cria um match também e coloca no banco de dados
         // >>>> matchService.registrar(UserAtual, donoDoPost); <<<<<

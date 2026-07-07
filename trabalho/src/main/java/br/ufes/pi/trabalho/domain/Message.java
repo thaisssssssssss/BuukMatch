@@ -22,6 +22,8 @@ public class Message {
     @ManyToOne 
     private Chat chat;
 
+    private String remetenteName;
+
     protected Message(){}
     
     public Message(String conteudo, User remetente, Chat chat){
@@ -29,6 +31,7 @@ public class Message {
         setDataRecebimento();
         setRemetente(remetente);
         setChat(chat);
+        setRemetenteName(remetente.getName());
     }
 
     public Long getId() {
@@ -69,5 +72,13 @@ public class Message {
 
     public void setChat(Chat chat) {
         this.chat = chat;
+    }
+
+    public String getRemetenteName() {
+        return remetenteName;
+    }
+
+    public void setRemetenteName(String remetenteName) {
+        this.remetenteName = remetenteName;
     }
 }

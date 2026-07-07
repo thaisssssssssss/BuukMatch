@@ -21,14 +21,14 @@ public class PostController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> publishPost(@RequestBody CreatePostRequest request){
-        postService.registerPostById(request);
+    public ResponseEntity<Void> publishPost(@RequestBody CreatePostRequest request, @RequestHeader("Authorization") String token){
+        postService.registerPostById(request, token);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<List<PostResponse>> listPostByUser(@PathVariable Long id){
-        return ResponseEntity.ok(postService.listPostByUser(id));
+    @GetMapping
+    public ResponseEntity<List<PostResponse>> listPostByUser(@RequestHeader("Authorization") String token){
+        return ResponseEntity.ok(postService.listPostByUser(token));
     }
 
 }

@@ -2,27 +2,36 @@ package br.ufes.pi.trabalho.dto;
 
 
 public class CreatePostRequest{
-    private Long idUser;
-    private String description;
+    private String legend;
     private String photo;
+    private BookRequest book;
     
-    public CreatePostRequest(String description, String photo, Long idUser){
-        this.description = description;
+
+    public CreatePostRequest(String legend, String photo, BookRequest bookRequest){
+        setLegend(legend);
         this.photo = photo;
-        this.idUser = idUser;
+        setBookRequest(bookRequest);
     }
 
     protected CreatePostRequest(){}
     
-    public String getDescription() {
-        return description;
+    public String getLegend() {
+        return legend;
     }
 
-    public Long getIdUser() {
-        return idUser;
+    public void setLegend(String legend) {
+        this.legend = legend;
     }
     
     public String getPhoto() {
         return photo;
+    }
+
+    public BookRequest getBook() {
+        return book;
+    }
+
+    public void setBookRequest(BookRequest book) {
+        this.book = book;
     }
 }

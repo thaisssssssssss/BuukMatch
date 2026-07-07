@@ -23,17 +23,20 @@ public class User{
     
     @Column(name = "name", unique=true)
     private String name;
+
     @Column(name = "email", unique=true)
     private String email;
+
     private String password;
     private String photo;
     private LocalDate birthdate;
-    private ArrayList<BookGenre> GenresFavoritos; 
+    private ArrayList<BookGenre> favoriteGenres; 
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     private List<Post> posts = new ArrayList<>();
 
     private Address Address;
+
     private ArrayList<Match> matches;  
 
     protected User(){}
@@ -46,7 +49,7 @@ public class User{
         this.Address = Address;
         this.matches = new ArrayList<Match>();
         this.posts = new ArrayList<Post>();
-        this.GenresFavoritos = new ArrayList<BookGenre>();
+        this.favoriteGenres = new ArrayList<BookGenre>();
     }
 
     public void addMatch(Match match){
@@ -78,6 +81,14 @@ public class User{
     }
 
     public void setEmail(String email) {
+        if (email == null || email.isBlank()) {
+            throw new IllegalArgumentException("Email nao pode ser vazio");
+        }
+
+        if (!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
+            throw new IllegalArgumentException("Email invalido");
+        }        
+        
         this.email = email;
     }
 
@@ -86,11 +97,14 @@ public class User{
     }
 
     public void setPassword(String password) {
+        if (email == null || email.isBlank()) {
+            throw new IllegalArgumentException("Senha nao pode ser vazia");
+        }
+
         this.password = password;
     }
 
     public boolean comparePassword(String password){
-//        if(!this.password.equals(password)) throw new Exception("password incorreta");
         if(!this.password.equals(password)) return false;
         else return true;
     }
@@ -115,7 +129,7 @@ public class User{
         return posts;
     }
 
-    public ArrayList<BookGenre> getGenresFavoritos() {
-        return GenresFavoritos;
+    public ArrayList<BookGenre> getFavoriteGenres() {
+        return favoriteGenres;
     }
 }
