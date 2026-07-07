@@ -1,8 +1,8 @@
 import logo from "../assets/logo.png"
 import { NavLink, Link } from "react-router-dom"
 import './styles/NavBar.css'
-import Cadastro from "../pages/Cadastro";
-import Entrar from "../pages/Entrar";
+// import Cadastro from "../pages/Cadastro";
+import SignIn from "../pages/SignIn";
 import SobreNos from "../pages/SobreNos";
 import { useLocation } from "react-router-dom";
 
@@ -19,7 +19,7 @@ function NavBar(){
                 <ul>
                     <li><NavLink className="option-navbar" to = "/" end>Início</NavLink></li>
                     <li><NavLink className="option-navbar" to = "/sobre">Sobre Nós</NavLink></li>
-                    <li><NavLink className="cadastrar" to = "/">Cadastrar</NavLink></li>
+                    <li><NavLink className="cadastrar" to = "/signin">Cadastrar</NavLink></li>
                     <li><NavLink className="login" to = "/login">Login</NavLink></li>
                 </ul>
             </div>
