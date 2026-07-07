@@ -3,12 +3,13 @@ import Input from "../components/Input"
 import logoImg from "../assets/logo.png"
 import { Link } from "react-router-dom"
 import { useState } from "react"
+import { authentication } from "../services/authentication"
 
 function Login() {
     
     const [formData, setFormData] = useState({
         email: "",
-        senha: ""
+        password: ""
     })
 
     const handleChange = (e) => {
@@ -20,9 +21,26 @@ function Login() {
         }))
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Dados enviados: ", formData);
+        try {
+            console.log("Tentando conectar com o backend");
+
+            const respostaServidor = await authentication.login(formData);
+            const token = respostaServidor.token;
+            const dadosUsuario = respostaServidor.user;
+
+            if(token){
+                localStorage.setItem("token", respostaServidor.token);
+            }
+            alert(`Bem-vindo de volta, ${dadosUsuario?.name || 'usuário'}!`);
+            
+        } catch(erro){
+            // tratar cada erro melhor
+            const mensagemErro = erro.response?.data?.message || "E-mail ou senha incorretos.";
+            alert(mensagemErro);
+        }
+        // console.log("Dados enviados: ", formData);
     }
 
     return (
@@ -42,14 +60,16 @@ function Login() {
 
                     <form className="form-class">
                         <Input type="text" value={formData.email} label="Email" placeholder="Digite seu e-mail" name="email" onChange={handleChange} />
-                        <Input type="password" value={formData.senha} label="Senha" placeholder="Digite sua senha" name="senha" onChange={handleChange} />
+                        <Input type="password" value={formData.password} label="Senha" placeholder="Digite sua senha" name="password" onChange={handleChange} />
                     </form>
 
                     <button type="submit" className="login-button" onClick={handleSubmit}>Fazer login</button>
 
                     <div className="criar-conta">
                         <p>Ainda não tem uma conta?</p>
-                        <p className="link-criar">Criar agora!</p>
+                        <Link to="/signin" className="signin-link">
+                            <p className="link-criar">Entrar agora!</p>
+                        </Link>
                     </div>
                 </div>
             </section>

@@ -1,10 +1,10 @@
 import "./styles/Input.css"
 
-function Input({label, onChange, ...props}) {
+function Input({label, onChange, value,...props}) {
     return (
         <div className="input-box">
             <label className="input-name" htmlFor={label}>{label}</label>
-            <input className="input-insert" id={label} {...props} onChange={onChange} autoComplete="off" required/>
+            <input className="input-insert" id={label} {...props} value={value} onChange={onChange} autoComplete="off" required/>
         </div>
     )
 }
