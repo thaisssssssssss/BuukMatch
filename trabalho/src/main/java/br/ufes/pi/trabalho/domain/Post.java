@@ -1,5 +1,4 @@
 package br.ufes.pi.trabalho.domain;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -11,13 +10,12 @@ public class Post{
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String description;
+    private String legend;
     private LocalDateTime publicationDate;
     private String photo;
 
     @OneToMany(mappedBy = "post")
     private List<Like> likes;
-    // private int nLikes;
 
     @ManyToOne
     private User owner;
@@ -27,14 +25,16 @@ public class Post{
     
     private String ownerName;
 
-    // tem que inicializar o dono
-    public Post(String description, String photo, User owner){
-        setDescription(description);
+    private Book book;
+
+    public Post(String legend, String photo, User owner, Book book){
+        setLegend(legend);      
         setPhoto(photo);
         setOwner(owner);
         setPublicationDate(LocalDateTime.now());
         setStatus(StatusPost.DISPONIVEL);
         setOwnerName(owner.getName());
+        setBook(book);
     }
 
     protected Post() {}
@@ -47,12 +47,12 @@ public class Post{
         this.id = id;
     }
     
-    public String getDescription() {
-        return description;
+    public String getLegend() {
+        return legend;
     }
-    
-    public void setDescription(String description) {
-        this.description = description;
+
+    public void setLegend(String legend) {
+        this.legend = legend;
     }
     
     public LocalDateTime getPublicationDate() {
@@ -97,5 +97,13 @@ public class Post{
 
     public void addLike(Like like){
         this.likes.add(like);
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
     }
 }
