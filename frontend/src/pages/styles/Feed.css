@@ -1,4 +1,4 @@
-.container {
+.container-feed {
     position: relative;
     width: 100%;
     height: 100vh;
@@ -20,27 +20,33 @@
     gap: 1rem;
 }
 
-.title-box {
+.title-feed-box {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
-.title {
+.title-feed {
+    display: flex;
     font-size: 1.5rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
     color: #E34C75;
 }
 
-.title-description {
+.title-description-feed {
     color: black;
 }
 
-.logo-busca {
+.logo-busca-feed {
     width: auto;
     height: 3.5rem;
 }
 
-.return {
+.return-feed {
     text-align: center;
     align-self: center;
     justify-self: center;
@@ -48,7 +54,7 @@
     transform: translateY(-1rem);
 }
 
-.return span {
+.return-feed span {
     color: #E54F81;
     cursor: pointer;
 }
@@ -58,7 +64,7 @@
         margin-top: 1rem;
     }
 
-    .return {
+    .return-feed {
         margin-top: 2rem;
 
     }

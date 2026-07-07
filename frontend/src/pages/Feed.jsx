@@ -69,18 +69,18 @@ function Feed() {
     }
 
     return (
-        <div className='container'>
+        <div className='container-feed'>
             <NavBarApp />
             <section 
                 className='feed-swiper-container'
                 
                 >
-                <div className='title-box'>
-                    <div className='title'>
+                <div className='title-feed-box'>
+                    <div className='title-feed'>
                         <p>Buuusque seu próximo livro</p>
-                        <img src={Logo} className='logo-busca' alt="" />
+                        <img src={Logo} className='logo-busca-feed' alt="" />
                     </div>
-                    <p className='title-description'>curta para dar match ou descarte para passar.</p>
+                    <p className='title-description-feed'>curta para dar match ou descarte para passar.</p>
                 </div>
                 <Swiper
                 effect={'cards'}
@@ -99,7 +99,7 @@ function Feed() {
                 </Swiper>
             </section>
 
-            <div className='return'>
+            <div className='return-feed'>
                 <p>Pulou? <span onClick={handleUndo}>Desfazer</span></p>
             </div>
 
