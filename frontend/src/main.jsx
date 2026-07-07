@@ -6,7 +6,6 @@ import Login from "./pages/Login.jsx"
 import SignIn from "./pages/SignIn.jsx"
 
 import { BrowserRouter , createBrowserRouter, RouterProvider } from "react-router-dom";
-import Feed from './pages/Feed.jsx'
 
 const router = createBrowserRouter([
   {
@@ -16,10 +15,6 @@ const router = createBrowserRouter([
   {
     path: "/login",
     Component: Login
-  },
-  {
-    path: "/feed",
-    Component: Feed
   },
   {
     path: "/signin",

@@ -4,6 +4,8 @@ import {Link} from "react-router-dom"
 import home_img from "../assets/home-novo.png"
 
 function Home(){
+
+
     return (
         <div className ="home">
             <NavBar/>
