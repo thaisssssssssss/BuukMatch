@@ -46,8 +46,7 @@ function SignIn() {
                     <div className='box-pop-out'>
                         <AddressInput
                             dadosPessoais={formData}
-                            FecharPopup={()=> setShowPopup(false)}
-                        
+                            fecharPopup={()=> setShowPopup(false)}
                         />
                     </div>
                 </div>

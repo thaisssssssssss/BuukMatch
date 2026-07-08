@@ -5,9 +5,8 @@ import App from './App.jsx'
 import Login from "./pages/Login.jsx"
 import Chat from "./pages/Chat.jsx"
 import SignIn from "./pages/SignIn.jsx"
-
-import { BrowserRouter , createBrowserRouter, RouterProvider } from "react-router-dom";
 import Feed from './pages/Feed.jsx'
+import { BrowserRouter , createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter([
   {

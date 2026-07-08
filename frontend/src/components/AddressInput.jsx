@@ -2,9 +2,11 @@ import "./styles/AddressInput.css"
 import Input from "./Input"
 import { useState } from "react";
 import { authentication } from '../services/authentication'
+import { useNavigate } from "react-router-dom";
+import { use } from "react";
 
 function AddressInput({dadosPessoais, fecharPopup}) {
-    
+    const trocarNavegacao = useNavigate(); 
     const [formData, setFormData] = useState({
             street: "",
             district: "",
@@ -36,6 +38,7 @@ function AddressInput({dadosPessoais, fecharPopup}) {
 
             alert("Conta criada com sucesso com o seu endereço!");
             fecharPopup();
+            trocarNavegacao("/login");
 
         } catch (erro){
             console.log(erro);
