@@ -26,7 +26,8 @@ function Feed() {
                 "description": "A mystical story about following your dreams and listening to your heart, following the journey of a young shepherd named Santiago.",
                 "pageCount": 208,
                 "publicationYear": 1988,
-                "publisher": "HarperOne"
+                "publisher": "HarperOne",
+                "imgSrc": "/books/the_alchemist.jpg"
             },
             {
                 "id": 2,
@@ -35,7 +36,8 @@ function Feed() {
                 "description": "A gripping, heart-wrenching, and wholly remarkable tale of coming-of-age in a South poisoned by virulent prejudice.",
                 "pageCount": 324,
                 "publicationYear": 1960,
-                "publisher": "J. B. Lippincott & Co."
+                "publisher": "J. B. Lippincott & Co.",
+                "imgSrc": "/books/to_kill_a_mockingbird.jpg"
             },
             {
                 "id": 3,
@@ -44,7 +46,9 @@ function Feed() {
                 "description": "A dystopian social science fiction novel and cautionary tale about the dangers of totalitarianism, mass surveillance, and repressive regimentation.",
                 "pageCount": 328,
                 "publicationYear": 1949,
-                "publisher": "Secker & Warburg"
+                "publisher": "Secker & Warburg",
+                "imgSrc": "/books/1984.jpeg"
+
             },
             {
                 "id": 4,
@@ -53,7 +57,8 @@ function Feed() {
                 "description": "A classic fantasy novel following the quest of home-loving hobbit Bilbo Baggins to win a share of the treasure guarded by Smaug the dragon.",
                 "pageCount": 310,
                 "publicationYear": 1937,
-                "publisher": "George Allen & Unwin"
+                "publisher": "George Allen & Unwin",
+                "imgSrc": "/books/the_hobbit.jpeg"
             }
         ]
     

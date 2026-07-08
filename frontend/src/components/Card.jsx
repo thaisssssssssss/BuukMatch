@@ -1,11 +1,15 @@
 import "./styles/Card.css"
 import { BookOpen, CalendarDays, NotebookText } from "lucide-react"
 
-function Card({ post: {title, author, description, pageCount, publicationYear, publisher} }) {    
+function Card({ post: {title, author, description, pageCount, publicationYear, publisher, imgSrc} }) {    
+    console.log(imgSrc)
     return (
         <div className="card-container">
-            <section className="img-section sections-half"></section>
-            <section className="text-section sections-half">
+            <section
+             className="img-section-card sections-half"
+             style={{ backgroundImage: `url(${imgSrc})`}}
+             ></section>
+            <section className="text-section-card sections-half">
                 <div className="text-container">
                     <div className="head-card">
                         <h2 className="book-name">{ title }</h2>
