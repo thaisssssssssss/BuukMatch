@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import Login from "./pages/Login.jsx"
+import Chat from "./pages/Chat.jsx"
 import SignIn from "./pages/SignIn.jsx"
 
 import { BrowserRouter , createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
     Component: Login
   },
   {
+    path: "/chat",
+    Component: Chat
+  },
+  {
     path: "/feed",
     Component: Feed
   },
@@ -26,8 +31,6 @@ const router = createBrowserRouter([
     Component: SignIn
   }
 ])
-
-
 
 createRoot(document.getElementById('root')).render(
   <RouterProvider router={router} />

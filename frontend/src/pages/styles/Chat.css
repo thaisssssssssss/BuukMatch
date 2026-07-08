@@ -1,0 +1,21 @@
+.chat-pai{
+    background-color: #FFF2FA;
+    /* min-height: 100vh; */
+    height: 100vh;
+    display: flex;
+}
+.chat-content{
+    /* ; ocupa o espaço que sobrou  */
+    display: flex; /* sidebar + chat lado a lado */ 
+    flex-direction: column;
+    /* overflow: hidden; */
+    height: 100%;
+    flex: 1;
+}
+
+.chat-main-content{
+    display: flex;
+    height: 100%;
+    gap: 0.5rem;
+
+}
