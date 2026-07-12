@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-
+import React, { useState, createRef, useMemo } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
@@ -13,12 +12,14 @@ import { EffectCards } from 'swiper/modules';
 import NavBarApp from '../components/NavBarApp'
 import Logo from '../assets/logo.png'
 
+import TinderCard from 'react-tinder-card'
+
 import Card from '../components/Card'
 
 
 function Feed() {
 
-    const posts = [
+    const initialPosts = [
             {
                 "id": 1,
                 "title": "The Alchemist",
@@ -62,15 +63,52 @@ function Feed() {
             }
         ]
     
-    const [swiperInstance, setSwiperInstance] = useState(null);
-    
-    // Desfazer
-    const handleUndo = () => {
-        if (swiperInstance) {
-            swiperInstance.allowSlidePrev = true;
-            swiperInstance.slidePrev();           
-            swiperInstance.allowSlidePrev = false; 
+    const [posts, setPosts] = useState(initialPosts)
+
+    const [history, setHistory] = useState([])
+
+    // Nn entendi isso ainda
+    // Cria um array de referências (refs) persistentes para cada card usando useMemo
+    const childRefs = useMemo(
+        () => Array(initialPosts.length).fill(0).map((i) => createRef()),
+        []
+    );
+
+
+    const onSwipe = (direction, post) => {
+        if (direction === 'left') {
+            console.log(`Rejeitou: ${post.title}`);
+        } else if (direction === 'right') {
+            console.log(`Aceitou: ${post.title}`);
+        }    
+        
+        setHistory((prev) => [...prev, post.id]);
+    }
+
+    const handleUndo = async () => {
+        // Se não tiver nada no histórico, não faz nada
+        if (history.length === 0) {
+            console.log("Nenhum card para desfazer.");
+            return;
         }
+
+        // Pega o ID do último card que saiu da tela
+        const lastSwipedId = history[history.length - 1];
+        
+        // Remove esse ID do histórico
+        setHistory((prev) => prev.slice(0, -1));
+
+        // Encontra o índice correspondente no array original para achar a referência do card
+        const cardIndex = initialPosts.findIndex(p => p.id === lastSwipedId);
+        
+        // Dispara a função nativa do react-tinder-card para puxar o card de volta animado!
+        if (childRefs[cardIndex] && childRefs[cardIndex].current) {
+            await childRefs[cardIndex].current.restoreCard();
+        }
+    };
+
+    const onCardLeftScreen = (myIdentifier) => {
+        console.log(myIdentifier + ' left the screen')
     }
 
     return (
@@ -87,21 +125,22 @@ function Feed() {
                     </div>
                     <p className='title-description-feed'>curta para dar match ou descarte para passar.</p>
                 </div>
-                <Swiper
-                effect={'cards'}
-                grabCursor={true}
-                modules={[EffectCards]}
-                // allowSlidePrev={false}
-                onSwiper={setSwiperInstance}
-                >
+                
+                <div className="card-stack-container">
                     {
-                        posts.map((post) => (
-                            <SwiperSlide key={post.id}>
+                        posts.map((post, index) => (
+                            <TinderCard
+                            ref={childRefs[index]}
+                            className='swipe-card' 
+                            key={post.id}
+                            onSwipe={(dir) => onSwipe(dir, post)}
+                            preventSwipe={['up', 'down']}
+                            >
                                 <Card post={post} />
-                            </SwiperSlide>
+                            </TinderCard>
                         ))
                     }
-                </Swiper>
+                </div>
             </section>
 
             <div className='return-feed'>
