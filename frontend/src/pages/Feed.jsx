@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo, createRef } from 'react';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -15,10 +15,13 @@ import Logo from '../assets/logo.png'
 
 import Card from '../components/Card'
 
+import FloatingIcons from '../components/FloatingIcons';
+import TinderCard from 'react-tinder-card'
+
 
 function Feed() {
 
-    const posts = [
+    const initialPosts = [
             {
                 "id": 1,
                 "title": "The Alchemist",
@@ -62,23 +65,59 @@ function Feed() {
             }
         ]
     
-    const [swiperInstance, setSwiperInstance] = useState(null);
-    
-    // Desfazer
-    const handleUndo = () => {
-        if (swiperInstance) {
-            swiperInstance.allowSlidePrev = true;
-            swiperInstance.slidePrev();           
-            swiperInstance.allowSlidePrev = false; 
-        }
+    const [showHearts, setShowHearts] = useState(false);
+    const [showTrash, setShowTrash] = useState(false);
+
+    const [posts, setPosts] = useState(initialPosts)
+    const [history, setHistory] = useState([])
+    const [currentIndex, setCurrentIndex] = useState(initialPosts.length - 1);
+
+    // Nn entendi isso ainda
+    // Cria um array de referências (refs) persistentes para cada card usando useMemo
+    const childRefs = useMemo(
+        () => Array(initialPosts.length).fill(0).map((i) => createRef()),
+        []
+    );
+
+    const onSwipe = (direction, post) => {
+        if (direction === 'left') {
+            console.log(`Rejeitou: ${post.title}`);
+        } else if (direction === 'right') {
+            console.log(`Aceitou: ${post.title}`);
+        }    
+        
+        setHistory((prev) => [...prev, post.id]);
+        setCurrentIndex((prev) => prev - 1);
     }
+
+    const handleAccept = async () => {
+        // Se currentIndex for menor que 0, acabaram os cards
+        if (currentIndex < 0) return;
+
+        setShowHearts(true);
+        setTimeout(() => setShowHearts(false), 1000);
+
+        if (childRefs[currentIndex] && childRefs[currentIndex].current) {
+            await childRefs[currentIndex].current.swipe('right');
+        }        
+    }
+
+    const handleReject = async () => {
+        if (currentIndex < 0) return;
+
+        setShowTrash(true);
+        setTimeout(() => setShowTrash(false), 1000);
+
+        if (childRefs[currentIndex] && childRefs[currentIndex].current) {
+            await childRefs[currentIndex].current.swipe('left');
+        }
+    };
 
     return (
         <div className='container-feed'>
             <NavBarApp />
             <section 
                 className='feed-swiper-container'
-                
                 >
                 <div className='title-feed-box'>
                     <div className='title-feed'>
@@ -87,27 +126,38 @@ function Feed() {
                     </div>
                     <p className='title-description-feed'>curta para dar match ou descarte para passar.</p>
                 </div>
-                <Swiper
-                effect={'cards'}
-                grabCursor={true}
-                modules={[EffectCards]}
-                // allowSlidePrev={false}
-                onSwiper={setSwiperInstance}
-                >
-                    {
-                        posts.map((post) => (
-                            <SwiperSlide key={post.id}>
+                <div className="card-stack-container">
+                    {currentIndex < 0 ? (
+                        <div className="no-more-posts">
+                            <h2>Ops...</h2>
+                            <p>Estamos trabalhando em novos posts! 📚 ✨</p>
+                        </div>
+                    ) : (
+                        posts.map((post, index) => (
+                            <TinderCard
+                                ref={childRefs[index]}
+                                className='swipe-card' 
+                                key={post.id}
+                                onSwipe={(dir) => onSwipe(dir, post)}
+                                preventSwipe={['up', 'down', 'left', 'right']}
+                            >
                                 <Card post={post} />
-                            </SwiperSlide>
+                            </TinderCard>
                         ))
-                    }
-                </Swiper>
+                    )}
+                </div>
+                <div className="swipe-buttons-container">
+                    <button onClick={handleReject} className='swipe-reject-button swipe-button'>
+                        Rejeitar
+                        <span>{showTrash && <FloatingIcons icon="❌" />}</span>
+
+                    </button>
+                    <button onClick={handleAccept} className='swipe-accept-button swipe-button'>
+                        Match
+                        <span>{showHearts && <FloatingIcons icon="💖" />}</span>
+                    </button>
+                </div>
             </section>
-
-            <div className='return-feed'>
-                <p>Pulou? <span onClick={handleUndo}>Desfazer</span></p>
-            </div>
-
         </div>
     )
 }
