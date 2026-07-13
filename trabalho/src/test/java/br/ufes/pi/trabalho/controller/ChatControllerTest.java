@@ -46,6 +46,7 @@ class ChatControllerTest {
     @Test
     void listMessageSuccess() {
         MessageResponse msg = new MessageResponse(
+                2L,
                 LocalDateTime.now(),
                 "Oi",
                 "Maria",
@@ -67,9 +68,9 @@ class ChatControllerTest {
         SendMessageRequest request = new SendMessageRequest();
         request.setConteudo("Oi, tudo bem?");
 
-        ResponseEntity<Void> response = chatController.sendMessage(10L, request, "token123");
+        ResponseEntity<MessageResponse> response = chatController.sendMessage(10L, request, "token123");
 
-        assertEquals(200, response.getStatusCode().value());
+        assertEquals(201, response.getStatusCode().value());
 
         // confirma que o controler chamou o metodo do service
         verify(chatService).sendMessage(10L, "token123", "Oi, tudo bem?");
