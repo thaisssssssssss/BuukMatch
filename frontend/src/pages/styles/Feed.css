@@ -6,7 +6,7 @@
     background-color: #FFF2FA;
     display: flex;
     flex-direction: column;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 

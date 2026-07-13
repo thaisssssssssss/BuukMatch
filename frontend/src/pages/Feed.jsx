@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo, createRef } from 'react';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -16,11 +16,12 @@ import Logo from '../assets/logo.png'
 import Card from '../components/Card'
 
 import FloatingIcons from '../components/FloatingIcons';
+import TinderCard from 'react-tinder-card'
 
 
 function Feed() {
 
-    const posts = [
+    const initialPosts = [
             {
                 "id": 1,
                 "title": "The Alchemist",
@@ -64,49 +65,51 @@ function Feed() {
             }
         ]
     
-    const [swiperInstance, setSwiperInstance] = useState(null);
     const [showHearts, setShowHearts] = useState(false);
     const [showTrash, setShowTrash] = useState(false);
 
-    // Desfazer
-    const handleUndo = () => {
-        if (swiperInstance) {
-            swiperInstance.allowSlidePrev = true;
-            swiperInstance.slidePrev();           
-            swiperInstance.allowSlidePrev = false; 
-        }
+    const [posts, setPosts] = useState(initialPosts)
+    const [history, setHistory] = useState([])
+    const [currentIndex, setCurrentIndex] = useState(initialPosts.length - 1);
+
+    // Nn entendi isso ainda
+    // Cria um array de referências (refs) persistentes para cada card usando useMemo
+    const childRefs = useMemo(
+        () => Array(initialPosts.length).fill(0).map((i) => createRef()),
+        []
+    );
+
+    const onSwipe = (direction, post) => {
+        if (direction === 'left') {
+            console.log(`Rejeitou: ${post.title}`);
+        } else if (direction === 'right') {
+            console.log(`Aceitou: ${post.title}`);
+        }    
+        
+        setHistory((prev) => [...prev, post.id]);
+        setCurrentIndex((prev) => prev - 1);
     }
 
-    const handleAccept = () => {
-        if(swiperInstance) {
-            const currentPost = posts[swiperInstance.activeIndex];
-            console.log("Aceitou:", currentPost.title);
-            
-            // chamada pra api aqui
+    const handleAccept = async () => {
+        // Se currentIndex for menor que 0, acabaram os cards
+        if (currentIndex < 0) return;
 
-            setShowHearts(true);
+        setShowHearts(true);
+        setTimeout(() => setShowHearts(false), 1000);
 
-            setTimeout(() => {
-                setShowHearts(false);
-            }, 1000);
-
-            swiperInstance.slideNext(800);
-        }
+        if (childRefs[currentIndex] && childRefs[currentIndex].current) {
+            await childRefs[currentIndex].current.swipe('right');
+        }        
     }
 
-    const handleReject = () => {
-        if (swiperInstance) {
-            const currentPost = posts[swiperInstance.activeIndex];
-            console.log("Rejeitou:", currentPost.title);
+    const handleReject = async () => {
+        if (currentIndex < 0) return;
 
-            // chamada pra api aqui
-            setShowTrash(true);
+        setShowTrash(true);
+        setTimeout(() => setShowTrash(false), 1000);
 
-            setTimeout(() => {
-                setShowTrash(false);
-            }, 1000);
-
-            swiperInstance.slideNext(800);
+        if (childRefs[currentIndex] && childRefs[currentIndex].current) {
+            await childRefs[currentIndex].current.swipe('left');
         }
     };
 
@@ -123,23 +126,20 @@ function Feed() {
                     </div>
                     <p className='title-description-feed'>curta para dar match ou descarte para passar.</p>
                 </div>
-                <Swiper
-                effect={'cards'}
-                grabCursor={true}
-                modules={[EffectCards]}
-                allowSlidePrev={false}
-                onSwiper={setSwiperInstance}
-                grabCursor={false}
-                allowTouchMove={false}
-                >
+                <div className="card-stack-container">
                     {
-                        posts.map((post) => (
-                            <SwiperSlide key={post.id}>
+                       posts.map((post, index) => (
+                            <TinderCard
+                            ref={childRefs[index]}
+                            className='swipe-card' 
+                            key={post.id}
+                            onSwipe={(dir) => onSwipe(dir, post)}
+                            preventSwipe={['up', 'down', 'left', 'right']}
+                            >
                                 <Card post={post} />
-                            </SwiperSlide>
-                        ))
-                    }
-                </Swiper>
+                            </TinderCard>
+                    ))}
+                </div>
                 <div className="swipe-buttons-container">
                     <button onClick={handleReject} className='swipe-reject-button swipe-button'>
                         Rejeitar
@@ -152,11 +152,6 @@ function Feed() {
                     </button>
                 </div>
             </section>
-
-            <div className='return-feed'>
-                <p>Pulou? <span onClick={handleUndo}>Desfazer</span></p>
-            </div>
-
         </div>
     )
 }
