@@ -8,6 +8,13 @@ import { UserRound } from "lucide-react";
 function NavBarApp(){
     const path = useLocation()
 
+    let user_data = null
+
+    const user_data_save = localStorage.getItem("user_data")
+    if(user_data_save) {
+        user_data = JSON.parse(user_data_save)
+    }
+
     return (
         <nav className="navBar">
             <div className="navBar-container">
@@ -24,7 +31,7 @@ function NavBarApp(){
                 </ul>
                 <div className="profile">
                     <UserRound />
-                    <p>Olá, <span>Ronald</span>!</p>
+                    <p>Olá, <span>{ user_data ? user_data.name : "Usuário"  }</span>!</p>
                 </div>
             </div>
         </nav>

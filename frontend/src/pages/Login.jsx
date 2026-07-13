@@ -32,9 +32,11 @@ function Login() {
             const respostaServidor = await authentication.login(formData);
             const token = respostaServidor.token;
             const dadosUsuario = respostaServidor.user;
+            console.log(dadosUsuario)
 
             if(token){
                 localStorage.setItem("token", respostaServidor.token);
+                localStorage.setItem("user_data", JSON.stringify(dadosUsuario))
             }
 
             toast(`Bem-vindo de volta, ${dadosUsuario?.name || 'usuário'}! 🐮`, {
