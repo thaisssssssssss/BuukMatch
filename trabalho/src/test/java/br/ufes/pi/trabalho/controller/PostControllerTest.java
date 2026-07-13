@@ -49,9 +49,11 @@ class PostControllerTest {
     @Test
     void listPostByUserSuccess() {
         PostResponse post = new PostResponse(
+                1L,
                 "Meu post",
                 LocalDateTime.now(),
-                "foto.png"
+                "foto.png",
+                "Thais"
         );
 
         when(postService.listPostByUser("token123")).thenReturn(List.of(post));
