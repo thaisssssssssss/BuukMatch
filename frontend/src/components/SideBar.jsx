@@ -4,6 +4,14 @@ import profile from "../assets/woman.png"
 import ChatSideBar from "./ChatSideBar";
 
 function SideBar({ chats, onChatClick }){
+
+    const user_data_save = localStorage.getItem("user_data")
+    let user_data = null
+
+    if(user_data_save) {
+        user_data = JSON.parse(user_data_save)
+    }
+
     return (
         <nav className="sideBar">
             <div className="sideBar-container">
@@ -15,8 +23,8 @@ function SideBar({ chats, onChatClick }){
                         <img className="profile-img" src = {profile}  alt = "profile"/>
                     </Link>
                     <div className="profileContents">
-                        <p className="name">Hello, Marina👋</p>
-                        <p className="email">marinasorvete@gmail.com</p>
+                        <p className="name">Hello, { user_data ? user_data.name : "Usuário" }👋</p>
+                        <p className="email">{ user_data ? user_data.email : "Email" }</p>
                     </div>
                 </div>
                 <p className="sidebar-chats-title">Meus chats</p>
