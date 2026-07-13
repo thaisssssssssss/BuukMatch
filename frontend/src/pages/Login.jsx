@@ -5,6 +5,7 @@ import { Link } from "react-router-dom"
 import { useState } from "react"
 import { authentication } from "../services/authentication"
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast, Bounce } from 'react-toastify'
 
 function Login() {
     const trocarNavegacao = useNavigate(); 
@@ -35,18 +36,53 @@ function Login() {
             if(token){
                 localStorage.setItem("token", respostaServidor.token);
             }
-            alert(`Bem-vindo de volta, ${dadosUsuario?.name || 'usuário'}!`);
-            trocarNavegacao("/feed");
+
+            toast(`Bem-vindo de volta, ${dadosUsuario?.name || 'usuário'}! 🐮`, {
+                position: "top-right",
+                autoClose: 2500,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+                onClose: () => trocarNavegacao("/feed")
+            });
+
         } catch(erro){
-            // tratar cada erro melhor
             const mensagemErro = erro.response?.data?.message || "E-mail ou senha incorretos.";
-            alert(mensagemErro);
+            // tratar cada erro melhor
+            toast.error(mensagemErro, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+            });
         }
         // console.log("Dados enviados: ", formData);
     }
 
     return (
         <div className="login-pai">
+            <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick={false}
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+            transition={Bounce}
+            />
             <section className="image-section login-section-g"></section>
             <section className="login-section login-section-g">
                 <div className="head">
