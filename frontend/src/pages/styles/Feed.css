@@ -86,11 +86,22 @@
     border: none;
     outline: none;
     position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
 }
 
 .swipe-reject-button {
     background-color: white;
     color: black;
+}
+
+.swipe-like-button {
+    background-color: white;
+    color: #E54F81;
+    border: 1px solid #E54F81;
 }
 
 .swipe-accept-button {
