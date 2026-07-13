@@ -82,7 +82,7 @@ class ChatServiceTest {
 
         when(userService.returnUserByToken("token123")).thenReturn(maria);
         when(chatRepository.findById(10L)).thenReturn(Optional.of(chat));
-        when(messageRepository.findByChatOrderByDataRecebimentoAsc(chat))
+        when(messageRepository.findByChatOrderByIdAsc(chat))
                 .thenReturn(List.of(msgMaria, msgJoao));
 
         List<MessageResponse> response = chatService.listMessage(10L, "token123");
@@ -111,6 +111,11 @@ class ChatServiceTest {
 
         when(chatRepository.findById(10L)).thenReturn(Optional.of(chat));
         when(userService.returnUserByToken("token123")).thenReturn(maria);
+         when(messageRepository.save(any(Message.class)))
+                    .thenAnswer(invocation -> {
+                    Message message = invocation.getArgument(0);
+                    message.setId(1L);
+                    return message;});
 
         chatService.sendMessage(10L, "token123", "Oi, João!");
 
