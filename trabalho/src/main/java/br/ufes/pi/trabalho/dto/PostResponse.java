@@ -15,7 +15,7 @@ public class PostResponse {
         setDescription(description);
         setPublicationDate(publicationDate);
         setPhoto(photo);
-        setOwnerName(photo);
+        setOwnerName(ownerName);
     }
     
     protected PostResponse(){}
