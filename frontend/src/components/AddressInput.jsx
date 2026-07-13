@@ -4,6 +4,7 @@ import { useState } from "react";
 import { authentication } from '../services/authentication'
 import { useNavigate } from "react-router-dom";
 import { use } from "react";
+import { ToastContainer, toast, Bounce } from 'react-toastify'
 
 function AddressInput({dadosPessoais, fecharPopup}) {
     const trocarNavegacao = useNavigate(); 
@@ -35,10 +36,23 @@ function AddressInput({dadosPessoais, fecharPopup}) {
             };
             console.log(dadosCompletos);
             await authentication.cadastrar(dadosCompletos);
-
-            alert("Conta criada com sucesso com o seu endereço!");
+            
             fecharPopup();
-            trocarNavegacao("/login");
+
+            toast("Conta criada com sucesso com o seu endereço! 🐮", {
+                position: "top-right",
+                autoClose: 2500,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+                onClose: () => {
+                    trocarNavegacao("/login")
+                }
+            })
 
         } catch (erro){
             console.log(erro);
