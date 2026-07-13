@@ -10,6 +10,7 @@ import './styles/Feed.css'
 
 // import required modules
 import { EffectCards } from 'swiper/modules';
+import { Heart, Trash } from 'lucide-react';
 import NavBarApp from '../components/NavBarApp'
 import Logo from '../assets/logo.png'
 
@@ -68,7 +69,7 @@ function Feed() {
     const [showHearts, setShowHearts] = useState(false);
     const [showTrash, setShowTrash] = useState(false);
 
-    const [posts, setPosts] = useState(initialPosts)
+    const [posts, setPosts] = useState(() => initialPosts.map(post => ({ ...post, liked: false })))
     const [history, setHistory] = useState([])
     const [currentIndex, setCurrentIndex] = useState(initialPosts.length - 1);
 
@@ -88,6 +89,17 @@ function Feed() {
         
         setHistory((prev) => [...prev, post.id]);
         setCurrentIndex((prev) => prev - 1);
+    }
+
+    const handleLike = () => {
+        if (currentIndex < 0) return;
+        const currentPostId = posts[currentIndex].id;
+
+        setPosts((prevPosts) =>
+            prevPosts.map((post) =>
+                post.id === currentPostId ? { ...post, liked: !post.liked } : post
+            )
+        )
     }
 
     const handleAccept = async () => {
@@ -146,14 +158,16 @@ function Feed() {
                         ))
                     )}
                 </div>
-                <div className="swipe-buttons-container">
+                <div className="swipe-buttons-container" style={{ display: currentIndex < 0 ? 'none' : 'flex' }}>
                     <button onClick={handleReject} className='swipe-reject-button swipe-button'>
-                        Rejeitar
+                        Rejeitar <Trash fill='black'/>
                         <span>{showTrash && <FloatingIcons icon="❌" />}</span>
-
+                    </button>
+                    <button onClick={handleLike} className='swipe-like-button swipe-button'>
+                        Curtir <Heart fill={`${((currentIndex > 0) && posts[currentIndex].liked) ? "#E54F81" : "white"}`} />
                     </button>
                     <button onClick={handleAccept} className='swipe-accept-button swipe-button'>
-                        Match
+                        Match <Heart fill='white' />
                         <span>{showHearts && <FloatingIcons icon="💖" />}</span>
                     </button>
                 </div>
