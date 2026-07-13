@@ -3,12 +3,14 @@ package br.ufes.pi.trabalho.dto;
 import java.time.LocalDateTime;
 
 public class MessageResponse {
+    private Long id;
     private LocalDateTime receiveDate;
     private String content;
     private String remetenteName;
     private boolean sentByMe;
     
-    public MessageResponse(LocalDateTime receiveDate, String content, String remetente, boolean sentByMe){
+    public MessageResponse(Long id, LocalDateTime receiveDate, String content, String remetente, boolean sentByMe){
+        setId(id);
         setReceiveDate(receiveDate);
         setContent(content);
         setRemetenteName(remetente);
@@ -43,5 +45,13 @@ public class MessageResponse {
 
     public void setReceiveDate(LocalDateTime receiveDate) {
         this.receiveDate = receiveDate;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
