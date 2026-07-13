@@ -15,6 +15,8 @@ import Logo from '../assets/logo.png'
 
 import Card from '../components/Card'
 
+import FloatingIcons from '../components/FloatingIcons';
+
 
 function Feed() {
 
@@ -63,7 +65,9 @@ function Feed() {
         ]
     
     const [swiperInstance, setSwiperInstance] = useState(null);
-    
+    const [showHearts, setShowHearts] = useState(false);
+    const [showTrash, setShowTrash] = useState(false);
+
     // Desfazer
     const handleUndo = () => {
         if (swiperInstance) {
@@ -73,12 +77,44 @@ function Feed() {
         }
     }
 
+    const handleAccept = () => {
+        if(swiperInstance) {
+            const currentPost = posts[swiperInstance.activeIndex];
+            console.log("Aceitou:", currentPost.title);
+            
+            // chamada pra api aqui
+
+            setShowHearts(true);
+
+            setTimeout(() => {
+                setShowHearts(false);
+            }, 1000);
+
+            swiperInstance.slideNext(800);
+        }
+    }
+
+    const handleReject = () => {
+        if (swiperInstance) {
+            const currentPost = posts[swiperInstance.activeIndex];
+            console.log("Rejeitou:", currentPost.title);
+
+            // chamada pra api aqui
+            setShowTrash(true);
+
+            setTimeout(() => {
+                setShowTrash(false);
+            }, 1000);
+
+            swiperInstance.slideNext(800);
+        }
+    };
+
     return (
         <div className='container-feed'>
             <NavBarApp />
             <section 
                 className='feed-swiper-container'
-                
                 >
                 <div className='title-feed-box'>
                     <div className='title-feed'>
@@ -91,8 +127,10 @@ function Feed() {
                 effect={'cards'}
                 grabCursor={true}
                 modules={[EffectCards]}
-                // allowSlidePrev={false}
+                allowSlidePrev={false}
                 onSwiper={setSwiperInstance}
+                grabCursor={false}
+                allowTouchMove={false}
                 >
                     {
                         posts.map((post) => (
@@ -102,6 +140,17 @@ function Feed() {
                         ))
                     }
                 </Swiper>
+                <div className="swipe-buttons-container">
+                    <button onClick={handleReject} className='swipe-reject-button swipe-button'>
+                        Rejeitar
+                        <span>{showTrash && <FloatingIcons icon="❌" />}</span>
+
+                    </button>
+                    <button onClick={handleAccept} className='swipe-accept-button swipe-button'>
+                        Match
+                        <span>{showHearts && <FloatingIcons icon="💖" />}</span>
+                    </button>
+                </div>
             </section>
 
             <div className='return-feed'>
