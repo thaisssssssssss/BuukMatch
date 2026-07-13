@@ -127,18 +127,24 @@ function Feed() {
                     <p className='title-description-feed'>curta para dar match ou descarte para passar.</p>
                 </div>
                 <div className="card-stack-container">
-                    {
-                       posts.map((post, index) => (
+                    {currentIndex < 0 ? (
+                        <div className="no-more-posts">
+                            <h2>Ops...</h2>
+                            <p>Estamos trabalhando em novos posts! 📚 ✨</p>
+                        </div>
+                    ) : (
+                        posts.map((post, index) => (
                             <TinderCard
-                            ref={childRefs[index]}
-                            className='swipe-card' 
-                            key={post.id}
-                            onSwipe={(dir) => onSwipe(dir, post)}
-                            preventSwipe={['up', 'down', 'left', 'right']}
+                                ref={childRefs[index]}
+                                className='swipe-card' 
+                                key={post.id}
+                                onSwipe={(dir) => onSwipe(dir, post)}
+                                preventSwipe={['up', 'down', 'left', 'right']}
                             >
                                 <Card post={post} />
                             </TinderCard>
-                    ))}
+                        ))
+                    )}
                 </div>
                 <div className="swipe-buttons-container">
                     <button onClick={handleReject} className='swipe-reject-button swipe-button'>
