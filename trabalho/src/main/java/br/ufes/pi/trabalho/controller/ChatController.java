@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.ufes.pi.trabalho.dto.ChatResponse;
@@ -49,8 +50,13 @@ public class ChatController {
      *  }
      */
     @PostMapping("/{chatId}/mensagens/enviar")
-    public ResponseEntity<Void> sendMessage(@PathVariable Long chatId, @RequestBody SendMessageRequest request, @RequestHeader("Authorization") String token){
-        chatService.sendMessage(chatId, token, request.getConteudo());
-        return ResponseEntity.status(HttpStatus.OK).build();
+    public ResponseEntity<MessageResponse> sendMessage(@PathVariable Long chatId, @RequestBody SendMessageRequest request, @RequestHeader("Authorization") String token){
+        MessageResponse response = chatService.sendMessage(chatId, token, request.getConteudo());
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @GetMapping("/{chatId}/mensagens/novas")
+    public ResponseEntity<List<MessageResponse>> listNewMessages(@PathVariable Long chatId, @RequestParam(defaultValue = "0") Long lastMessageId, @RequestHeader("Authorization") String token){
+        return ResponseEntity.ok(chatService.listNewMessages(chatId, lastMessageId, token));
     }
 }

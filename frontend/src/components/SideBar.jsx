@@ -4,6 +4,8 @@ import './styles/SideBar.css'
 import ChatSideBar from "./ChatSideBar";
 import Perfil from "./Perfil";
 function SideBar({ chats, onChatClick }){
+
+
     return (
         <nav className="sideBar">
             <div className="sideBar-container">
