@@ -20,7 +20,7 @@ public class PostController {
         this.postService = postService;
     }
 
-    @PostMapping
+    @PostMapping("/publicar")
     public ResponseEntity<Void> publishPost(@RequestBody CreatePostRequest request, @RequestHeader("Authorization") String token){
         postService.registerPostById(request, token);
         return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -29,6 +29,17 @@ public class PostController {
     @GetMapping
     public ResponseEntity<List<PostResponse>> listPostByUser(@RequestHeader("Authorization") String token){
         return ResponseEntity.ok(postService.listPostByUser(token));
+    }
+
+    @GetMapping("/nao-vistos")
+    public ResponseEntity<List<PostResponse>> listUnseenPostsByUser(@RequestHeader("Authorization") String token){
+        return ResponseEntity.ok(postService.listUnseenPostsByUser(token));
+    }
+
+    @PostMapping("{postId}/visualizar")
+    public ResponseEntity<Void> viewPost(@PathVariable Long postId, @RequestHeader("Authorization") String token){
+        postService.viewPost(postId, token);
+        return ResponseEntity.noContent().build();
     }
 
 }

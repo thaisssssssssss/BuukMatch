@@ -78,13 +78,13 @@ public class ChatService {
             throw new RuntimeException("Id do chat passado nao corresponde aos chats do usuario logado");
         }
 
-        List<Message> msgs = messageRepository.findByChatOrderByDataRecebimentoAsc(chat);
+        List<Message> msgs = messageRepository.findByChatOrderByIdAsc(chat);
         List<MessageResponse> response = new ArrayList<>();
 
         for(Message m : msgs){
             boolean sentByMe = m.getRemetente().getId().equals(user.getId());
 
-            response.add(new MessageResponse(m.getDataRecebimento(), m.getConteudo(), m.getRemetente().getName(), sentByMe));
+            response.add(new MessageResponse(m.getId(), m.getDataRecebimento(), m.getConteudo(), m.getRemetente().getName(), sentByMe));
         }
 
         return response;
@@ -103,7 +103,7 @@ public class ChatService {
      * @param token verificação de login do usuário remetente
      * @param conteudo conteúdo da mensagem
      */
-    public void sendMessage(Long chatId, String token, String conteudo){
+    public MessageResponse sendMessage(Long chatId, String token, String conteudo){
         //tentar tirar isso de passar o id do chat
         Chat chat = chatRepository
                     .findById(chatId)
@@ -117,7 +117,30 @@ public class ChatService {
 
         Message msg = new Message(conteudo, remetente, chat);
 
-        messageRepository.save(msg);
+        Message savedMsg = messageRepository.save(msg);
+
+        return new MessageResponse(savedMsg.getId(), savedMsg.getDataRecebimento(), savedMsg.getConteudo(), savedMsg.getRemetente().getName(),true);
+    }
+
+    public List<MessageResponse> listNewMessages(Long chatId, Long lastMsgId, String token){
+        User user = userService.returnUserByToken(token);
+        Chat chat = chatRepository.findById(chatId)
+                                  .orElseThrow(() -> new RuntimeException("Chat nao encontrado"));
+
+        if(!chat.getUser1().equals(user) && !chat.getUser2().equals(user)){
+            throw new RuntimeException("Usuario nao esta nesse chat");
+        }
+
+        List<Message> msgs = messageRepository.findByChatAndIdGreaterThanOrderByIdAsc(chat, lastMsgId);
+        List<MessageResponse> response = new ArrayList<>();
+
+        for(Message m : msgs){
+            boolean sentByMe = m.getRemetente().getId().equals(user.getId());
+
+            response.add(new MessageResponse(m.getId(), m.getDataRecebimento(), m.getConteudo(), m.getRemetente().getName(), sentByMe));
+        }
+
+        return response;
     }
 
 }
