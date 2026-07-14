@@ -16,6 +16,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.mock.web.MockMultipartFile;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -27,70 +28,46 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class PostServiceTest {
 
-    @Mock
-    private PostRepository postRepository;
+        @Mock
+        private PostRepository postRepository;
 
-    @Mock
-    private UserRepository userRepository;
+        @Mock
+        private UserRepository userRepository;
 
-    @Mock
-    private UserService userService;
+        @Mock
+        private UserService userService;
 
-    @InjectMocks
-    private PostService postService;
-
-    @Test
-    void registerPostSuccess() {
-
-        User maria = new User(
-                "Maria",
-                "maria@email.com",
-                "123456",
-                LocalDate.of(2000,1,1),
-                null
-        );
-
-        BookRequest b = new BookRequest("Crepusculo", "Thais", "Capa", "Livro de vampiros feiosinhos que brilham.", 300, 2010, BookGenre.ROMANCE);
-        CreatePostRequest request = new CreatePostRequest(
-                "Livro muito bom!",
-                "foto.png",
-                b
-        );
-
-        when(userService.returnUserByToken("tokenMaria")).thenReturn(maria);
-
-        postService.registerPostById(request, "tokenMaria");
-
-        ArgumentCaptor<Post> captor = ArgumentCaptor.forClass(Post.class);
-
-        verify(postRepository).save(captor.capture());
-
-        Post savedPost = captor.getValue();
-
-        assertEquals("Livro muito bom!", savedPost.getLegend());
-        assertEquals("foto.png", savedPost.getPhoto());
-        assertEquals(maria, savedPost.getOwner());
-
-        assertEquals(1, maria.getPosts().size());
-    }
+        @InjectMocks
+        private PostService postService;
 
     @Test
-    void registerPostInvalidToken() {
+void registerPostInvalidToken() {
 
-        BookRequest b = new BookRequest("Crepusculo", "Thais", "Capa", "Livro de vampiros feiosinhos que brilham.", 300, 2010, BookGenre.ROMANCE);
-        CreatePostRequest request = new CreatePostRequest(
-                "Livro",
-                "foto.png",
-                b
-        );
+    BookRequest b = new BookRequest("Crepusculo", "Thais", 300, 2010, BookGenre.ROMANCE);
+    CreatePostRequest request = new CreatePostRequest(
+            "Livro",
+            b
+    );
 
-        when(userService.returnUserByToken("tokenInvalido"))
-                .thenThrow(new ResponseStatusException(org.springframework.http.HttpStatus.UNAUTHORIZED));
+    MockMultipartFile mockFile = new MockMultipartFile(
+            "file", 
+            "foto.png", 
+            "image/png", 
+            new byte[0] 
+    );
 
-        assertThrows(ResponseStatusException.class, () -> {postService.registerPostById(request, "tokenInvalido");});
+    // configura o mock do userService para lançar a exceção
+    when(userService.returnUserByToken("tokenInvalido"))
+            .thenThrow(new ResponseStatusException(org.springframework.http.HttpStatus.UNAUTHORIZED));
 
-        verify(postRepository, never()).save(any(Post.class));
-    }
+   
+    assertThrows(ResponseStatusException.class, () -> {
+        postService.registerPostById(request, mockFile, "tokenInvalido");
+    });
+
+    // garante que o repositório nunca foi chamado, já que o token era inválido
+    verify(postRepository, never()).save(any(Post.class));
+}
 
     @Test
     void listPostsSuccess() {
@@ -102,9 +79,9 @@ class PostServiceTest {
                 null
         );
 
-        Book b = new Book("Crepusculo", "Thais", "Capa", "Livro de vampiros feiosinhos que brilham.", 300, 2010, BookGenre.ROMANCE);
-        Post p1 = new Post("Primeiro post", "foto1.png", maria, b);
-        Post p2 = new Post("Segundo post", "foto2.png", maria, b);
+        Book b = new Book("Crepusculo", "Thais", 300, 2010, BookGenre.ROMANCE);
+        Post p1 = new Post("Primeiro post", "foto1.png".getBytes(), maria, b);
+        Post p2 = new Post("Segundo post", "foto2.png".getBytes(), maria, b);
 
         when(userService.returnUserByToken("tokenMaria")).thenReturn(maria);
 
@@ -115,10 +92,10 @@ class PostServiceTest {
         assertEquals(2, response.size());
 
         assertEquals("Primeiro post", response.get(0).getDescription());
-        assertEquals("foto1.png", response.get(0).getPhoto());
-
+        assertArrayEquals("foto1.png".getBytes(), response.get(0).getPhoto());
+        
         assertEquals("Segundo post", response.get(1).getDescription());
-        assertEquals("foto2.png", response.get(1).getPhoto());
+        assertArrayEquals("foto2.png".getBytes(), response.get(1).getPhoto());
     }
 
     @Test

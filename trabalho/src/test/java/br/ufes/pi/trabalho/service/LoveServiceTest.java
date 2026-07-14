@@ -49,8 +49,8 @@ class LoveServiceTest {
         User maria = new User("Maria", "maria@email.com", "123456", LocalDate.of(2000, 1, 1), null);
         User joao = new User("João", "joao@email.com", "123456", LocalDate.of(2000, 1, 1), null);
 
-        Book b = new Book("Crepusculo", "Thais", "Capa", "Livro de vampiros feiosinhos que brilham.", 300, 2010, BookGenre.ROMANCE);
-        Post postJoao = new Post("Livro legal", "foto.png", joao, b);
+        Book b = new Book("Crepusculo", "Thais", 300, 2010, BookGenre.ROMANCE);
+        Post postJoao = new Post("Livro legal", "foto.png".getBytes(), joao, b);
 
         LoveRequest request = new LoveRequest(10L);
 
@@ -80,9 +80,9 @@ class LoveServiceTest {
         User maria = new User("Maria", "maria@email.com", "123456", LocalDate.of(2000, 1, 1), null);
         User joao = new User("João", "joao@email.com", "123456", LocalDate.of(2000, 1, 1), null);
 
-        Book b = new Book("Crepusculo", "Thais", "Capa", "Livro de vampiros feiosinhos que brilham.", 300, 2010, BookGenre.ROMANCE);
-        Post postJoao = new Post("Post do João", "joao.png", joao, b);
-        Post postMaria = new Post("Post da Maria", "maria.png", maria, b);
+        Book b = new Book("Crepusculo", "Thais", 300, 2010, BookGenre.ROMANCE);
+        Post postJoao = new Post("Post do João", "joao.png".getBytes(), joao, b);
+        Post postMaria = new Post("Post da Maria", "maria.png".getBytes(), maria, b);
 
         LoveRequest request = new LoveRequest(10L);
 
@@ -116,8 +116,8 @@ class LoveServiceTest {
     void registerLoveOnPostWhenUserLikesOwnPostFail() {
         User maria = new User("Maria", "maria@email.com", "123456", LocalDate.of(2000, 1, 1), null);
         
-        Book b = new Book("Crepusculo", "Thais", "Capa", "Livro de vampiros feiosinhos que brilham.", 300, 2010, BookGenre.ROMANCE);
-        Post postMaria = new Post("Meu próprio post", "foto.png", maria, b);
+        Book b = new Book("Crepusculo", "Thais", 300, 2010, BookGenre.ROMANCE);
+        Post postMaria = new Post("Meu próprio post", "foto.png".getBytes(), maria, b);
 
         LoveRequest request = new LoveRequest(10L);
 

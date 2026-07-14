@@ -2,6 +2,8 @@ package br.ufes.pi.trabalho.controller;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.http.HttpStatus;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -30,28 +32,33 @@ class PostControllerTest {
 
     @Test
     void publishPostSuccess() {
-        BookRequest b = new BookRequest("Crepusculo", "Thais", "Capa", "Livro de vampiros feiosinhos que brilham.", 300, 2010, BookGenre.ROMANCE);
+        BookRequest b = new BookRequest("Crepusculo", "Thais", 300, 2010, BookGenre.ROMANCE);
         CreatePostRequest request = new CreatePostRequest(
                 "Meu post",
-                "foto.png",
                 b
         );
 
-        // postService é um mock, logo não é chamado de verdade
-        ResponseEntity<Void> response = postController.publishPost(request, "token123");
+        MockMultipartFile mockFile = new MockMultipartFile(
+                "file",                         
+                "foto.png",                     
+                "image/png",                    
+                "bytes-falsos-da-imagem".getBytes() // Conteúdo em bytes da imagem para o H2 ler
+        );
 
-        assertEquals(201, response.getStatusCode().value());
-        
-        // confirma que o controler chamou o metodo do service
-        verify(postService).registerPostById(request, "token123");
+        ResponseEntity<Void> response = postController.publishPost(request, mockFile, "token123");
+
+        // Verifica se retornou 201 Created
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
+
+        verify(postService).registerPostById(request, mockFile, "token123");
     }
 
-    @Test
+   @Test
     void listPostByUserSuccess() {
         PostResponse post = new PostResponse(
                 "Meu post",
                 LocalDateTime.now(),
-                "foto.png"
+                "bytes-da-foto".getBytes() // Mudança aqui: passando byte[] em vez de String
         );
 
         when(postService.listPostByUser("token123")).thenReturn(List.of(post));
@@ -59,8 +66,6 @@ class PostControllerTest {
         ResponseEntity<List<PostResponse>> response = postController.listPostByUser("token123");
 
         assertEquals(200, response.getStatusCode().value());
-
-        // confirma que o controler chamou o metodo do service
         verify(postService).listPostByUser("token123");
     }
 }

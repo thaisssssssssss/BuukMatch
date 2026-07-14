@@ -1,0 +1,128 @@
+.post-page{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.post-pai{
+    flex:1;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    /* padding: 8px 20px; */
+    /* background-color: blue; */
+}
+
+.post-load-section{
+    background-size: cover;
+    background-position: center;
+    background-color: #E34C75;
+}
+
+.post-input-section{
+    /* align-self: flex-start; */
+    /* height: 100%; */
+    /* margin-top: 20px; */
+    display: flex;
+    /* justify-content: center; */
+    background-color:#FFF2FA;
+    flex-direction: column;
+}
+
+.login-section-g{
+width: 100%;
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 50%;
+    /* flex: 1; */
+    justify-content: center;
+    align-items: center;
+
+    @media (max-width: 1024px) {
+        flex-basis: 100%;
+    }
+}
+
+.post-title{
+    color: #70062D;
+    align-self: center;
+    text-align: center;
+}
+
+
+.post-form-button{
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 2rem;
+    border: none;
+    border-radius: 5px;
+    padding: 1.5rem;
+    background-color: #E54F81;
+    font-weight: bold;
+    color: white;
+    align-self: center;
+    /* align-items: center; */
+
+}
+.post-perfil-container{
+
+    transform: scale(0.8);
+    transform-origin: right center;
+}
+.post-form{
+    max-width: 400px;
+    width: 100%;
+
+    background-color: white;
+    padding: 15px 40px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;    
+    /* align-items: center; */
+}
+.post-title-description{
+    margin-top: 10px;
+    color: #70062D;
+    font-size: 20px;
+}
+
+.post-title-dados-livro{
+
+    color: #70062D;
+    font-size: 20px;
+}
+
+.post-input-center{
+    margin: 10px 0px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.input-long-box {
+    border-radius: 8px;
+    width: 100%;
+}
+
+.input-long-name {
+    font-size: 1rem;
+    color: rgb(196, 196, 196);
+}
+
+.input-long-insert {
+    /* color: inherit; */
+    width: 100%;
+    height: 70px;
+    resize: none;
+    border: none;
+    background-color: #FFF2FA;
+    padding: 1rem;
+    border-radius: 5px;
+}

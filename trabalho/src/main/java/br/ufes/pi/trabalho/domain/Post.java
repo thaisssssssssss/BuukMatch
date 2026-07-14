@@ -12,7 +12,9 @@ public class Post{
 
     private String legend;
     private LocalDateTime publicationDate;
-    private String photo;
+
+    @Lob
+    private byte[] photo;
 
     @OneToMany(mappedBy = "post")
     private List<Like> likes;
@@ -23,17 +25,16 @@ public class Post{
     @Enumerated(EnumType.STRING)
     private StatusPost status; 
     
-    private String ownerName;
-
+    
+    @Embedded
     private Book book;
 
-    public Post(String legend, String photo, User owner, Book book){
+    public Post(String legend, byte [] photo, User owner, Book book){
         setLegend(legend);      
         setPhoto(photo);
         setOwner(owner);
         setPublicationDate(LocalDateTime.now());
         setStatus(StatusPost.DISPONIVEL);
-        setOwnerName(owner.getName());
         setBook(book);
     }
 
@@ -63,11 +64,11 @@ public class Post{
         this.publicationDate = publicationDate;
     }
     
-    public String getPhoto() {
+    public byte [] getPhoto() {
         return photo;
     }
 
-    public void setPhoto(String photo) {
+    public void setPhoto(byte [] photo) {
         this.photo = photo;
     }
     
@@ -88,12 +89,9 @@ public class Post{
     }
 
     public String getOwnerName() {
-        return ownerName;
+        return owner.getName();
     }
 
-    public void setOwnerName(String ownerName) {
-        this.ownerName = ownerName;
-    }
 
     public void addLike(Like like){
         this.likes.add(like);
