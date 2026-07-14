@@ -5,9 +5,9 @@ import java.time.LocalDateTime;
 public class PostResponse {
     private String description;
     private LocalDateTime publicationDate;
-    private String photo;
+    private byte [] photo;
 
-    public PostResponse(String description, LocalDateTime publicationDate, String photo){
+    public PostResponse(String description, LocalDateTime publicationDate, byte [] photo){
         this.description = description;
         this.publicationDate = publicationDate;
         this.photo = photo;
@@ -19,7 +19,7 @@ public class PostResponse {
         return description;
     }
 
-    public String getPhoto() {
+    public byte [] getPhoto() {
         return photo;
     }
     

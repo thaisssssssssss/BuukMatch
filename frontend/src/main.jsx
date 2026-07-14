@@ -6,6 +6,8 @@ import Login from "./pages/Login.jsx"
 import Chat from "./pages/Chat.jsx"
 import SignIn from "./pages/SignIn.jsx"
 import Feed from './pages/Feed.jsx'
+import Post from './pages/Post.jsx'
+
 import { BrowserRouter , createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter([
@@ -28,6 +30,10 @@ const router = createBrowserRouter([
   {
     path: "/signin",
     Component: SignIn
+  },
+  {
+    path: "/post",
+    Component: Post
   }
 ])
 
