@@ -27,7 +27,7 @@ function NavBarApp(){
                     <li><NavLink className="option-navbar" to = "/feed" end>Feed</NavLink></li>
                     <li><NavLink className="option-navbar" to = "/matches">Matches</NavLink></li>
                     <li><NavLink className="option-navbar" to = "/chat">Chat</NavLink></li>
-                    <li><NavLink className="option-navbar" to = "/me">Meu perfil</NavLink></li>
+                    <li><NavLink className="option-navbar" to = "/profile">Meu perfil</NavLink></li>
                 </ul>
                 <div className="profile">
                     <UserRound />
