@@ -6,6 +6,7 @@ import br.ufes.pi.trabalho.domain.User;
 import br.ufes.pi.trabalho.domain.ViewPost;
 import br.ufes.pi.trabalho.repository.PostRepository;
 import br.ufes.pi.trabalho.repository.ViewPostRepository;
+import br.ufes.pi.trabalho.dto.BookRequest;
 import br.ufes.pi.trabalho.dto.CreatePostRequest;
 import br.ufes.pi.trabalho.dto.PostResponse;
 import org.springframework.web.multipart.MultipartFile;
@@ -57,6 +58,10 @@ public class PostService {
         List<PostResponse> responses = new ArrayList<PostResponse>();
 
         for(Post p : posts){
+            System.out.println("Post " + p.getId());
+            System.out.println("Book no loop = " + p.getBook());
+            BookRequest br = p.getBook().createBookRequest();
+            System.out.println("BookRequest = " + br);
             responses.add(
                 new PostResponse(
                     p.getId(),
@@ -64,7 +69,7 @@ public class PostService {
                     p.getPublicationDate(),
                     p.getPhoto(),
                     user.getName(),
-                    p.getBook().createBookRequest()
+                   br
                 )
             );
         }
@@ -79,7 +84,11 @@ public class PostService {
         List<PostResponse> response = new ArrayList<>();
 
         for(Post p : posts){
-            response.add(new PostResponse(p.getId(), p.getLegend(), p.getPublicationDate(), p.getPhoto(), p.getOwner().getName(), p.getBook().createBookRequest()));
+            System.out.println("Post " + p.getId());
+            System.out.println("Book no loop = " + p.getBook());
+            BookRequest br = p.getBook().createBookRequest();
+            System.out.println("BookRequest = " + br);
+            response.add(new PostResponse(p.getId(), p.getLegend(), p.getPublicationDate(), p.getPhoto(), p.getOwner().getName(), br));
         }
 
         return response;

@@ -16,6 +16,7 @@ public class PostResponse {
     public PostResponse(Long id, String legend, LocalDateTime publicationDate, byte [] photo, String ownerName, BookRequest book){
         setId(id);
         setLegend(legend);
+        setBook(book);
         setPublicationDate(publicationDate);
         setPhoto(photo);
         setOwnerName(ownerName);
