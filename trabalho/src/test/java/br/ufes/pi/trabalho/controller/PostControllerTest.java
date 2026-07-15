@@ -56,9 +56,11 @@ class PostControllerTest {
    @Test
     void listPostByUserSuccess() {
         PostResponse post = new PostResponse(
+                1L,
                 "Meu post",
                 LocalDateTime.now(),
-                "bytes-da-foto".getBytes() // Mudança aqui: passando byte[] em vez de String
+                "bytes-da-foto".getBytes(), // Mudança aqui: passando byte[] em vez de String,
+                "Thais"
         );
 
         when(postService.listPostByUser("token123")).thenReturn(List.of(post));
