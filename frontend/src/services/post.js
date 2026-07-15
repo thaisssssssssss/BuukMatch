@@ -38,8 +38,18 @@ export const postService = {
           }
         }
       );
-      // return resposta.data;
+    },
+    listUserPosts: async (token) => {
+      const response = await api.get(
+        'post', 
+        {
+          headers: {
+            Authorization: token
+          }
+        }
+      );
 
-    }
+      return response.data
+    },
 
 };
