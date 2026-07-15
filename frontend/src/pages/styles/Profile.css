@@ -1,6 +1,6 @@
 .profile-container {
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     background-color: #FFF2FA;
     display: flex;
     flex-direction: column;
@@ -10,8 +10,8 @@
     width: 50%;
     margin-top: 2rem;
     align-self: center;
-    /* display: flex; */
-    /* flex-direction: column; */
+    display: flex;
+    flex-direction: column;
     align-items: center;
     gap: 1rem;
 }
@@ -27,8 +27,81 @@
 .profile-boas-vindas {
     width: 70%;
     color: white;
-    background-color: #E54F81;
+    background-color: #860b34;
     padding: 1rem 2rem;
     text-align: center;
     border-radius: 5px;
+}
+
+.profile-options-list {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    text-align: center;
+}
+
+.profile-option {
+    border: 1px solid #E54F81;
+    border-radius: 5px;
+    transition: .2s;
+    padding: 0;
+    display: flex;
+    overflow: hidden;
+}
+
+.profile-option a {
+    text-decoration: none;
+    color: #E54F81;
+    font-weight: normal;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.profile-create-post {
+    border: 1px solid #E54F81;
+    background-color: #E54F81;
+}
+
+.profile-create-post a {
+    color: white;
+}
+
+.profile-create-post:hover {
+    background-color: white;
+    transition: .2s;
+}
+
+.profile-create-post:hover a {
+    color: #E54F81;
+}
+
+.profile-logout {
+    border-color: black;
+    width: 30%;
+    align-self: center;
+}
+
+.profile-logout a {
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    width: 100%;
+    padding: 1rem;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+}
+
+.profile-logout:hover  {
+    background-color: black;
+    transition: .2s;
+}
+
+.profile-logout:hover a {
+    color: white;
 }

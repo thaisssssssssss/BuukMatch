@@ -1,5 +1,6 @@
-import { use } from "react"
+import { Link } from "react-router-dom"
 import NavBarApp from "../components/NavBarApp"
+import { ArrowLeft } from "lucide-react"
 import "./styles/Profile.css"
 
 
@@ -11,6 +12,11 @@ function Profile() {
         user_data = JSON.parse(user_data_save)
     }
 
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user_data");
+    }
+
     return (
         <div className="profile-container">
             <NavBarApp />
@@ -20,10 +26,12 @@ function Profile() {
                     <h2 className="profile-hello">Caro leitor, {user_data ? user_data.name : "Usuário"}!</h2>
                     <p className="profile-email">{ user_data ? user_data.email : "Email" }</p>
                 </div>
-                <div className="profile-options">
-                    <button>Ola</button>
+                <ul className="profile-options-list">
+                    <li className="profile-option profile-create-post"><Link to="/post">🌟 Criar post</Link></li>
+                    <li className="profile-option profile-create-post"><Link>❤️ Meus posts</Link></li>
+                    <li className="profile-option profile-logout"><Link to="/" onClick={handleLogout}><ArrowLeft /> Logout</Link></li>
+                </ul>
                 </div>
-            </div>
         </div>
     )
 }
