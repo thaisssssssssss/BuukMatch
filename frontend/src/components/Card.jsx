@@ -8,9 +8,9 @@ function Card({ post }) {
     const { legend, photo, ownerName, book } = post;
     const { title, author, numberOfPages, publicationYear, publisher } = book || {};
     const imageSource = photo 
-        ? `data:image/jpeg;base64,${photo}` 
-        : "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=500&q=80";
-    
+       ? `data:image/jpeg;base64,${photo}` 
+      : "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=500&q=80";
+
     return (
         <div className="card-container">
             <section
