@@ -9,10 +9,12 @@ import Feed from './pages/Feed.jsx'
 import Profile from "./pages/Profile.jsx"
 import Post from './pages/Post.jsx'
 
+import ProtectedRoute from './utils/ProtectedRoute.jsx'
+
 import { BrowserRouter , createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter([
-  {
+{
     path: "/",
     Component: App
   },
@@ -21,25 +23,29 @@ const router = createBrowserRouter([
     Component: Login
   },
   {
-    path: "/chat",
-    Component: Chat
-  },
-  {
-    path: "/feed",
-    Component: Feed
-  },
-  {
     path: "/signin",
     Component: SignIn
   },
   {
-    path: "/profile",
-    Component: Profile
-  },
-  {
-    path: "/post",
-    Component: Post
-  }
+    element: <ProtectedRoute />,
+    children: [
+      {
+        path: "/chat",
+        Component: Chat
+      },
+      {
+        path: "/feed",
+        Component: Feed
+      },
+      {
+        path: "/profile",
+        Component: Profile
+      },
+      {
+        path: "/post",
+        Component: Post
+      }
+    ]}
 ])
 
 createRoot(document.getElementById('root')).render(
