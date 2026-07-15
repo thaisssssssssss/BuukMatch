@@ -6,11 +6,11 @@ public class PostResponse {
     private Long id;
     private String description;
     private LocalDateTime publicationDate;
-    private String photo;
+    private byte [] photo;
     private String ownerName;
 
     
-    public PostResponse(Long id, String description, LocalDateTime publicationDate, String photo, String ownerName){
+    public PostResponse(Long id, String description, LocalDateTime publicationDate, byte [] photo, String ownerName){
         setId(id);
         setDescription(description);
         setPublicationDate(publicationDate);
@@ -44,8 +44,7 @@ public class PostResponse {
         this.description = description;
     }
 
-
-    public String getPhoto() {
+    public byte [] getPhoto() {
         return photo;
     }
 

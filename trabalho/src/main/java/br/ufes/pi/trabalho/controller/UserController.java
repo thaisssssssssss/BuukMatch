@@ -78,7 +78,7 @@ public class UserController{
     }
 
     /**
-     * URL no postman: GET http://localhost:8080/users
+     * URL no postman: GET http://localhost:8080/users/listar
      *
      * @return lista com todos os usuários
      */
