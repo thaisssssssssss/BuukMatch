@@ -38,8 +38,18 @@ export const postService = {
           }
         }
       );
-      // return resposta.data;
+    },
+     listUnseenPost: async (token) => {
+        const resposta = await api.get(
+          '/post/nao-vistos', 
+          {
+            headers:{
+              Authorization: token
+            }
+          }
+        )
 
-    }
+        return resposta.data;
+      }
 
 };

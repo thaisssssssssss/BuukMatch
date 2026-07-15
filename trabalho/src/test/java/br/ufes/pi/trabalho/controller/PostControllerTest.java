@@ -15,7 +15,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.ResponseEntity;
 
-import br.ufes.pi.trabalho.domain.BookGenre;
 import br.ufes.pi.trabalho.dto.BookRequest;
 import br.ufes.pi.trabalho.dto.CreatePostRequest;
 import br.ufes.pi.trabalho.dto.PostResponse;
@@ -32,7 +31,7 @@ class PostControllerTest {
 
     @Test
     void publishPostSuccess() {
-        BookRequest b = new BookRequest("Crepusculo", "Thais", 300, 2010, BookGenre.ROMANCE);
+        BookRequest b = new BookRequest("Crepusculo", "Thais", "Intrinseca",300, 2010);
         CreatePostRequest request = new CreatePostRequest(
                 "Meu post",
                 b
@@ -60,7 +59,8 @@ class PostControllerTest {
                 "Meu post",
                 LocalDateTime.now(),
                 "bytes-da-foto".getBytes(), // Mudança aqui: passando byte[] em vez de String,
-                "Thais"
+                "Thais",
+                new BookRequest("Crepusculo", "Ronaldo Braga", "Intrinseca", 212, 2002)
         );
 
         when(postService.listPostByUser("token123")).thenReturn(List.of(post));

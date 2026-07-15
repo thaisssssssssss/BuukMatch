@@ -38,12 +38,16 @@ public class PostService {
             } catch (IOException e) {
                 throw new RuntimeException("Falha ao ler os bytes da imagem enviada", e);
             }
-            Book b_new = new Book(request.getBook().getTitle(), request.getBook().getAuthor(), request.getBook().getNumberOfPages(), request.getBook().getPublicationYear(), request.getBook().getGenre());
+            Book b_new = new Book(request.getBook().getTitle(), request.getBook().getAuthor(), request.getBook().getPublisher() ,request.getBook().getNumberOfPages(), request.getBook().getPublicationYear());
 
             Post p_new = new Post(request.getLegend(), bytesDaFoto, owner, b_new);
             
+            System.out.println(p_new.getBook());
+
             owner.addPost(p_new);
             postRepository.save(p_new);
+            Post teste = postRepository.findById(p_new.getId()).orElseThrow();
+            System.out.println("Book após salvar: " + teste.getBook());
     }
 
     public List<PostResponse> listPostByUser(String token){
@@ -59,7 +63,8 @@ public class PostService {
                     p.getLegend(),
                     p.getPublicationDate(),
                     p.getPhoto(),
-                    user.getName()
+                    user.getName(),
+                    p.getBook().createBookRequest()
                 )
             );
         }
@@ -74,7 +79,7 @@ public class PostService {
         List<PostResponse> response = new ArrayList<>();
 
         for(Post p : posts){
-            response.add(new PostResponse(p.getId(), p.getLegend(), p.getPublicationDate(), p.getPhoto(), p.getOwner().getName()));
+            response.add(new PostResponse(p.getId(), p.getLegend(), p.getPublicationDate(), p.getPhoto(), p.getOwner().getName(), p.getBook().createBookRequest()));
         }
 
         return response;

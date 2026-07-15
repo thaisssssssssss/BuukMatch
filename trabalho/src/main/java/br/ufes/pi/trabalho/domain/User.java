@@ -29,7 +29,7 @@ public class User{
 
     private String password;
     private LocalDate birthdate;
-    private ArrayList<BookGenre> favoriteGenres; 
+
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     private List<Post> posts = new ArrayList<>();
@@ -48,7 +48,6 @@ public class User{
         this.Address = Address;
         this.matches = new ArrayList<Match>();
         this.posts = new ArrayList<Post>();
-        this.favoriteGenres = new ArrayList<BookGenre>();
     }
 
     public void addMatch(Match match){
@@ -124,7 +123,4 @@ public class User{
         return posts;
     }
 
-    public ArrayList<BookGenre> getFavoriteGenres() {
-        return favoriteGenres;
-    }
 }

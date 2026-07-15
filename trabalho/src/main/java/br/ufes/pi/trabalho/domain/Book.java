@@ -1,5 +1,6 @@
 package br.ufes.pi.trabalho.domain;
 
+import br.ufes.pi.trabalho.dto.BookRequest;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -9,19 +10,16 @@ import jakarta.persistence.Enumerated;
 public class Book{
     private String title;
     private String author;
-    private String cover;
+    private String publisher;
     private Integer numberOfPages;
     private Integer publicationYear;
-
-    @Enumerated(EnumType.STRING)
-    private BookGenre genre;
     
-    public Book(String title, String author, Integer numberOfPages, Integer publicationYear, BookGenre genre){
+    public Book(String title, String author, String publisher, Integer numberOfPages, Integer publicationYear){
         setTitle(title);
+        setPublisher(publisher);
         setAuthor(author);
         setNumberOfPages(numberOfPages);
         setPublicationYear(publicationYear);
-        setGenre(genre);
     }
     
     protected Book(){}
@@ -32,15 +30,6 @@ public class Book{
 
     public void setNumberOfPages(Integer numberOfPages) {
         this.numberOfPages = numberOfPages;
-    }
-
-
-    public String getCover() {
-        return cover;
-    }
-
-    public void setCover(String cover) {
-        this.cover = cover;
     }
 
     public String getAuthor() {
@@ -58,15 +47,6 @@ public class Book{
     public void setTitle(String title) {
         this.title = title;
     }
-
-    public BookGenre getGenre() {
-        return genre;
-    }
-
-    public void setGenre(BookGenre genre) {
-        this.genre = genre;
-    }
-
     
     public Integer getPublicationYear() {
         return publicationYear;
@@ -74,5 +54,16 @@ public class Book{
 
     public void setPublicationYear(Integer publicationYear) {
         this.publicationYear = publicationYear;
+    }
+
+    public String getPublisher(){
+        return publisher;
+    }
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+    public BookRequest createBookRequest(){
+        return new BookRequest(title, author, publisher, numberOfPages, publicationYear);
     }
 }

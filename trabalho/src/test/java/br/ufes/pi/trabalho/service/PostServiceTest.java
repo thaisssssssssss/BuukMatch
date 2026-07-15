@@ -1,7 +1,6 @@
 package br.ufes.pi.trabalho.service;
 
 import br.ufes.pi.trabalho.domain.Book;
-import br.ufes.pi.trabalho.domain.BookGenre;
 import br.ufes.pi.trabalho.domain.Post;
 import br.ufes.pi.trabalho.domain.User;
 import br.ufes.pi.trabalho.dto.BookRequest;
@@ -43,7 +42,7 @@ class PostServiceTest {
     @Test
 void registerPostInvalidToken() {
 
-    BookRequest b = new BookRequest("Crepusculo", "Thais", 300, 2010, BookGenre.ROMANCE);
+    BookRequest b = new BookRequest("Crepusculo", "Thais", "Intrinseca",300, 2010);
     CreatePostRequest request = new CreatePostRequest(
             "Livro",
             b
@@ -79,7 +78,7 @@ void registerPostInvalidToken() {
                 null
         );
 
-        Book b = new Book("Crepusculo", "Thais", 300, 2010, BookGenre.ROMANCE);
+        Book b = new Book("Crepusculo", "Thais", "Intrinseca",300, 2010);
         Post p1 = new Post("Primeiro post", "foto1.png".getBytes(), maria, b);
         Post p2 = new Post("Segundo post", "foto2.png".getBytes(), maria, b);
 
@@ -91,10 +90,10 @@ void registerPostInvalidToken() {
 
         assertEquals(2, response.size());
 
-        assertEquals("Primeiro post", response.get(0).getDescription());
+        assertEquals("Primeiro post", response.get(0).getLegend());
         assertArrayEquals("foto1.png".getBytes(), response.get(0).getPhoto());
         
-        assertEquals("Segundo post", response.get(1).getDescription());
+        assertEquals("Segundo post", response.get(1).getLegend());
         assertArrayEquals("foto2.png".getBytes(), response.get(1).getPhoto());
     }
 
