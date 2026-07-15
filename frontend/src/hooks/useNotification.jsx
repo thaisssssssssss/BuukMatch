@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from "react";
 import { catchErro } from "../utils/ErroHandler";
 import { postService } from "../services/post";
+import { toast, Bounce } from "react-toastify";
+import ToastMatch from "../components/ToastMatch";
 
 export function useNotification(){
     const [notifications, setNotifications] = useState([]);
@@ -14,8 +16,14 @@ export function useNotification(){
             setNotifications(listNots);
 
             listNots.forEach((not) => {
-                console.log("conteudo de not: ",not)
-                alert(not.message || "erro")
+                toast(<ToastMatch message={not.message} />, {
+                    position: "top-center",
+                    pauseOnHover: true,
+                    draggable: true,
+                    theme: "light",
+                    transition: Bounce,
+                    icon: false,
+                })
             });
 
         }

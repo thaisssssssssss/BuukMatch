@@ -97,9 +97,6 @@ export function useFeed(){
                 idPost: currentPost.id
             }
             const resposta = await postService.registerPostLove(token, finalData);
-            // alert("Post criado com sucesso!");
-            // toast.success(resposta.message); ///TOAST AQUI RONALD
-            // alert(resposta.message);
 
             toast(<ToastMatch message={resposta.message} />, {
                             position: "top-center",
@@ -107,7 +104,6 @@ export function useFeed(){
                             draggable: true,
                             theme: "light",
                             transition: Bounce,
-                            message: resposta.message,
                             icon: false,
             })
             const response = await postService.viewPost(token, currentPost.id);
