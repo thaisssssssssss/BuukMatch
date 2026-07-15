@@ -48,7 +48,7 @@ public class PostResponse {
         return photo;
     }
 
-    public void setPhoto(String photo) {
+    public void setPhoto(byte [] photo) {
         this.photo = photo;
     }
     

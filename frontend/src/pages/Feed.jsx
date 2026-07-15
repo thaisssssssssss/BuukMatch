@@ -18,7 +18,9 @@ import Card from '../components/Card'
 
 import FloatingIcons from '../components/FloatingIcons';
 import TinderCard from 'react-tinder-card'
-
+import { postService } from '../services/post';
+import { toast } from 'react-toastify';
+import { catchErro } from '../utils/ErroHandler';
 
 function Feed() {
 
@@ -91,27 +93,58 @@ function Feed() {
         setCurrentIndex((prev) => prev - 1);
     }
 
-    const handleLike = () => {
+    const handleLike = async () => {
         if (currentIndex < 0) return;
-        const currentPostId = posts[currentIndex].id;
+        try{
+            const token = localStorage.getItem("token");
+            const currentPostId = posts[currentIndex].id;
+            
 
-        setPosts((prevPosts) =>
-            prevPosts.map((post) =>
-                post.id === currentPostId ? { ...post, liked: !post.liked } : post
+            const finalData ={
+                idPost: currentPostId
+            }
+            await postService.registerPostLike(token, finalData);
+            // alert("Pos
+            setPosts((prevPosts) =>
+                prevPosts.map((post) =>
+                    post.id === currentPostId ? { ...post, liked: !post.liked } : post
+                )
             )
-        )
+        }
+        catch(erro){
+            catchErro(erro);
+        }
+
     }
 
-    const handleAccept = async () => {
+    const handleLove = async () => {
         // Se currentIndex for menor que 0, acabaram os cards
         if (currentIndex < 0) return;
+        
+        try{
+            
+            const token = localStorage.getItem("token");
+            const currentPost = posts[currentIndex];
 
-        setShowHearts(true);
-        setTimeout(() => setShowHearts(false), 1000);
+            const finalData ={
+                idPost: currentPost.id
+            }
+            const resposta = await postService.registerPostLove(token, finalData);
+            // alert("Post criado com sucesso!");
+            // toast.success(resposta.message); ///TOAST AQUI RONALD
+            alert(resposta.message);
 
-        if (childRefs[currentIndex] && childRefs[currentIndex].current) {
-            await childRefs[currentIndex].current.swipe('right');
-        }        
+
+            setShowHearts(true);
+            setTimeout(() => setShowHearts(false), 1000);
+
+            if (childRefs[currentIndex] && childRefs[currentIndex].current) {
+                await childRefs[currentIndex].current.swipe('right');
+            }        
+        }
+        catch(erro){
+            catchErro(erro);
+        }
     }
 
     const handleReject = async () => {
@@ -166,7 +199,7 @@ function Feed() {
                     <button onClick={handleLike} className='swipe-like-button swipe-button'>
                         Curtir <Heart fill={`${((currentIndex > 0) && posts[currentIndex].liked) ? "#E54F81" : "white"}`} />
                     </button>
-                    <button onClick={handleAccept} className='swipe-accept-button swipe-button'>
+                    <button onClick={handleLove} className='swipe-accept-button swipe-button'>
                         Match <Heart fill='white' />
                         <span>{showHearts && <FloatingIcons icon="💖" />}</span>
                     </button>

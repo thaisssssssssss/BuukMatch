@@ -1,16 +1,5 @@
+import { data } from 'react-router-dom';
 import api from './api';
-
-// export const bookService = {
-//     obterFeed: async (token) => {
-   
-//     const resposta = await api.get('posts', {
-//       headers: {
-//         'Authorization': `Bearer ${token}`
-//       }
-//     });
-//     return resposta.data;
-//   }
-// };
 
 export const postService = {
     publishPostService: async (token, dataForms) => { 
@@ -25,5 +14,32 @@ export const postService = {
         }
       );
       return resposta.data;
+    },
+    registerPostLove: async (token, dataForms) => {
+      const resposta = await api.post(
+        'loves', 
+        dataForms,
+        {
+          headers: {
+            Authorization: token
+          }
+        }
+      );
+      return resposta.data;
+
+    },
+    registerPostLike: async (token, dataForms) => {
+      const resposta = await api.post(
+        'likes', 
+        dataForms,
+        {
+          headers: {
+            Authorization: token
+          }
+        }
+      );
+      // return resposta.data;
+
     }
+
 };
