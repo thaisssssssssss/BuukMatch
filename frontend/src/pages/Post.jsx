@@ -18,7 +18,8 @@ function Post() {
         title: "",
         numberOfPages: "",
         author: "",
-        publicationYear:""
+        publicationYear:"",
+        publisher:""
     })
 
     // guarda o estado do FileUploader
@@ -44,6 +45,7 @@ function Post() {
         finalData.append('book.numberOfPages', formData.numberOfPages);
         finalData.append('book.author', formData.author);
         finalData.append('book.publicationYear', formData.publicationYear);
+        finalData.append('book.publisher', formData.publisher);
         finalData.append('file', file);
         
         // fazer ainda o fetch
@@ -77,6 +79,7 @@ function Post() {
                                     <Input type="text" value={formData.title} label="Título" placeholder="Digite o título do livro" name="title" onChange={handleChange} />
                                     <Input type="text" value={formData.numberOfPages} label="Número de páginas" placeholder="Digite o número de páginas do livro" name="numberOfPages" onChange={handleChange} />
                                     <Input type="text" value={formData.author} label="Autor" placeholder="Digite o autor do livro" name="author" onChange={handleChange} />
+                                    <Input type="text" value={formData.publisher} label="Editora" placeholder="Digite a editora do livro" name="publisher" onChange={handleChange} />
                                     <Input type="text" value={formData.publicationYear} label="Ano de Publicação" placeholder="Digite o ano de publicação do livro" name="publicationYear" onChange={handleChange} />
                                     <h2 className='post-title-description'>Adicione uma descrição:</h2>
 

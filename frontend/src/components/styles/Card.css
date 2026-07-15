@@ -1,5 +1,5 @@
 .card-container {
-    max-width: 100%;
+    width: 100%;
     height: 100%;
     display: flex;
 }
@@ -37,7 +37,7 @@
     font-weight: 500;
 }
 
-.post-description {
+.post-legend {
     font-size: 1rem;
     font-weight: 300;
 }

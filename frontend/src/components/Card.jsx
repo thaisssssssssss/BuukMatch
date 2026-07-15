@@ -1,12 +1,21 @@
 import "./styles/Card.css"
 import { BookOpen, CalendarDays, NotebookText } from "lucide-react"
 
-function Card({ post: {title, author, description, pageCount, publicationYear, publisher, imgSrc} }) {    
+// function Card({ post: {legend, photo, ownerName, book:{ title, author, numberOfPages, publicationYear, publisher}}}) {  
+function Card({ post }) {  
+    console.log("Dados que chegaram no Card:", post);
+    if (!post) return null;
+    const { legend, photo, ownerName, book } = post;
+    const { title, author, numberOfPages, publicationYear, publisher } = book || {};
+    const imageSource = photo 
+       ? `data:image/jpeg;base64,${photo}` 
+      : "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=500&q=80";
+
     return (
         <div className="card-container">
             <section
              className="img-section-card sections-half"
-             style={{ backgroundImage: `url(${imgSrc})`}}
+             style={{ backgroundImage: `url(${imageSource})`}}
              ></section>
             <section className="text-section-card sections-half">
                 <div className="text-container">
@@ -16,15 +25,15 @@ function Card({ post: {title, author, description, pageCount, publicationYear, p
                     </div>
 
                     <div className="mid-card">
-                        <p className="post-description">
-                            { description }
+                        <p className="post-legend">
+                            { legend }
                         </p>
                     </div>
 
                     <ul className="lista-atributos">
                         <li className="num-pages">
                             <BookOpen />
-                            <span>{ pageCount } páginas</span>
+                            <span>{ numberOfPages } páginas</span>
                         </li>
                         <li className="year">
                             <CalendarDays />

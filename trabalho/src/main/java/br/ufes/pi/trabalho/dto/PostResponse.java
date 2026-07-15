@@ -2,17 +2,21 @@ package br.ufes.pi.trabalho.dto;
 
 import java.time.LocalDateTime;
 
+import br.ufes.pi.trabalho.dto.BookRequest;
+
 public class PostResponse {
     private Long id;
-    private String description;
+    private String legend;
     private LocalDateTime publicationDate;
     private byte [] photo;
     private String ownerName;
+    private BookRequest book;
 
     
-    public PostResponse(Long id, String description, LocalDateTime publicationDate, byte [] photo, String ownerName){
+    public PostResponse(Long id, String legend, LocalDateTime publicationDate, byte [] photo, String ownerName, BookRequest book){
         setId(id);
-        setDescription(description);
+        setLegend(legend);
+        setBook(book);
         setPublicationDate(publicationDate);
         setPhoto(photo);
         setOwnerName(ownerName);
@@ -36,12 +40,12 @@ public class PostResponse {
         this.ownerName = ownerName;
     }
     
-    public String getDescription() {
-        return description;
+    public String getLegend() {
+        return legend;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setLegend(String legend) {
+        this.legend = legend;
     }
 
     public byte [] getPhoto() {
@@ -59,5 +63,10 @@ public class PostResponse {
     public void setPublicationDate(LocalDateTime publicationDate) {
         this.publicationDate = publicationDate;
     }
-
+    public BookRequest getBook() {
+        return book;
+    }
+    public void setBook(BookRequest book) {
+        this.book = book;
+    }
 }

@@ -4,7 +4,6 @@ import br.ufes.pi.trabalho.domain.Love;
 import br.ufes.pi.trabalho.domain.Post;
 import br.ufes.pi.trabalho.domain.User;
 import br.ufes.pi.trabalho.domain.Book;
-import br.ufes.pi.trabalho.domain.BookGenre;
 import br.ufes.pi.trabalho.dto.LoveRequest;
 import br.ufes.pi.trabalho.repository.LoveRepository;
 import br.ufes.pi.trabalho.repository.PostRepository;
@@ -49,7 +48,7 @@ class LoveServiceTest {
         User maria = new User("Maria", "maria@email.com", "123456", LocalDate.of(2000, 1, 1), null);
         User joao = new User("João", "joao@email.com", "123456", LocalDate.of(2000, 1, 1), null);
 
-        Book b = new Book("Crepusculo", "Thais", 300, 2010, BookGenre.ROMANCE);
+        Book b = new Book("Crepusculo", "Thais","Intrinseca" ,300, 2010);
         Post postJoao = new Post("Livro legal", "foto.png".getBytes(), joao, b);
 
         LoveRequest request = new LoveRequest(10L);
@@ -80,7 +79,7 @@ class LoveServiceTest {
         User maria = new User("Maria", "maria@email.com", "123456", LocalDate.of(2000, 1, 1), null);
         User joao = new User("João", "joao@email.com", "123456", LocalDate.of(2000, 1, 1), null);
 
-        Book b = new Book("Crepusculo", "Thais", 300, 2010, BookGenre.ROMANCE);
+        Book b = new Book("Crepusculo", "Thais", "Intrinseca",300, 2010);
         Post postJoao = new Post("Post do João", "joao.png".getBytes(), joao, b);
         Post postMaria = new Post("Post da Maria", "maria.png".getBytes(), maria, b);
 
@@ -116,7 +115,7 @@ class LoveServiceTest {
     void registerLoveOnPostWhenUserLikesOwnPostFail() {
         User maria = new User("Maria", "maria@email.com", "123456", LocalDate.of(2000, 1, 1), null);
         
-        Book b = new Book("Crepusculo", "Thais", 300, 2010, BookGenre.ROMANCE);
+        Book b = new Book("Crepusculo", "Thais", "Intrinseca",300, 2010);
         Post postMaria = new Post("Meu próprio post", "foto.png".getBytes(), maria, b);
 
         LoveRequest request = new LoveRequest(10L);

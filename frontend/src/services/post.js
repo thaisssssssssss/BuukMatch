@@ -52,4 +52,17 @@ export const postService = {
       return response.data
     },
 
+    listUnseenPost: async (token) => {
+        const resposta = await api.get(
+          '/post/nao-vistos', 
+          {
+            headers:{
+              Authorization: token
+            }
+          }
+        )
+
+        return resposta.data;
+      }
+
 };
