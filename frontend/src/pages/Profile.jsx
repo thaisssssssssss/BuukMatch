@@ -28,6 +28,10 @@ function Profile() {
         setShowPopUp(true)
     }
 
+    const handleClosePopUp = () => {
+        setShowPopUp(false)
+    }
+
     const fetchUserPosts = async () => {
         try {
             const response = await postService.listUserPosts(token)
@@ -46,7 +50,7 @@ function Profile() {
             {showPopUp && (
                 <div className='profile-pop-up-container'>
                     <div className='profile-pop-up-content'>
-                        <button className="profile-close-button"><X color="black"/></button>
+                        <button className="profile-close-button" onClick={handleClosePopUp}><X color="white"/></button>
                         <h2 className="profile-pop-up-title">Meus posts</h2>
                         <ul className="profile-post-list">
                             {

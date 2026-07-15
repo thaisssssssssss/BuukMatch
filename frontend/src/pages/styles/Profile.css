@@ -124,15 +124,31 @@
     padding: 30px;
     border-radius: 12px;
     width: 500px;
-    max-width: 90vw;
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     position: relative;
+    max-height: 70vh;
+    overflow: auto;
 }
 
 .profile-close-button {
     position: absolute;
-    right: 10;
-    top: 10;
+    padding: 5px;
+    right: 10px;
+    top: 10px;
+    background-color: #E54F81;
+    cursor: pointer;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .2s;
+}
+
+.profile-close-button:hover {
+    background-color: #860b34;
+    transition: .2s;
 }
 
 .profile-pop-up-title {
@@ -153,7 +169,7 @@
 .profile-post-card {
     margin: 0;
     width: 100%;
-    height: 75px;      
+    min-height: 50px;      
     display: flex;
     border-radius: 6px;
     background-color: #FFF2FA;
@@ -176,7 +192,6 @@
 
 .profile-post-info {
     width: 75%;
-    height: 100%;
     padding: 0.5rem 0.8rem;
     display: flex;
     flex-direction: column;
