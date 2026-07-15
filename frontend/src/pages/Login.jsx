@@ -5,7 +5,8 @@ import { Link } from "react-router-dom"
 import { useState } from "react"
 import { authentication } from "../services/authentication"
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast, Bounce } from 'react-toastify'
+import { ToastContainer, Bounce, toast } from 'react-toastify'
+import {catchErro} from "../utils/ErroHandler"
 
 function Login() {
     const trocarNavegacao = useNavigate(); 
@@ -53,21 +54,8 @@ function Login() {
             });
 
         } catch(erro){
-            const mensagemErro = erro.response?.data?.message || "E-mail ou senha incorretos.";
-            // tratar cada erro melhor
-            toast.error(mensagemErro, {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: false,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-                transition: Bounce,
-            });
+            catchErro(erro);
         }
-        // console.log("Dados enviados: ", formData);
     }
 
     return (

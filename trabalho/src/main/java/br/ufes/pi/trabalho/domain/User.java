@@ -28,7 +28,6 @@ public class User{
     private String email;
 
     private String password;
-    private String photo;
     private LocalDate birthdate;
     private ArrayList<BookGenre> favoriteGenres; 
 
@@ -111,10 +110,6 @@ public class User{
 
     public LocalDate getBirthdate() {
         return birthdate;
-    }
-
-    public String getPhoto() {
-        return photo;
     }
 
     public Address getAddress() {

@@ -8,20 +8,17 @@ import jakarta.persistence.Enumerated;
 @Embeddable
 public class Book{
     private String title;
-    private String autor;
+    private String author;
     private String cover;
-    private String description;
     private Integer numberOfPages;
     private Integer publicationYear;
 
     @Enumerated(EnumType.STRING)
     private BookGenre genre;
     
-    public Book(String title, String autor, String cover, String description, Integer numberOfPages, Integer publicationYear, BookGenre genre){
+    public Book(String title, String author, Integer numberOfPages, Integer publicationYear, BookGenre genre){
         setTitle(title);
-        setAutor(autor);
-        setCover(cover);
-        setDescription(description);
+        setAuthor(author);
         setNumberOfPages(numberOfPages);
         setPublicationYear(publicationYear);
         setGenre(genre);
@@ -37,13 +34,6 @@ public class Book{
         this.numberOfPages = numberOfPages;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     public String getCover() {
         return cover;
@@ -53,12 +43,12 @@ public class Book{
         this.cover = cover;
     }
 
-    public String getAutor() {
-        return autor;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setAutor(String autor) {
-        this.autor = autor;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public String getTitle() {

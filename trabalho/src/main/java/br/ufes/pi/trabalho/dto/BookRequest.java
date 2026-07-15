@@ -7,20 +7,16 @@ import jakarta.persistence.Enumerated;
 
 public class BookRequest{
     private String title;
-    private String autor;
-    private String cover;
-    private String description;
+    private String author;
     private Integer numberOfPages;
     private Integer publicationYear;
 
     @Enumerated(EnumType.STRING)
     private BookGenre genre;
     
-    public BookRequest(String title, String autor, String cover, String description, Integer numberOfPages, Integer publicationYear, BookGenre genre){
+    public BookRequest(String title, String author, Integer numberOfPages, Integer publicationYear, BookGenre genre){
         setTitle(title);
-        setAutor(autor);
-        setCover(cover);
-        setDescription(description);
+        setAuthor(author);
         setNumberOfPages(numberOfPages);
         setPublicationYear(publicationYear);
         setGenre(genre);
@@ -36,28 +32,14 @@ public class BookRequest{
         this.numberOfPages = numberOfPages;
     }
 
-    public String getDescription() {
-        return description;
+
+
+    public String getAuthor() {
+        return author;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getCover() {
-        return cover;
-    }
-
-    public void setCover(String cover) {
-        this.cover = cover;
-    }
-
-    public String getAutor() {
-        return autor;
-    }
-
-    public void setAutor(String autor) {
-        this.autor = autor;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public String getTitle() {

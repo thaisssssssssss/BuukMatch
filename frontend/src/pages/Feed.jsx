@@ -18,7 +18,10 @@ import Card from '../components/Card'
 
 import FloatingIcons from '../components/FloatingIcons';
 import TinderCard from 'react-tinder-card'
-
+import { postService } from '../services/post';
+import { catchErro } from '../utils/ErroHandler';
+import { ToastContainer, Bounce, toast } from 'react-toastify';
+import ToastMatch from '../components/ToastMatch';
 
 function Feed() {
 
@@ -91,27 +94,64 @@ function Feed() {
         setCurrentIndex((prev) => prev - 1);
     }
 
-    const handleLike = () => {
+    const handleLike = async () => {
         if (currentIndex < 0) return;
-        const currentPostId = posts[currentIndex].id;
+        try{
+            const token = localStorage.getItem("token");
+            const currentPostId = posts[currentIndex].id;
+            
 
-        setPosts((prevPosts) =>
-            prevPosts.map((post) =>
-                post.id === currentPostId ? { ...post, liked: !post.liked } : post
+            const finalData ={
+                idPost: currentPostId
+            }
+            await postService.registerPostLike(token, finalData);
+            // alert("Pos
+            setPosts((prevPosts) =>
+                prevPosts.map((post) =>
+                    post.id === currentPostId ? { ...post, liked: !post.liked } : post
+                )
             )
-        )
+        }
+        catch(erro){
+            catchErro(erro);
+        }
+
     }
 
-    const handleAccept = async () => {
+    const handleLove = async () => {
         // Se currentIndex for menor que 0, acabaram os cards
         if (currentIndex < 0) return;
+        
+        try{
+            
+            const token = localStorage.getItem("token");
+            const currentPost = posts[currentIndex];
 
-        setShowHearts(true);
-        setTimeout(() => setShowHearts(false), 1000);
+            const finalData ={
+                idPost: currentPost.id
+            }
+            const resposta = await postService.registerPostLove(token, finalData);
 
-        if (childRefs[currentIndex] && childRefs[currentIndex].current) {
-            await childRefs[currentIndex].current.swipe('right');
-        }        
+            toast(<ToastMatch message={resposta.message} />, {
+                position: "top-center",
+                pauseOnHover: true,
+                draggable: true,
+                theme: "light",
+                transition: Bounce,
+                message: resposta.message,
+                icon: false,
+            })
+
+            setShowHearts(true);
+            setTimeout(() => setShowHearts(false), 1000);
+
+            if (childRefs[currentIndex] && childRefs[currentIndex].current) {
+                await childRefs[currentIndex].current.swipe('right');
+            }        
+        }
+        catch(erro){
+            catchErro(erro);
+        }
     }
 
     const handleReject = async () => {
@@ -123,10 +163,23 @@ function Feed() {
         if (childRefs[currentIndex] && childRefs[currentIndex].current) {
             await childRefs[currentIndex].current.swipe('left');
         }
-    };
+    }
 
     return (
         <div className='container-feed'>
+            <ToastContainer
+                position="top-center"
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick={false}
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+                transition={Bounce}
+            />
             <NavBarApp />
             <section 
                 className='feed-swiper-container'
@@ -166,7 +219,7 @@ function Feed() {
                     <button onClick={handleLike} className='swipe-like-button swipe-button'>
                         Curtir <Heart fill={`${((currentIndex > 0) && posts[currentIndex].liked) ? "#E54F81" : "white"}`} />
                     </button>
-                    <button onClick={handleAccept} className='swipe-accept-button swipe-button'>
+                    <button onClick={handleLove} className='swipe-accept-button swipe-button'>
                         Match <Heart fill='white' />
                         <span>{showHearts && <FloatingIcons icon="💖" />}</span>
                     </button>

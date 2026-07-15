@@ -3,14 +3,12 @@ package br.ufes.pi.trabalho.dto;
 
 public class CreatePostRequest{
     private String legend;
-    private String photo;
-    private BookRequest book;
+    private BookRequest book =  new BookRequest();
     
 
-    public CreatePostRequest(String legend, String photo, BookRequest bookRequest){
+    public CreatePostRequest(String legend, BookRequest bookRequest){
         setLegend(legend);
-        this.photo = photo;
-        setBookRequest(bookRequest);
+        this.book = bookRequest;
     }
 
     protected CreatePostRequest(){}
@@ -22,16 +20,12 @@ public class CreatePostRequest{
     public void setLegend(String legend) {
         this.legend = legend;
     }
-    
-    public String getPhoto() {
-        return photo;
-    }
 
     public BookRequest getBook() {
         return book;
     }
 
-    public void setBookRequest(BookRequest book) {
+    public void setBook(BookRequest book) {
         this.book = book;
     }
 }
