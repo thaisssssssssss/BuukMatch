@@ -42,7 +42,7 @@ class NotificationServiceTest {
                 null
         );
 
-        User joao = new User(
+        User joao_owner = new User(
                 "João",
                 "joao@email.com",
                 "123456",
@@ -50,9 +50,9 @@ class NotificationServiceTest {
                 null
         );
 
-        Match match = new Match(maria, joao);
+        Match match = new Match(maria, joao_owner);
 
-        notificationService.creatMatch2Notification(maria, joao, match);
+        notificationService.registerMatchNotificationOwner(match);
 
         ArgumentCaptor<Notification> captor =
                 ArgumentCaptor.forClass(Notification.class);
@@ -61,10 +61,10 @@ class NotificationServiceTest {
 
         Notification notification = captor.getValue();
 
-        assertEquals(maria, notification.getUser());
+        assertEquals(joao_owner, notification.getUser());
         assertEquals(match, notification.getMatch());
         assertEquals(
-                "Ebaaa, você deu match com João!",
+                "Ebaaa, você deu match com Maria!",
                 notification.getMessage()
         );
     }
