@@ -41,7 +41,7 @@ class UserControllerTest {
 
     @Test
     void findUserByIdSuccess() {
-        UserResponse user = new UserResponse("Maria", "maria@email.com", null);
+        UserResponse user = new UserResponse("Maria", "maria@email.com");
 
         when(userService.findUserResponseById(1L)).thenReturn(user);
 
@@ -59,7 +59,7 @@ class UserControllerTest {
         request.setEmail("maria@email.com");
         request.setPassword("123456");
 
-        UserResponse user = new UserResponse("Maria", "maria@email.com", null);
+        UserResponse user = new UserResponse("Maria", "maria@email.com");
 
         LoginResponse loginResponse = new LoginResponse("token123", user);
 
@@ -75,7 +75,7 @@ class UserControllerTest {
 
     @Test
     void listUsersSuccess() {
-        UserResponse maria = new UserResponse("Maria", "maria@email.com", null);
+        UserResponse maria = new UserResponse("Maria", "maria@email.com");
 
         when(userService.listUsers()).thenReturn(List.of(maria));
 

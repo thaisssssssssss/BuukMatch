@@ -1,32 +1,40 @@
 import {Link} from "react-router-dom"
 import './styles/SideBar.css'
-import profile from "../assets/woman.png"
-import ChatSideBar from "./ChatSideBar";
 
-function SideBar({ chats, onChatClick }){
+import ChatSideBar from "./ChatSideBar";
+import Perfil from "./Perfil";
+function SideBar({ chats, activeChat, onChatClick }){
+
+    const chatsOrdenados = [...chats].sort((a, b) => {
+        if (!a.lastMessageTime && !b.lastMessageTime) return 0;
+        
+        if (!a.lastMessageTime) return 1;
+        
+        if (!b.lastMessageTime) return -1;
+
+        return new Date(b.lastMessageTime) - new Date(a.lastMessageTime);
+    });
+
+
     return (
         <nav className="sideBar">
             <div className="sideBar-container">
                 <div className="title-chat-container">
                     <h2 className="title-chat">Chats</h2>
                 </div>
-                <div className="profileContainer"> {/* o profile nao precisa ter lik para nada*/}
-                    <Link to = "/" className="links-SideBar"> 
-                        <img className="profile-img" src = {profile}  alt = "profile"/>
-                    </Link>
-                    <div className="profileContents">
-                        <p className="name">Hello, Marina👋</p>
-                        <p className="email">marinasorvete@gmail.com</p>
-                    </div>
-                </div>
+                <Perfil/>
                 <p className="sidebar-chats-title">Meus chats</p>
                 <ul className="sidebar-chats">
                     {
-                        chats.map((chat) => (
-                            <li className="sidebar-chat-item" onClick={() => onChatClick(chat)}>
-                                <ChatSideBar key={chat.id} chat={chat} />
-                            </li>
-                        ))
+                        chatsOrdenados.map((chat) => {
+                            const isActive = activeChat && (activeChat.chatId === chat.chatId)
+
+                            return (
+                                <li className={`sidebar-chat-item ${isActive ? "sidebar-chat-active" : ""}`} key={chat.chatId} onClick={() => onChatClick(chat)}>
+                                    <ChatSideBar chat={chat} />
+                                </li>
+                            )
+                    })
                     }
                 </ul>
                

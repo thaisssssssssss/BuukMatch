@@ -31,7 +31,7 @@ public class MatchService {
         Chat chat = new Chat(savedMatch);
         chatRepository.save(chat);
 
-        notificationService.creatMatch2Notification(user2, user1, savedMatch);
+        notificationService.registerMatchNotificationOwner(savedMatch);
 
         return savedMatch;
     }

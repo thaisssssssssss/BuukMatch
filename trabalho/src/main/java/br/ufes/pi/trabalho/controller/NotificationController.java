@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.ufes.pi.trabalho.dto.NotificationResponse;
 import br.ufes.pi.trabalho.service.NotificationService;
+import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "http://localhost:5173") 
 @RestController
 @RequestMapping("/notification")
 public class NotificationController {
@@ -22,6 +24,7 @@ public class NotificationController {
 
     @GetMapping
     public ResponseEntity<List<NotificationResponse>> listNotificationsNotRead(@RequestHeader("Authorization") String token) {
+        System.err.printf("cheguei aqui");
         return ResponseEntity.ok(notificationService.listNotificationsNotRead(token));
     }
 }

@@ -6,12 +6,10 @@ package br.ufes.pi.trabalho.dto;
 public class UserResponse {
     private String name;
     private String email;
-    private String photo;
 
-    public UserResponse(String name, String email, String photo){
+    public UserResponse(String name, String email){
         this.email = email;
         this.name = name;
-        this.photo = photo;
     }
 
     protected UserResponse(){}
@@ -23,11 +21,5 @@ public class UserResponse {
     public String getName() {
         return name;
     }
-    
-    public String getPhoto() {
-        return photo;
-    }
-
-    // foto
 
 }

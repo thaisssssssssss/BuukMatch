@@ -6,10 +6,12 @@ import br.ufes.pi.trabalho.domain.User;
 import br.ufes.pi.trabalho.domain.ViewPost;
 import br.ufes.pi.trabalho.repository.PostRepository;
 import br.ufes.pi.trabalho.repository.ViewPostRepository;
+import br.ufes.pi.trabalho.dto.BookRequest;
 import br.ufes.pi.trabalho.dto.CreatePostRequest;
 import br.ufes.pi.trabalho.dto.PostResponse;
+import org.springframework.web.multipart.MultipartFile;
 
-
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,14 +30,22 @@ public class PostService {
         this.viewPostRepository = viewPostRepository;
     }
 
-    public void registerPostById(CreatePostRequest request, String token){
-        User owner = userService.returnUserByToken(token);
+    public void registerPostById(CreatePostRequest request, MultipartFile file, String token){
 
-        Book b_new = new Book(request.getBook().getTitle(), request.getBook().getAutor(), request.getBook().getCover(), request.getBook().getDescription(), request.getBook().getNumberOfPages(), request.getBook().getPublicationYear(), request.getBook().getGenre());
-        Post p_new = new Post(request.getLegend(), request.getPhoto(), owner, b_new);
-        
-        owner.addPost(p_new);
-        postRepository.save(p_new);
+            User owner = userService.returnUserByToken(token);
+            byte[] bytesDaFoto;
+            try {
+                bytesDaFoto = file.getBytes(); // Proteja apenas a linha que realmente pode dar IOException
+            } catch (IOException e) {
+                throw new RuntimeException("Falha ao ler os bytes da imagem enviada", e);
+            }
+            Book b_new = new Book(request.getBook().getTitle(), request.getBook().getAuthor(), request.getBook().getPublisher() ,request.getBook().getNumberOfPages(), request.getBook().getPublicationYear());
+
+            Post p_new = new Post(request.getLegend(), bytesDaFoto, owner, b_new);
+            
+            owner.addPost(p_new);
+            postRepository.save(p_new);
+            Post teste = postRepository.findById(p_new.getId()).orElseThrow();
     }
 
     public List<PostResponse> listPostByUser(String token){
@@ -51,7 +61,8 @@ public class PostService {
                     p.getLegend(),
                     p.getPublicationDate(),
                     p.getPhoto(),
-                    user.getName()
+                    user.getName(),
+                   p.getBook().createBookRequest()
                 )
             );
         }
@@ -66,7 +77,7 @@ public class PostService {
         List<PostResponse> response = new ArrayList<>();
 
         for(Post p : posts){
-            response.add(new PostResponse(p.getId(), p.getLegend(), p.getPublicationDate(), p.getPhoto(), p.getOwner().getName()));
+            response.add(new PostResponse(p.getId(), p.getLegend(), p.getPublicationDate(), p.getPhoto(), p.getOwner().getName(),  p.getBook().createBookRequest()));
         }
 
         return response;

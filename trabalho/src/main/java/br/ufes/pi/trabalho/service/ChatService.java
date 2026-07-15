@@ -12,6 +12,7 @@ import br.ufes.pi.trabalho.dto.ChatResponse;
 import br.ufes.pi.trabalho.dto.MessageResponse;
 import br.ufes.pi.trabalho.repository.ChatRepository;
 import br.ufes.pi.trabalho.repository.MessageRepository;
+import java.time.LocalDateTime;
 
 @Service 
 public class ChatService {
@@ -58,7 +59,13 @@ public class ChatService {
                                  .map(Message::getConteudo)
                                  .orElse("");
 
+            LocalDateTime lastMessageTime = messageRepository
+                        .findFirstByChatOrderByIdDesc(c)
+                        .map(Message::getDataRecebimento)
+                        .orElse(null);
+
             cs.setLastMessage(lastMessage);
+            cs.setLastMessageTime(lastMessageTime);
 
             response.add(cs);
         }

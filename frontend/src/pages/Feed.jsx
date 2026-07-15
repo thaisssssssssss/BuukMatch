@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, createRef } from 'react';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -10,75 +10,42 @@ import './styles/Feed.css'
 
 // import required modules
 import { EffectCards } from 'swiper/modules';
+import { Heart, Trash } from 'lucide-react';
 import NavBarApp from '../components/NavBarApp'
 import Logo from '../assets/logo.png'
 
 import Card from '../components/Card'
 
+import FloatingIcons from '../components/FloatingIcons';
+import TinderCard from 'react-tinder-card'
+import { postService } from '../services/post';
+import { useNotification } from '../hooks/useNotification';
+import { useFeed } from '../hooks/useFeed';
+import { ToastContainer, Bounce, toast } from 'react-toastify';
+import ToastMatch from '../components/ToastMatch';
 
 function Feed() {
-
-    const posts = [
-            {
-                "id": 1,
-                "title": "The Alchemist",
-                "author": "Paulo Coelho",
-                "description": "A mystical story about following your dreams and listening to your heart, following the journey of a young shepherd named Santiago.",
-                "pageCount": 208,
-                "publicationYear": 1988,
-                "publisher": "HarperOne",
-                "imgSrc": "/books/the_alchemist.jpg"
-            },
-            {
-                "id": 2,
-                "title": "To Kill a Mockingbird",
-                "author": "Harper Lee",
-                "description": "A gripping, heart-wrenching, and wholly remarkable tale of coming-of-age in a South poisoned by virulent prejudice.",
-                "pageCount": 324,
-                "publicationYear": 1960,
-                "publisher": "J. B. Lippincott & Co.",
-                "imgSrc": "/books/to_kill_a_mockingbird.jpg"
-            },
-            {
-                "id": 3,
-                "title": "1984",
-                "author": "George Orwell",
-                "description": "A dystopian social science fiction novel and cautionary tale about the dangers of totalitarianism, mass surveillance, and repressive regimentation.",
-                "pageCount": 328,
-                "publicationYear": 1949,
-                "publisher": "Secker & Warburg",
-                "imgSrc": "/books/1984.jpeg"
-
-            },
-            {
-                "id": 4,
-                "title": "The Hobbit",
-                "author": "J.R.R. Tolkien",
-                "description": "A classic fantasy novel following the quest of home-loving hobbit Bilbo Baggins to win a share of the treasure guarded by Smaug the dragon.",
-                "pageCount": 310,
-                "publicationYear": 1937,
-                "publisher": "George Allen & Unwin",
-                "imgSrc": "/books/the_hobbit.jpeg"
-            }
-        ]
+    const {posts, showHearts, showTrash, childRefs, onSwipe,handleLove, handleLike, handleReject, currentIndex} = useFeed();
+    const {notifications} = useNotification();
     
-    const [swiperInstance, setSwiperInstance] = useState(null);
-    
-    // Desfazer
-    const handleUndo = () => {
-        if (swiperInstance) {
-            swiperInstance.allowSlidePrev = true;
-            swiperInstance.slidePrev();           
-            swiperInstance.allowSlidePrev = false; 
-        }
-    }
-
     return (
         <div className='container-feed'>
+            <ToastContainer
+                position="top-center"
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick={false}
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+                transition={Bounce}
+            />
             <NavBarApp />
             <section 
                 className='feed-swiper-container'
-                
                 >
                 <div className='title-feed-box'>
                     <div className='title-feed'>
@@ -87,27 +54,40 @@ function Feed() {
                     </div>
                     <p className='title-description-feed'>curta para dar match ou descarte para passar.</p>
                 </div>
-                <Swiper
-                effect={'cards'}
-                grabCursor={true}
-                modules={[EffectCards]}
-                // allowSlidePrev={false}
-                onSwiper={setSwiperInstance}
-                >
-                    {
-                        posts.map((post) => (
-                            <SwiperSlide key={post.id}>
+                <div className="card-stack-container">
+                    {currentIndex < 0 ? (
+                        <div className="no-more-posts">
+                            <h2>Ops...</h2>
+                            <p>Estamos trabalhando em novos posts! 📚 ✨</p>
+                        </div>
+                    ) : (
+                        posts.map((post, index) => (
+                            <TinderCard
+                                ref={childRefs[index]}
+                                className='swipe-card' 
+                                key={post.id}
+                                onSwipe={(dir) => onSwipe(dir, post)}
+                                preventSwipe={['up', 'down', 'left', 'right']}
+                            >
                                 <Card post={post} />
-                            </SwiperSlide>
+                            </TinderCard>
                         ))
-                    }
-                </Swiper>
+                    )}
+                </div>
+                <div className="swipe-buttons-container" style={{ display: currentIndex < 0 ? 'none' : 'flex' }}>
+                    <button onClick={handleReject} className='swipe-reject-button swipe-button'>
+                        Rejeitar <Trash fill='black'/>
+                        <span>{showTrash && <FloatingIcons icon="❌" />}</span>
+                    </button>
+                    <button onClick={handleLike} className='swipe-like-button swipe-button'>
+                        Curtir <Heart fill={`${((currentIndex > 0) && posts[currentIndex].liked) ? "#E54F81" : "white"}`} />
+                    </button>
+                    <button onClick={handleLove} className='swipe-accept-button swipe-button'>
+                        Match <Heart fill='white' />
+                        <span>{showHearts && <FloatingIcons icon="💖" />}</span>
+                    </button>
+                </div>
             </section>
-
-            <div className='return-feed'>
-                <p>Pulou? <span onClick={handleUndo}>Desfazer</span></p>
-            </div>
-
         </div>
     )
 }

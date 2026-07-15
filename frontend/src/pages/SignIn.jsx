@@ -6,7 +6,7 @@ import logoImg from "../assets/logo.png"
 import { Link } from "react-router-dom"
 import { useState } from "react"
 import { authentication } from '../services/authentication'
-
+import { ToastContainer, toast, Bounce } from 'react-toastify'
 
 function SignIn() {
     const [showPopup, setShowPopup] = useState(false);
@@ -30,7 +30,18 @@ function SignIn() {
         e.preventDefault();
 
         if(!formData.email || !formData.password || !formData.birthdate || !formData.name){
-            alert("Por favor, preencha todos os dados pessoais antes de continuar");
+            toast.error("Por favor, preencha todos os dados pessoais antes de continuar", {
+                position: "top-right",
+                autoClose: 2500,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce
+            })
+
             return;
         }
         setShowPopup(true);
@@ -39,6 +50,19 @@ function SignIn() {
 
   return (
       <div className="signin-pai">
+            <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick={false}
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+            transition={Bounce}
+            />
           <section className="image-section signin-section-g"></section>
           <section className="signin-section signin-section-g">
             {showPopup && (

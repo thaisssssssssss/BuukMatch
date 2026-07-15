@@ -1,29 +1,24 @@
 package br.ufes.pi.trabalho.dto;
 
-import br.ufes.pi.trabalho.domain.BookGenre;
+
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 
 
 public class BookRequest{
     private String title;
-    private String autor;
-    private String cover;
-    private String description;
+    private String author;
+    private String publisher;
     private Integer numberOfPages;
     private Integer publicationYear;
 
-    @Enumerated(EnumType.STRING)
-    private BookGenre genre;
     
-    public BookRequest(String title, String autor, String cover, String description, Integer numberOfPages, Integer publicationYear, BookGenre genre){
+    public BookRequest(String title, String author, String publisher, Integer numberOfPages, Integer publicationYear){
         setTitle(title);
-        setAutor(autor);
-        setCover(cover);
-        setDescription(description);
+        setAuthor(author);
+        setPublisher(publisher);
         setNumberOfPages(numberOfPages);
         setPublicationYear(publicationYear);
-        setGenre(genre);
     }
     
     protected BookRequest(){}
@@ -36,28 +31,14 @@ public class BookRequest{
         this.numberOfPages = numberOfPages;
     }
 
-    public String getDescription() {
-        return description;
+
+
+    public String getAuthor() {
+        return author;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getCover() {
-        return cover;
-    }
-
-    public void setCover(String cover) {
-        this.cover = cover;
-    }
-
-    public String getAutor() {
-        return autor;
-    }
-
-    public void setAutor(String autor) {
-        this.autor = autor;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public String getTitle() {
@@ -68,14 +49,6 @@ public class BookRequest{
         this.title = title;
     }
 
-    public BookGenre getGenre() {
-        return genre;
-    }
-
-    public void setGenre(BookGenre genre) {
-        this.genre = genre;
-    }
-
     
     public Integer getPublicationYear() {
         return publicationYear;
@@ -84,4 +57,11 @@ public class BookRequest{
     public void setPublicationYear(Integer publicationYear) {
         this.publicationYear = publicationYear;
     }
+    public String getPublisher() {
+        return publisher;
+    }
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+    
 }

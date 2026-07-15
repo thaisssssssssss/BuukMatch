@@ -7,13 +7,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import br.ufes.pi.trabalho.domain.Love;
+import br.ufes.pi.trabalho.domain.Match;
 import br.ufes.pi.trabalho.dto.NotificationResponse;
 import br.ufes.pi.trabalho.domain.Post;
 import br.ufes.pi.trabalho.domain.User;
 import br.ufes.pi.trabalho.dto.LoveRequest;
 import br.ufes.pi.trabalho.repository.LoveRepository;
 import br.ufes.pi.trabalho.repository.PostRepository;
-
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class LoveService {
@@ -49,6 +50,7 @@ public class LoveService {
      *
      * @param request um LoveRequest com id do usuário que curtiu o post e id do post.
      */
+    @Transactional
     public NotificationResponse registerLoveOnPost(LoveRequest request, String token) {
         //quem curtiu
         User user = userService.returnUserByToken(token);
@@ -78,19 +80,15 @@ public class LoveService {
             boolean likedByOwner = loveRepository.existsByUserAndPost(owner, uP);
 
             if(likedByOwner){
-                matchService.registrar(user, owner);
-                return notificationService.creatMatch1Notification(user, owner);
+                Match match = matchService.registrar(user, owner);
+                return notificationService.createMatchNotificationUser(match);
             }
         }
 
 
 
         return notificationService.creatWaitingMatchNotification();
-        // !!!!!! tem que buscar se existe o Love inverso
-        // se existe cria um match também e coloca no banco de dados
-        // >>>> matchService.registrar(UserAtual, donoDoPost); <<<<<
-        // ai teria que chamar o serviço que cria o match
-        //FEITO!!
+
     
     }
 
