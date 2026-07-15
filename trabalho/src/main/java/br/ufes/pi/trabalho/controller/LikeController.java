@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.ufes.pi.trabalho.service.LikeService;
 import br.ufes.pi.trabalho.dto.LikeRequest;
+import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/likes")
 public class LikeController {

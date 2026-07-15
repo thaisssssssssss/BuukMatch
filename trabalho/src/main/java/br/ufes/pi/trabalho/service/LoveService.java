@@ -86,11 +86,7 @@ public class LoveService {
 
 
         return notificationService.creatWaitingMatchNotification();
-        // !!!!!! tem que buscar se existe o Love inverso
-        // se existe cria um match também e coloca no banco de dados
-        // >>>> matchService.registrar(UserAtual, donoDoPost); <<<<<
-        // ai teria que chamar o serviço que cria o match
-        //FEITO!!
+
     
     }
 

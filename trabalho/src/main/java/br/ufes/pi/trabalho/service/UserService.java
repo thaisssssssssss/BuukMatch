@@ -93,7 +93,7 @@ public class UserService {
 
         tokenRepository.save(new Token(token, user));
 
-        UserResponse userResponse = new UserResponse(user.getName(), user.getEmail(), user.getPhoto());
+        UserResponse userResponse = new UserResponse(user.getName(), user.getEmail());
 
         // devolve userResponse pra evitar devolver a entidade diretamente para o usuário
         return new LoginResponse(token, userResponse);
@@ -114,7 +114,7 @@ public class UserService {
         .orElseThrow(() -> new ResponseStatusException(
         HttpStatus.NOT_FOUND, "User do not exist"));
 
-        return new UserResponse(u.getName(), u.getEmail(), u.getPhoto());
+        return new UserResponse(u.getName(), u.getEmail());
     }
 
     /**
@@ -133,8 +133,7 @@ public class UserService {
         for(User u : users){
             responses.add(new UserResponse(
                 u.getName(),
-                u.getEmail(),
-                u.getPhoto()
+                u.getEmail()
             ));
         }
     

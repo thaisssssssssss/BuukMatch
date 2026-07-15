@@ -33,4 +33,15 @@ public class PostController {
         return ResponseEntity.ok(postService.listPostByUser(token));
     }
 
+    @GetMapping("/nao-vistos")
+    public ResponseEntity<List<PostResponse>> listUnseenPostsByUser(@RequestHeader("Authorization") String token){
+        return ResponseEntity.ok(postService.listUnseenPostsByUser(token));
+    }
+
+    @PostMapping("{postId}/visualizar")
+    public ResponseEntity<Void> viewPost(@PathVariable Long postId, @RequestHeader("Authorization") String token){
+        postService.viewPost(postId, token);
+        return ResponseEntity.noContent().build();
+    }
+
 }
