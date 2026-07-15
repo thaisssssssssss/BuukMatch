@@ -18,7 +18,28 @@ function MainChatRender({ chat }) {
     const [enviando, setEnviando] = useState(false)
     const idMensagemEnviadaRef = useRef(null)
 
+    // State para começar o chat do final ========
+    const messagesEndRef = useRef(null);
+    const isInitialLoadRef = useRef(true);
 
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    };
+
+    useEffect(() => {
+        isInitialLoadRef.current = true;
+    }, [chat.chatId]);
+
+    useEffect(() => {
+        if (messages.length > 0 && isInitialLoadRef.current) {
+            scrollToBottom();
+            isInitialLoadRef.current = false; // Desativa para futuras atualizações (como o polling de 3s)
+        }
+    }, [messages]);
+
+    // ============================================
+
+    // Extraindo token para requisicoes
     const token = localStorage.getItem("token")
 
     // Mantem o array de mensagens atualizado para o setInterval
@@ -64,8 +85,7 @@ function MainChatRender({ chat }) {
                     if(mensagemChegou) {
                         setEnviando(false)
                         idMensagemEnviadaRef.current = null
-                    }
-                
+                    }                
                 }
             } catch(erro) {
                 console.log(`Houve um erro: ${erro}`)
@@ -109,6 +129,8 @@ function MainChatRender({ chat }) {
                         <Message message={message} />
                     </li>
                 ))}
+                <div ref={messagesEndRef} />
+
             </ul>
             
             <div className="mainchat-input-container">
@@ -121,6 +143,7 @@ function MainChatRender({ chat }) {
                     )}
                 </button>
             </div>
+
         </div>
     )
 

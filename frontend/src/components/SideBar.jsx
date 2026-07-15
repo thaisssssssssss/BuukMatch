@@ -3,8 +3,7 @@ import './styles/SideBar.css'
 
 import ChatSideBar from "./ChatSideBar";
 import Perfil from "./Perfil";
-function SideBar({ chats, onChatClick }){
-
+function SideBar({ chats, activeChat, onChatClick }){
 
     return (
         <nav className="sideBar">
@@ -16,11 +15,15 @@ function SideBar({ chats, onChatClick }){
                 <p className="sidebar-chats-title">Meus chats</p>
                 <ul className="sidebar-chats">
                     {
-                        chats.map((chat) => (
-                            <li className="sidebar-chat-item" key={chat.chatId} onClick={() => onChatClick(chat)}>
-                                <ChatSideBar chat={chat} />
-                            </li>
-                        ))
+                        chats.map((chat) => {
+                            const isActive = activeChat && (activeChat.chatId === chat.chatId)
+
+                            return (
+                                <li className={`sidebar-chat-item ${isActive ? "sidebar-chat-active" : ""}`} key={chat.chatId} onClick={() => onChatClick(chat)}>
+                                    <ChatSideBar chat={chat} />
+                                </li>
+                            )
+                    })
                     }
                 </ul>
                

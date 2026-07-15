@@ -35,7 +35,7 @@ function Chat() {
             <div className="chat-content"> 
                 <NavBarApp /> 
                 <div className="chat-main-content">
-                    <SideBar chats={chats} onChatClick={setFocusChat}/>
+                    <SideBar chats={chats} activeChat={focusChat} onChatClick={setFocusChat}/>
                     <MainChatRender chat={focusChat} />
                 </div>
             </div>
