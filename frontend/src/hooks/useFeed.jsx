@@ -1,6 +1,8 @@
 import React, {useState, useEffect, useMemo, createRef} from "react";
 import { postService } from "../services/post";
 import { catchErro } from "../utils/ErroHandler";
+import { ToastContainer, Bounce, toast } from 'react-toastify';
+import ToastMatch from '../components/ToastMatch';
 
 export function useFeed(){
     /*Variables for handling with fetch posts*/
@@ -76,6 +78,7 @@ export function useFeed(){
             )
         }
         catch(erro){
+            console.log(erro);
             catchErro(erro);
         }
 
@@ -96,9 +99,17 @@ export function useFeed(){
             const resposta = await postService.registerPostLove(token, finalData);
             // alert("Post criado com sucesso!");
             // toast.success(resposta.message); ///TOAST AQUI RONALD
-            alert(resposta.message);
+            // alert(resposta.message);
 
-
+            toast(<ToastMatch message={resposta.message} />, {
+                            position: "top-center",
+                            pauseOnHover: true,
+                            draggable: true,
+                            theme: "light",
+                            transition: Bounce,
+                            message: resposta.message,
+                            icon: false,
+            })
             const response = await postService.viewPost(token, currentPost.id);
             setShowHearts(true);
             setTimeout(() => setShowHearts(false), 1000);

@@ -19,18 +19,31 @@ import Card from '../components/Card'
 import FloatingIcons from '../components/FloatingIcons';
 import TinderCard from 'react-tinder-card'
 import { postService } from '../services/post';
-import { toast } from 'react-toastify';
 import { useNotification } from '../hooks/useNotification';
 import { useFeed } from '../hooks/useFeed';
+import { ToastContainer, Bounce, toast } from 'react-toastify';
+import ToastMatch from '../components/ToastMatch';
 
 function Feed() {
 
     const {posts, showHearts, showTrash, childRefs, onSwipe,handleLove, handleLike, handleReject, currentIndex} = useFeed();
     const {notifications} = useNotification();
     
-
     return (
         <div className='container-feed'>
+            <ToastContainer
+                position="top-center"
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick={false}
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+                transition={Bounce}
+            />
             <NavBarApp />
             <section 
                 className='feed-swiper-container'
