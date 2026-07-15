@@ -17,8 +17,8 @@ function SideBar({ chats, onChatClick }){
                 <ul className="sidebar-chats">
                     {
                         chats.map((chat) => (
-                            <li className="sidebar-chat-item" onClick={() => onChatClick(chat)}>
-                                <ChatSideBar key={chat.id} chat={chat} />
+                            <li className="sidebar-chat-item" key={chat.chatId} onClick={() => onChatClick(chat)}>
+                                <ChatSideBar chat={chat} />
                             </li>
                         ))
                     }
