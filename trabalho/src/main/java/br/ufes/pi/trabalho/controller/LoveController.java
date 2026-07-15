@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.*;
 import br.ufes.pi.trabalho.dto.LoveRequest;
 import br.ufes.pi.trabalho.dto.NotificationResponse;
 import br.ufes.pi.trabalho.service.LoveService;
+import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/loves")
 public class LoveController {
