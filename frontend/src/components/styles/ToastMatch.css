@@ -1,0 +1,23 @@
+/* Container que alinha a imagem e o texto lado a lado */
+.toast-container {
+    display: flex;
+    align-items: center;
+    gap: 12px; 
+    width: 100%;
+}
+
+.toast-logo {
+    width: 45px;
+    height: 45px;
+    object-fit: contain; 
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.toast-description {
+    margin: 0;
+    font-weight: 300;
+    font-size: 1rem;
+    color: #333; 
+    max-width: 70%;
+}

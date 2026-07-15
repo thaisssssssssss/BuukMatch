@@ -19,8 +19,9 @@ import Card from '../components/Card'
 import FloatingIcons from '../components/FloatingIcons';
 import TinderCard from 'react-tinder-card'
 import { postService } from '../services/post';
-import { toast } from 'react-toastify';
 import { catchErro } from '../utils/ErroHandler';
+import { ToastContainer, Bounce, toast } from 'react-toastify';
+import ToastMatch from '../components/ToastMatch';
 
 function Feed() {
 
@@ -130,10 +131,16 @@ function Feed() {
                 idPost: currentPost.id
             }
             const resposta = await postService.registerPostLove(token, finalData);
-            // alert("Post criado com sucesso!");
-            // toast.success(resposta.message); ///TOAST AQUI RONALD
-            alert(resposta.message);
 
+            toast(<ToastMatch message={resposta.message} />, {
+                position: "top-center",
+                pauseOnHover: true,
+                draggable: true,
+                theme: "light",
+                transition: Bounce,
+                message: resposta.message,
+                icon: false,
+            })
 
             setShowHearts(true);
             setTimeout(() => setShowHearts(false), 1000);
@@ -156,10 +163,23 @@ function Feed() {
         if (childRefs[currentIndex] && childRefs[currentIndex].current) {
             await childRefs[currentIndex].current.swipe('left');
         }
-    };
+    }
 
     return (
         <div className='container-feed'>
+            <ToastContainer
+                position="top-center"
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick={false}
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+                transition={Bounce}
+            />
             <NavBarApp />
             <section 
                 className='feed-swiper-container'
