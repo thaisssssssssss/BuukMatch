@@ -5,11 +5,11 @@ Sistema de trocas de Books por meio de gostos em comum (match) para a disciplina
 
 Este repositório contém o código fonte do BuukMatch!
 
-A BuukMatch é uma plataforma que tem como propósito conectar leitores por meio de um ambiente de resenhas e troca de itens literários. 
+A BuukMatch é uma plataforma que tem como propósito conectar leitores por meio de troca de itens literários.
 
-O sistema busca unir amantes de Books que  residem próximos uns aos outros, por meio de um ambiente de troca que funciona por meio de publicações dos Books que se deseja desapegar, levando em conta a distância entre os interessados e também os gostos pessoais. 
+O sistema busca unir amantes de livros por meio de um ambiente de troca que funciona por meio de publicações dos itens que se deseja desapegar.
 
-Diferente de uma simples doação, nosso produto visa o engajamento de ambas as partes, de modo que a troca seja mútua e satisfatória aos dois lados. Além disso, é uma plataforma que permite troca de mensagens, Post de resenhas e comentários, o que fomenta a parte interativa do sistema.
+Diferente de uma simples doação, nosso produto visa o engajamento de ambas as partes, sendo necessário ocorrer um interesse mútuo entre os usuários. Além disso, é uma plataforma que permite troca de mensagens e feed interativo.
 
 ## 📚 Características principais
 * Criação do perfil 
