@@ -10,6 +10,7 @@ import br.ufes.pi.trabalho.dto.NotificationResponse;
 import br.ufes.pi.trabalho.domain.Match;
 import br.ufes.pi.trabalho.domain.Notification;
 import br.ufes.pi.trabalho.repository.NotificationRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class NotificationService {
@@ -21,16 +22,16 @@ public class NotificationService {
         this.userService = userService;
     }
 
-    public NotificationResponse creatMatch1Notification(User user1, User user2){
-        String msg = "Ebaaa, você deu match com " + user2.getName() + "!";
+    public NotificationResponse createMatchNotificationUser(Match match){
+        String msg = "Ebaaa, você deu match com " + match.getUser2().getName() + "!";
         
         return (new NotificationResponse(msg));
     }
 
-    public void creatMatch2Notification(User user1, User user2, Match match){
-        String msg = "Ebaaa, você deu match com " + user2.getName() + "!";
+    public void registerMatchNotificationOwner(Match match){
+        String msg = "Ebaaa, você deu match com " + match.getUser1().getName() + "!";
         
-        Notification notification = new Notification(user1, match, msg);
+        Notification notification = new Notification(match.getUser2(), match, msg);
 
         notificationRepository.save(notification);
     }
@@ -39,7 +40,8 @@ public class NotificationService {
         String msg = "Aguardando um futuro match...";
         return (new NotificationResponse(msg));
     }
-
+    
+    @Transactional
     public List<NotificationResponse> listNotificationsNotRead(String token){
         User user = userService.returnUserByToken(token);
 
@@ -48,6 +50,8 @@ public class NotificationService {
         List<NotificationResponse> response = new ArrayList<>();
 
         for(Notification n : notifications){
+            n.setRead();
+            System.out.println(n);
             response.add(new NotificationResponse(n.getMessage()));
         }
 

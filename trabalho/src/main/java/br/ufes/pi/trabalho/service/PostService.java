@@ -43,12 +43,9 @@ public class PostService {
 
             Post p_new = new Post(request.getLegend(), bytesDaFoto, owner, b_new);
             
-            System.out.println(p_new.getBook());
-
             owner.addPost(p_new);
             postRepository.save(p_new);
             Post teste = postRepository.findById(p_new.getId()).orElseThrow();
-            System.out.println("Book após salvar: " + teste.getBook());
     }
 
     public List<PostResponse> listPostByUser(String token){
@@ -58,10 +55,6 @@ public class PostService {
         List<PostResponse> responses = new ArrayList<PostResponse>();
 
         for(Post p : posts){
-            System.out.println("Post " + p.getId());
-            System.out.println("Book no loop = " + p.getBook());
-            BookRequest br = p.getBook().createBookRequest();
-            System.out.println("BookRequest = " + br);
             responses.add(
                 new PostResponse(
                     p.getId(),
@@ -69,7 +62,7 @@ public class PostService {
                     p.getPublicationDate(),
                     p.getPhoto(),
                     user.getName(),
-                   br
+                   p.getBook().createBookRequest()
                 )
             );
         }
@@ -84,11 +77,7 @@ public class PostService {
         List<PostResponse> response = new ArrayList<>();
 
         for(Post p : posts){
-            System.out.println("Post " + p.getId());
-            System.out.println("Book no loop = " + p.getBook());
-            BookRequest br = p.getBook().createBookRequest();
-            System.out.println("BookRequest = " + br);
-            response.add(new PostResponse(p.getId(), p.getLegend(), p.getPublicationDate(), p.getPhoto(), p.getOwner().getName(), br));
+            response.add(new PostResponse(p.getId(), p.getLegend(), p.getPublicationDate(), p.getPhoto(), p.getOwner().getName(),  p.getBook().createBookRequest()));
         }
 
         return response;

@@ -77,7 +77,7 @@ function Profile() {
             }
             <NavBarApp />
             <div className="profile-content">
-                <img className="profile-foto" src="/books/1984.jpeg" alt="Foto de perfil" />
+                <img className="profile-foto" src="/pink-book.avif" alt="Foto de perfil" />
                 <div className="profile-boas-vindas">
                     <h2 className="profile-hello">Caro leitor, {user_data ? user_data.name : "Usuário"}!</h2>
                     <p className="profile-email">{ user_data ? user_data.email : "Email" }</p>

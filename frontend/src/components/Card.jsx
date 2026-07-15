@@ -1,7 +1,7 @@
 import "./styles/Card.css"
 import { BookOpen, CalendarDays, NotebookText } from "lucide-react"
 
-// function Card({ post: {legend, photo, ownerName, book:{ title, author, numberOfPages, publicationYear, publisher}}}) {  
+
 function Card({ post }) {  
     console.log("Dados que chegaram no Card:", post);
     if (!post) return null;

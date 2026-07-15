@@ -10,6 +10,9 @@ import Perfil from '../components/Perfil'
 import FileUploader from '../components/FileUploader'
 import {postService} from '../services/post' 
 import NavBarApp from '../components/NavBarApp'
+import { catchErro } from '../utils/ErroHandler'
+import { toast, ToastContainer, Bounce } from 'react-toastify'
+import ToastMatch from '../components/ToastMatch'
 
 function Post() {
     const trocarNavegacao = useNavigate();  
@@ -22,7 +25,6 @@ function Post() {
         publisher:""
     })
 
-    // guarda o estado do FileUploader
     const[file, setFile] = useState(null);
 
     const handleChange = (e) => {
@@ -36,7 +38,14 @@ function Post() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if(!file){
-            alert("Por favor, selecione uma imagem!");
+            toast.error("Selecione uma imagem!", {
+                    position: "top-center",
+                    pauseOnHover: true,
+                    draggable: true,
+                    theme: "light",
+                    transition: Bounce,
+                    icon: false,
+            })
             return;
         }
         const finalData = new FormData();
@@ -48,23 +57,48 @@ function Post() {
         finalData.append('book.publisher', formData.publisher);
         finalData.append('file', file);
         
-        // fazer ainda o fetch
         try{
             const token = localStorage.getItem("token");
             await postService.publishPostService(token, finalData);
-            alert("Post criado com sucesso!");
+            setFormData({
+                legend: "",
+                title: "",
+                numberOfPages: "",
+                author: "",
+                publicationYear:"",
+                publisher:""
+            })
+
+            setFile(null)
+
+            toast(<ToastMatch message="Post criado com sucesso!" />, {
+                    position: "top-center",
+                    pauseOnHover: true,
+                    draggable: true,
+                    theme: "light",
+                    transition: Bounce,
+                    icon: false,
+            })
         } catch(error){
-            console.error(error);
-            if (error.response) {
-            alert(`Erro ${error.response.status}: ${error.response.data}`);
-            } else {
-                alert("Não foi possível conectar ao servidor.");
-            }
+            catchErro(error)
         }
     }
 
     return (
         <div className='post-page'>
+            <ToastContainer
+                position="top-center"
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick={false}
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+                transition={Bounce}
+            />
             <NavBarApp/>
             <div className="post-pai">
                     <section className="post-load-section login-section-g">

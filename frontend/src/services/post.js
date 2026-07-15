@@ -38,6 +38,7 @@ export const postService = {
           }
         }
       );
+      return resposta.data;
     },
     listUserPosts: async (token) => {
       const response = await api.get(
@@ -63,6 +64,30 @@ export const postService = {
         )
 
         return resposta.data;
+      },
+      viewPost: async (token, postId) => {
+        const response = await api.post(
+          `post/${postId}/visualizar`,
+          null,
+          {
+            headers:{
+              Authorization: token
+            }
+          }
+        )
+
+        return response.data;
+      },
+      listNotificationsNotRead: async (token) => {
+        const response = await api.get(
+          'notification',
+          {
+            headers:{
+              Authorization: token
+            }
+          }
+        )
+        return response.data;
       }
 
 };
