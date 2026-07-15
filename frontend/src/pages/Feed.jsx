@@ -25,7 +25,6 @@ import { ToastContainer, Bounce, toast } from 'react-toastify';
 import ToastMatch from '../components/ToastMatch';
 
 function Feed() {
-
     const {posts, showHearts, showTrash, childRefs, onSwipe,handleLove, handleLike, handleReject, currentIndex} = useFeed();
     const {notifications} = useNotification();
     

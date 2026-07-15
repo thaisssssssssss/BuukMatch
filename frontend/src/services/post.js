@@ -40,7 +40,20 @@ export const postService = {
       );
       return resposta.data;
     },
-     listUnseenPost: async (token) => {
+    listUserPosts: async (token) => {
+      const response = await api.get(
+        'post', 
+        {
+          headers: {
+            Authorization: token
+          }
+        }
+      );
+
+      return response.data
+    },
+
+    listUnseenPost: async (token) => {
         const resposta = await api.get(
           '/post/nao-vistos', 
           {
