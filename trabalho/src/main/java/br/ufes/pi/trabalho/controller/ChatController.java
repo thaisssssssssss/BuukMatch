@@ -17,7 +17,9 @@ import br.ufes.pi.trabalho.dto.ChatResponse;
 import br.ufes.pi.trabalho.dto.MessageResponse;
 import br.ufes.pi.trabalho.dto.SendMessageRequest;
 import br.ufes.pi.trabalho.service.ChatService;
+import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/chats")
 public class ChatController {
